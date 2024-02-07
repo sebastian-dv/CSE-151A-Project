@@ -1,0 +1,18 @@
+Main Dataset: https://archive.ics.uci.edu/dataset/880/support2 
+Dataset comprising of 9105 individual critically ill patients across 5 United States medical centers, accessioned throughout 1989-1991 and 1992-1994. Each row is a patient record that matches a disease category.
+
+Abstract:
+This project looks to investigate and find key factors that exist in determining the different causes and factors that hint towards the existence of a specific disease. This project will be accomplished by using the dataset SUPPORT2 in the UC Irvine Machine Learning Repository, using discriminative factors such as blood type, chemical levels, and more to isolate correlations. This will be done through the 42 features offered by the set, looking to differentiate between nine disease categories: acute respiratory failure, chronic obstructive pulmonary disease, congestive heart failure, liver disease, coma, colon cancer, lung cancer, multiple organ system failure with malignancy, and multiple organ system failure with sepsis. We will use the feature set from the listed dataset to find specific relations between certain features that will indicate towards the existence of critical diseases found today.
+
+Backup Datasets: https://www.kaggle.com/datasets/kanchana1990/youtube-origins-trailblazing-early-uploads 
+Predicting popular titles and contents in early YouTube
+https://www.kaggle.com/datasets/samsonqian/college-admissions 
+	Finding what colleges value in applications (math, writing, application details) in relation to number of applications for acceptance
+Group:
+Pranav Prabu, pprabu@ucsd.edu
+Sebastian Diaz, s6diaz@ucsd.edu
+Jou-Chih Chang, joc044@ucsd.edu
+Xianzhe Guo, xig003@ucsd.edu
+Tiankuo Li, t8li@ucsd.edu
+Juan Yin, J9yin@ucsd.edu
+Irving Zhao, ziz057@ucsd.edu
