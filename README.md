@@ -29,3 +29,4 @@
 3. Multiple Line Plots: this function is used to check the pattern of two particular features.
    - first, we applied age-diabetes pair, it shows people between 40 to 80 is the main group to have diabetes
    - second, we applied bili-hrt pair and bili-ph pair, their diagram has similar pattern, and We think we should implement more data to see the pattern between them.
+4. Pairplot for the entire dataset
