@@ -22,6 +22,7 @@
 [df['sex'].replace('female', 0, inplace=True)](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=1&uniqifier=1)
 8. For nonbinary features, we applied [OneHotEncoder()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=4&uniqifier=1) function
 9. After the above data exploration and preprocessing, we are able to apply some visualization tools to help us explore the pattern of data
+10. We then chose to use a multi-class logistic regression model to train and fit the model with the preprocessed data. We then used the results to test for overfitting vs underfitting, accuracy and error for train vs test data. We are thinking of testing with a multi-class classification model and a Keras Sequential model next to look for better results. 
 
 ## Visualization Tool
 1. Parallel Coordinates Plot: we applied this function to visualize the relationship between "dementia" and other features.
@@ -30,3 +31,7 @@
    - first, we applied an age-diabetes pair, which shows people between 40 to 80 are the main group to have diabetes
    - second, we applied the bili-hrt pair and bili-ph pair, their diagram has a similar pattern, and We think we should implement more data to see the pattern between them.
 4. We apply the Pairplot for the entire dataset twice, before and after we split the data using one-hot encoding.
+
+## Conclusion
+### First Model
+The first model is not the most precise, as there is a relatively clear sign of overfitting due to the cross-validation score being lower in the start than the training score, and only a relative evening out towards the end of the graph. We can possibly improve this model by selecting different features for training use to further finetune the results and not have overfitting or underfitting for the model.
