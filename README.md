@@ -22,7 +22,7 @@
 [df['sex'].replace('female', 0, inplace=True)](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=1&uniqifier=1)
 8. For nonbinary features, we applied [OneHotEncoder()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=4&uniqifier=1) function
 9. After the above data exploration and preprocessing, we are able to apply some visualization tools to help us explore the pattern of data
-10. We then chose to use a multi-class logistic regression model to train and fit the model with the preprocessed data. We then used the results to test for overfitting vs underfitting, accuracy and error for train vs test data. We are thinking of testing with a multi-class classification model and a Keras Sequential model next to look for better results. 
+10. We then chose to use a multi-class logistic regression model to train and fit the model with the preprocessed data. We then used the results to test for overfitting vs underfitting, accuracy and error for train vs test data. We are thinking of testing with a multi-class classification model and a Keras Sequential model next to look for better results. This is because we need models which are capable of outputing multiple different classes since our targets are multiple different diseases. These next two models should be more powerful and hopefully better at predicting our targets.
 
 ## Visualization Tool
 1. Parallel Coordinates Plot: we applied this function to visualize the relationship between "dementia" and other features.
