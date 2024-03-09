@@ -24,6 +24,7 @@
 9. After the above data exploration and preprocessing, we are able to apply some visualization tools to help us explore the pattern of data
 10. We then chose to use a multi-class logistic regression model to train and fit the model with the preprocessed data. We then used the results to test for overfitting vs underfitting, accuracy and error for train vs test data. We are thinking of testing with a multi-class classification model and a Keras Sequential model next to look for better results. This is because we need models which are capable of outputing multiple different classes since our targets are multiple different diseases. These next two models should be more powerful and hopefully better at predicting our targets.
 
+
 ## Visualization Tool
 1. Parallel Coordinates Plot: we applied this function to visualize the relationship between "dementia" and other features.
 2. Plotly Express interface: This function is used to observe the relationship between "age" and dimensions=['age', 'sps', 'meanbp','scoma','aps'], it seems like people's physical features change around 50.
@@ -35,3 +36,27 @@
 ## Conclusion
 ### First Model
 The first model is not the most precise, as there is a relatively clear sign of overfitting due to the cross-validation score being lower in the start than the training score, and only a relative evening out towards the end of the graph. We can possibly improve this model by selecting different features for training use to further finetune the results and not have overfitting or underfitting for the model.
+
+## MS2
+## Requirements:
+In this milestone you will focus on building your second model. You will also need to evaluate your this model and see where it fits in the underfitting/overfitting graph.
+
+1.  Evaluate your data, labels and loss function. Were they sufficient or did you have have to change them.
+
+2. Train your second model
+
+3. Evaluate your model compare training vs test error
+
+4. Where does your model fit in the fitting graph, how does it compare to your first model?
+
+5. Did you perform hyper parameter tuning? K-fold Cross validation? Feature expansion? What were the results?
+
+5. What is the plan for the next model you are thinking of and why?
+
+6. Update your readme with this info added to the readme with links to the jupyter notebook!
+
+7. Conclusion section: What is the conclusion of your 2nd model? What can be done to possibly improve it? How did it perform to your first and why?
+
+## Our Work
+## Visualization Tool
+## Conclusion
