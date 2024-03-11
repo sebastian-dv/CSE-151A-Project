@@ -37,6 +37,14 @@
 ### First Model
 The first model is not the most precise, as there is a relatively clear sign of overfitting due to the cross-validation score being lower in the start than the training score, and only a relative evening out towards the end of the graph. We can possibly improve this model by selecting different features for training use to further finetune the results and not have overfitting or underfitting for the model.
 
+### Visualizaiton 
+![Screenshot 2024-03-10 at 7 16 17 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/90e3f1ea-bb2b-4f66-ad46-c7322d1a7d89)
+This is our plot for our multi-class regression model, comparing our training score vs our cross validation score.
+This plot shows that there is some overfitting in our model and thus a logistic regression model likely isn't the best model we could use for our data, which is usefult to know for our future models. We also had other similar plots for our logistic regression models that we did for each target rather than multiple at once.
+
+![Screenshot 2024-03-10 at 7 20 21 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/f9e92ef8-55ad-4b95-ad17-ad58568ef99d)
+Here is one of those models, the model itself doesn't look too different from the other models for each target and the results are relatively the same.
+
 ## MS2
 ## Requirements:
 In this milestone you will focus on building your second model. You will also need to evaluate your this model and see where it fits in the underfitting/overfitting graph.
