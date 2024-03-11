@@ -74,11 +74,11 @@ But it turns out the accuracy was low, so we decided to add an early_stopping, t
 
 Then we built a hyperparameter tuning model by tuning the units, activation function, optimizers, learning rates, and loss functions, trying to find the most optimized parameters to rebuild our model, we sort our tuner result by the score of accuracy.
 
-After finding the best model parameters, we rebuilt our model, printed the classification report, and displayed the plot again. This time, it turns out we improved our accuracy from 0.5 to 0.7, but we still tried for a better accuracy.
+After finding the best model parameters, we rebuilt our model, printed the classification report, and displayed the plot again. This time, it turns out our accuracy actually didn't improve by much, so we continued looking for a way to achieve a higher accuracy.
 
 Then we decided to apply OverSampling since we found that our target classes were imbalanced.
 
-After applying the RandomOverSampler, we got ~0.8 accuracy.
+After applying the RandomOverSampler to our best model from our hyperparameter tuning, we got 0.76 accuracy.
 
 ## Visualization Tool
 ## Conclusion
