@@ -45,7 +45,7 @@ This plot shows that there is some overfitting in our model and thus a logistic 
 ![Screenshot 2024-03-10 at 7 20 21 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/f9e92ef8-55ad-4b95-ad17-ad58568ef99d)
 Here is one of those models, the model itself doesn't look too different from the other models for each target and the results are relatively the same.
 
-## MS2
+## Second Model
 ## Requirements:
 In this milestone you will focus on building your second model. You will also need to evaluate your this model and see where it fits in the underfitting/overfitting graph.
 
