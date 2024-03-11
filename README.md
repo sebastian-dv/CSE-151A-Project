@@ -81,6 +81,9 @@ Then we decided to apply OverSampling since we found that our target classes wer
 After applying the RandomOverSampler to our best model from our hyperparameter tuning, we got 0.76 accuracy.
 
 ## Visualization
+### Manually Created 5-Layer Model 
 ![image](https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/e7dd898a-6044-4ec0-90de-c4c04ea8b2ee)
+### Hyperparameter Tuned Model with Oversampling
+![image](https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/3a5a0026-0896-4357-b8fb-7e49b2f5521d)
 
 ## Conclusion
