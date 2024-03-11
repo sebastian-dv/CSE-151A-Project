@@ -94,3 +94,6 @@ This graph shows no major signs of underfitting or overfitting, as the losses ar
 
 ## Conclusion
 Our second model has proved to be more accurate in predicting our target classes than our previous (multiclass) logistic regression model. Although, it started off very inaccurate and in some cases worse, we were able to apply different techniques such as K-fold, hyperparameter tuning, and oversampling, in order to improve the accuracy of our model. We believe that the largest contributor to this second model improving over the first was likely because of the oversampling we did. The oversampling helped balance out our target classes much more and helped our model learn much more effeciently. There is likely still room for improvement through more complex hyperparameter tuning and more time, but the improvement would probably only be very minimal over what we've achieved already. For our next model we are thinking of doing an SVM. We decided on an SVM because of its ability to support both categorical and numerical features, as well as it's ability to do multiclass classification. We want to possilby try a couple different kernel's in order to find which works best for our data.
+
+## Jupyter notebook link
+[Model 2 - for Milestone 4]()
