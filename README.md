@@ -36,10 +36,10 @@
 ### First Model
 The first model is not the most precise, as there is a relatively clear sign of overfitting due to the cross-validation score being lower in the start than the training score, and only a relative evening out towards the end of the graph. We can possibly improve this model by selecting different features for training use to further finetune the results and not have overfitting or underfitting for the model.
 
-### Visualizaiton 
+### Visualization 
 ![Screenshot 2024-03-10 at 7 16 17 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/90e3f1ea-bb2b-4f66-ad46-c7322d1a7d89)
 This is our plot for our multi-class regression model, comparing our training score vs our cross validation score.
-This plot shows that there is some overfitting in our model and thus a logistic regression model likely isn't the best model we could use for our data, which is usefult to know for our future models. We also had other similar plots for our logistic regression models that we did for each target rather than multiple at once.
+This plot shows that there is some underfitting in our model and thus a logistic regression model likely isn't the best model we could use for our data, which is useful to know for our future models. We also had other similar plots for our logistic regression models that we did for each target rather than multiple at once.
 
 ![Screenshot 2024-03-10 at 7 20 21 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/f9e92ef8-55ad-4b95-ad17-ad58568ef99d)
 Here is one of those models, the model itself doesn't look too different from the other models for each target and the results are relatively the same.
@@ -70,16 +70,27 @@ Our data and labels were sufficient for the most part, we didn't have to change 
 Our Second model is a Neural Network model.
 
 First, we tried manually creating a 5-layer model (including input and output layers) with the 'tanh' activation function for the input and hidden layers, and the 'softmax' activation function for the output layer since we got encoded target y. We observed the results with a classification report and plot which simulate the distance between our testing result and training input data as seen below in our visualizations.
-But it turns out the accuracy was low, ~0.5, so we decided to try and improve our accuracy through other methods like K-fold and hypterparameter tuning.
-Our attempt at using K-fold was not much better, also around 0.5 accuracy, but we still had a few more things to try.
-Then we built a hyperparameter tuning model by tuning the units, activation function, optimizers, learning rates, and loss functions, trying to find the most optimized parameters to rebuild our model, we sort our tuner result by the score of accuracy. After finding the best model parameters, we rebuilt our model, printed the classification report, and displayed the plot again. This time, it turns out our accuracy actually didn't improve by much, it was still very similar to the accuracy we achieved with our base model and with K-fold. So we continued looking for a way to achieve a higher accuracy. 
+After testing with the first model, the accuracy was low, at ~0.56, so we decided to try and improve our accuracy through other methods like K-fold and hypterparameter tuning.
+Our attempt at using K-fold was not much better, at ~0.53 accuracy, but we still had a few more things to try.
+Then we built a hyperparameter tuning model by tuning the units, activation function, optimizers, learning rates, and loss functions, trying to find the most optimized parameters to rebuild our model, we sort our tuner result by the score of accuracy. After finding the best model parameters, we rebuilt our model, printed the classification report, and displayed the plot again. This time, it turns out our accuracy actually didn't improve by much, it was still very similar to the accuracy we achieved with our base model and with K-fold, at ~0.51. So we continued looking for a way to achieve a higher accuracy. 
 Then we decided to apply OverSampling since we found that our target classes were imbalanced. After applying the RandomOverSampler to our best model from our hyperparameter tuning, we got 0.76 accuracy.
 
 ## Visualization
 ### Manually Created 5-Layer Model 
 ![image](https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/009f4f31-a8a0-4e4f-8cc9-b0e4c10e095c)
+<img width="434" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/311efdfb-e9a9-4c78-b251-e838a7ed7c99">
+
+This graph shows signs of overfitting, as seen by the disparity in loss apparent throughout the entire graph, which is different from the first model, as the first model was underfitting.
+### Hyperparameter Tuned Model
+![image](https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/47181271-be7a-444c-a1aa-655d1195fef1)
+<img width="429" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/d7a470d5-3f18-4cc8-ab90-dc155713a87e">
+
+Similar, to the inital version of the second model, this graph shows signs of overfitting, as seen by the disparity in loss apparent throughout the entire graph, which is different from the first model, as the first model was underfitting.
 ### Hyperparameter Tuned Model with Oversampling
 ![image](https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/3a5a0026-0896-4357-b8fb-7e49b2f5521d)
+<img width="425" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/293e2b68-8e5f-4c04-a968-e003df5293c8">
+
+This graph shows no major signs of underfitting or overfitting, as the losses are closely tied to each other, and progress at a similar rate, which is far better than the underfitting graph produced by the first model.
 
 ## Conclusion
 Our second model has proved to be more accurate in predicting our target classes than our previous (multiclass) logistic regression model. Although, it started off very inaccurate and in some cases worse, we were able to apply different techniques such as K-fold, hyperparameter tuning, and oversampling, in order to improve the accuracy of our model. We believe that the largest contributor to this second model improving over the first was likely because of the oversampling we did. The oversampling helped balance out our target classes much more and helped our model learn much more effeciently. There is likely still room for improvement through more complex hyperparameter tuning and more time, but the improvement would probably only be very minimal over what we've achieved already. For our next model we are thinking of doing an SVM. We decided on an SVM because of its ability to support both categorical and numerical features, as well as it's ability to do multiclass classification. We want to possilby try a couple different kernel's in order to find which works best for our data.
