@@ -72,13 +72,13 @@ First, we tried manually creating a 4-layer model(including input and output lay
 
 But it turns out the accuracy was low, so we decided to add an early_stopping, trying to improve the accuracy of our model.
 
-Then we build a hyperparameter tuning model by tuning the units, activation function, and learning rates, trying to find the optimized parameters to rebuild our model, we sort our tuner result by the score of accuracy.
+Then we built a hyperparameter tuning model by tuning the units, activation function, optimizers, learning rates, and loss functions, trying to find the most optimized parameters to rebuild our model, we sort our tuner result by the score of accuracy.
 
-After finding the better model parameter, we rebuilt our model, printed the classification, and displayed the plot again, it turns out we improved our accuracy from 0.5 to 0.7, but we still looking for a better accuracy.
+After finding the best model parameters, we rebuilt our model, printed the classification report, and displayed the plot again. This time, it turns out we improved our accuracy from 0.5 to 0.7, but we still tried for a better accuracy.
 
-Then we decided to apply OverSamplying since we find our entries are imbalanced.
+Then we decided to apply OverSampling since we found that our target classes were imbalanced.
 
-After applying the RandomOverSampler, we got 0.8ish accuracy.
+After applying the RandomOverSampler, we got ~0.8 accuracy.
 
 ## Visualization Tool
 ## Conclusion
