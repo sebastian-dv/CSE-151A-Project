@@ -33,7 +33,6 @@
    - second, we applied the bili-hrt pair and bili-ph pair, their diagram has a similar pattern, and We think we should implement more data to see the pattern between them.
 4. We apply the Pairplot for the entire dataset twice, before and after we split the data using one-hot encoding.
 
-## Conclusion
 ### First Model
 The first model is not the most precise, as there is a relatively clear sign of overfitting due to the cross-validation score being lower in the start than the training score, and only a relative evening out towards the end of the graph. We can possibly improve this model by selecting different features for training use to further finetune the results and not have overfitting or underfitting for the model.
 
@@ -49,7 +48,7 @@ Here is one of those models, the model itself doesn't look too different from th
 ## Requirements:
 In this milestone you will focus on building your second model. You will also need to evaluate your this model and see where it fits in the underfitting/overfitting graph.
 
-1.  Evaluate your data, labels and loss function. Were they sufficient or did you have have to change them.
+1. Evaluate your data, labels and loss function. Were they sufficient or did you have have to change them.
 
 2. Train your second model
 
@@ -63,22 +62,18 @@ In this milestone you will focus on building your second model. You will also ne
 
 6. Update your readme with this info added to the readme with links to the jupyter notebook!
 
-7. Conclusion section: What is the conclusion of your 2nd model? What can be done to possibly improve it? How did it perform to your first and why?
+7. Conclusion section: What is the conclusion of your 2nd model? What can be done to possibly improve it? How did it perform compared to your first and why?
 
 ## Our Work
+Our data and labels were sufficient for the most part, we didn't have to change our method of preprocessing for this model from the preprocessing in our first. We still scaled our numerical data as well as one hot encoded our categorical data. For our loss function we were able to find the most optimal one through hyperparameter tuning.
+
 Our Second model is a Neural Network model.
 
-First, we tried manually creating a 4-layer model(including input and output layers) with the 'tanh' activation function for the input and hidden layer, and the 'softmax' activation function for the output layer since we got encoded target y. We observed results by classification report and plot which simulate the distance between our testing result and training input data.
-
-But it turns out the accuracy was low, so we decided to add an early_stopping, trying to improve the accuracy of our model.
-
-Then we built a hyperparameter tuning model by tuning the units, activation function, optimizers, learning rates, and loss functions, trying to find the most optimized parameters to rebuild our model, we sort our tuner result by the score of accuracy.
-
-After finding the best model parameters, we rebuilt our model, printed the classification report, and displayed the plot again. This time, it turns out our accuracy actually didn't improve by much, so we continued looking for a way to achieve a higher accuracy.
-
-Then we decided to apply OverSampling since we found that our target classes were imbalanced.
-
-After applying the RandomOverSampler to our best model from our hyperparameter tuning, we got 0.76 accuracy.
+First, we tried manually creating a 5-layer model (including input and output layers) with the 'tanh' activation function for the input and hidden layers, and the 'softmax' activation function for the output layer since we got encoded target y. We observed the results with a classification report and plot which simulate the distance between our testing result and training input data as seen below in our visualizations.
+But it turns out the accuracy was low, ~0.5, so we decided to try and improve our accuracy through other methods like K-fold and hypterparameter tuning.
+Our attempt at using K-fold was not much better, also around 0.5 accuracy, but we still had a few more things to try.
+Then we built a hyperparameter tuning model by tuning the units, activation function, optimizers, learning rates, and loss functions, trying to find the most optimized parameters to rebuild our model, we sort our tuner result by the score of accuracy. After finding the best model parameters, we rebuilt our model, printed the classification report, and displayed the plot again. This time, it turns out our accuracy actually didn't improve by much, it was still very similar to the accuracy we achieved with our base model and with K-fold. So we continued looking for a way to achieve a higher accuracy. 
+Then we decided to apply OverSampling since we found that our target classes were imbalanced. After applying the RandomOverSampler to our best model from our hyperparameter tuning, we got 0.76 accuracy.
 
 ## Visualization
 ### Manually Created 5-Layer Model 
@@ -87,3 +82,4 @@ After applying the RandomOverSampler to our best model from our hyperparameter t
 ![image](https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/3a5a0026-0896-4357-b8fb-7e49b2f5521d)
 
 ## Conclusion
+Our second model has proved to be more accurate in predicting our target classes than our previous (multiclass) logistic regression model. Although, it started off very inaccurate and in some cases worse, we were able to apply different techniques such as K-fold, hyperparameter tuning, and oversampling, in order to improve the accuracy of our model. We believe that the largest contributor to this second model improving over the first was likely because of the oversampling we did. The oversampling helped balance out our target classes much more and helped our model learn much more effeciently. There is likely still room for improvement through more complex hyperparameter tuning and more time, but the improvement would probably only be very minimal over what we've achieved already. For our next model we are thinking of doing an SVM. We decided on an SVM because of its ability to support both categorical and numerical features, as well as it's ability to do multiclass classification. We want to possilby try a couple different kernel's in order to find which works best for our data.
