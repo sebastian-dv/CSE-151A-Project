@@ -97,4 +97,5 @@ Our second model has proved to be more accurate in predicting our target classes
 
 ## Jupyter Notebook Link
 [Link to Jupyter Notebook in Github](https://github.com/sebastian-dv/CSE-151A-Project/blob/main/Milestone%204%3A%20Model%202.ipynb)
+
 [Link to Jupyter Notebook in Google Colab](https://colab.research.google.com/drive/1quxLTGDJ_VTTTDzPrHU4nsm8mzdlV4yg?usp=sharing)
