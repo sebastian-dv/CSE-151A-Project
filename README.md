@@ -58,5 +58,19 @@ In this milestone you will focus on building your second model. You will also ne
 7. Conclusion section: What is the conclusion of your 2nd model? What can be done to possibly improve it? How did it perform to your first and why?
 
 ## Our Work
+Our Second model is a Neural Network model.
+
+First, we tried manually creating a 4-layer model(including input and output layers) with the 'tanh' activation function for the input and hidden layer, and the 'softmax' activation function for the output layer since we got encoded target y. We observed results by classification report and plot which simulate the distance between our testing result and training input data.
+
+But it turns out the accuracy was low, so we decided to add an early_stopping, trying to improve the accuracy of our model.
+
+Then we build a hyperparameter tuning model by tuning the units, activation function, and learning rates, trying to find the optimized parameters to rebuild our model, we sort our tuner result by the score of accuracy.
+
+After finding the better model parameter, we rebuilt our model, printed the classification, and displayed the plot again, it turns out we improved our accuracy from 0.5 to 0.7, but we still looking for a better accuracy.
+
+Then we decided to apply OverSamplying since we find our entries are imbalanced.
+
+After applying the RandomOverSampler, we got 0.8ish accuracy.
+
 ## Visualization Tool
 ## Conclusion
