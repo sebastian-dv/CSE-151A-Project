@@ -143,14 +143,25 @@ You will require the following:
 Note: A methods section does not include any why. the reason why will be in the discussion section. This is just a summary of your methods
 Results section. This will include the results from the methods listed above (C). You will have figures here about your results as well.
 No exploration of results is done here. This is mainly just a summary of your results. The sub-sections will be the same as the sections in your methods section.
+#### Data Preprocessing: 
+
+##### Model 1:
+##### Model 2:
+##### Model 3:
+
+
 
 #### Discussion section: This is where you will discuss the why, and your interpretation and your though process from beginning to end. This will mimic the sections you have created in your methods section as well as new sections you feel you need to create. You can also discuss how believable your results are at each step. You can discuss any short comings. It's ok to criticize as this shows your intellectual merit, as to how you are thinking about things scientifically and how you are able to correctly scrutinize things and find short comings. In science we never really find the perfect solution, especially since we know something will probably come up int he future (i.e. donkeys) and mess everything up. If you do it's probably a unicorn or the data and model you chose are just perfect for each other!
 #### Data Preprocessing
-   1. First, we try to figure out the meanings of each column of our data to choose our target
-   2. to do the data preprocessing, we tried to check how big our data is, if the dataset is too small, we will try to replace the null with 0 or another integer value; while if the dataset is big enough, we will drop the null without replacement.
-      It turns out we got a big data set with shape (9105, 22), so we just dropped the null values.
-   3. After that, by looking at the dataset frame, we need to find the innumaric data and translate 
-   4. We pulled out the description of each column and tried to find the pattern between some features and others, for instance, we tried  
+   ##### Data Clean
+   1. First, we try to figure out the meanings of each column of our data to choose our target, so we pulled out the description of each column and tried to find the pattern between some features and others.
+   2. To do the data preprocessing, we tried to check how big our data is, if the dataset is too small, we will try to replace the null with 0 or another integer value; while if the dataset is big enough, we will drop the null without replacement.
+      By applying ```print("Number of observations:", len(df))``` and ```df.shape```, It turns out we got a big data set with shape (9105, 22), so we just dropped the null values.
+   3. After that, by looking at the dataset, we need to find the non-numeric data and encode these columns to make the model consistent data type.
+   4. We tried to encode all of the categorical data using one-hot encoding, for example, features ```'dzgroup', 'race', 'ca'```. And for the binary features for example ```sex```, we manually encoded female to 0, and male to 1;
+   5. After removing null and encoding, we decided to double-check our value and make sure our dataset was ready to be processed. We applied ```heatmap``` to 
+   ##### Relation Simulations
+   1. after
 
  ##### Model 1:
  ##### Model 2:
