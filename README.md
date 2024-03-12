@@ -144,7 +144,13 @@ Note: A methods section does not include any why. the reason why will be in the 
 Results section. This will include the results from the methods listed above (C). You will have figures here about your results as well.
 No exploration of results is done here. This is mainly just a summary of your results. The sub-sections will be the same as the sections in your methods section.
 #### Data Preprocessing: 
-
+1. We take a look at the description of each variable.
+2. We select the features that are related to our topic.
+3. We print out the data frame of the features we selected.
+4. We check the shape of the data frame. For example, the number of observations in our data frame.
+5. We check whether there is any empty value(ex. null) in the data frame.
+6. For each of the categorical attributes, we print out all the unique elements.
+7. We man
 ##### Model 1:
 ##### Model 2:
 ##### Model 3:
