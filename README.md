@@ -100,3 +100,70 @@ Our second model has proved to be more accurate in predicting our target classes
 [Link to Jupyter Notebook in Github](https://github.com/sebastian-dv/CSE-151A-Project/blob/main/Milestone%204%3A%20Model%202.ipynb)
 
 [Link to Jupyter Notebook in Google Colab](https://colab.research.google.com/drive/1quxLTGDJ_VTTTDzPrHU4nsm8mzdlV4yg?usp=sharing)
+
+
+# Model 3
+## Model 3 Reqirements
+Your 3rd model must undergo the same requirements as Model 1 and Model 2 for evaluation. Please see the previous milestone for clarification: 
+1. Evaluate your data, labels and loss function. Were they sufficient or did you have have to change them.
+
+2. Train your third model
+
+3. Evaluate your model and compare training vs test error
+
+4. Where does your model fit in the fitting graph, how does it compare to your first model?
+
+5. Did you perform hyper parameter tuning? K-fold Cross validation? Feature expansion? What were the results?
+
+5. What is the plan for the next model you are thinking of and why?
+
+6. Update your readme with this info added to the readme with links to the jupyter notebook!
+
+7. Conclusion section: What is the conclusion of your 2nd model? What can be done to possibly improve it? How did it perform compared to your first and why?
+
+# Project Summary - Final Submission
+You will require the following:
+
+1. A complete Introduction
+   For model 1, we used...
+   For model 2, we used...
+   For model 3, we used...
+3. A complete submission of all prior submissions
+   [Link to Model 1]()
+   [Link to Model 2]()
+   [Link to Model 3]()
+5. All code uploaded in the form of Jupiter notebooks that can be easily followed along to your GitHub repo
+   [Link to our GitHub]()
+6. A completed write that includes the following:
+#### Introduction of your project. Why chosen? why is it cool? General/Broader impact of having a good predictive mode. i.e. why is this important?
+
+#### Figures (of your choosing to help with the narration of your story) with legends (similar to a scientific paper) For reference you search machine learning and your model in google scholar for reference examples.
+
+#### Methods section (this section will include the exploration results, preprocessing steps, models chosen in the order they were executed. Parameters chosen. Please make sub-sections for every step. i.e Data Exploration, Preprocessing, Model 1, Model 2, Model 3, (note models can be the same i.e. CNN but different versions of it if they are distinct enough). You can put links here to notebooks and/or code blocks using three ` in markup for displaying code. so it would look like this: ``` MY CODE BLOCK ```
+Note: A methods section does not include any why. the reason why will be in the discussion section. This is just a summary of your methods
+Results section. This will include the results from the methods listed above (C). You will have figures here about your results as well.
+No exploration of results is done here. This is mainly just a summary of your results. The sub-sections will be the same as the sections in your methods section.
+
+#### Discussion section: This is where you will discuss the why, and your interpretation and your though process from beginning to end. This will mimic the sections you have created in your methods section as well as new sections you feel you need to create. You can also discuss how believable your results are at each step. You can discuss any short comings. It's ok to criticize as this shows your intellectual merit, as to how you are thinking about things scientifically and how you are able to correctly scrutinize things and find short comings. In science we never really find the perfect solution, especially since we know something will probably come up int he future (i.e. donkeys) and mess everything up. If you do it's probably a unicorn or the data and model you chose are just perfect for each other!
+#### Data Preprocessing
+   1. First, we try to figure out the meanings of each column of our data to choose our target
+   2. to do the data preprocessing, we tried to check how big our data is, if the dataset is too small, we will try to replace the null with 0 or another integer value; while if the dataset is big enough, we will drop the null without replacement.
+      It turns out we got a big data set with shape (9105, 22), so we just dropped the null values.
+   3. After that, by looking at the dataset frame, we need to find the innumaric data and translate 
+   4. We pulled out the description of each column and tried to find the pattern between some features and others, for instance, we tried  
+
+ ##### Model 1:
+ ##### Model 2:
+ sequential model, 5 layers NN, tuner, 
+ 
+
+#### Conclusion section: This is where you do a mind dump on your opinions and possible future directions. Basically what you wish you could have done differently. Here you close with final thoughts
+
+#### Collaboration section: This is a statement of contribution by each member. This will be taken into consideration when making the final grade for each member in the group. Did you work as a team? was there a team leader? project manager? coding? writer? etc. Please be truthful about this as this will determine individual grades in participation. There is no job that is better than the other. If you did no code but did the entire write up and gave feedback during the steps and collaborated then you would still get full credit. If you only coded but gave feedback on the write up and other things, then you still get full credit. If you managed everyone and the deadlines and setup meetings and communicated with teaching staff only then you get full credit. Every role is important as long as you collaborated and were integral to the completion of the project. If the person did nothing. they risk getting a big fat 0. Just like in any job, if you did nothing, you have the risk of getting fired. Teamwork is one of the most important qualities in industry and academia!!!
+
+#### Start with Name: Title: Contribution. If the person contributed nothing then just put in writing: Did not participate in the project.
+Your final model (model 3) and final results summary (this should be the last paragraph in D)
+
+#### Your GitHub must be made public by the morning of the next day of the submission deadline.
+Note: The 5 left over points will be awarded for participating in the voting event. Voting will be released and you will have 2 days to decide on your top 3 favorite projects.
+
