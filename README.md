@@ -158,11 +158,15 @@ No exploration of results is done here. This is mainly just a summary of your re
    2. To do the data preprocessing, we tried to check how big our data is, if the dataset is too small, we will try to replace the null with 0 or another integer value; while if the dataset is big enough, we will drop the null without replacement.
       By applying ```print("Number of observations:", len(df))``` and ```df.shape```, It turns out we got a big data set with shape (9105, 22), so we just dropped the null values.
    3. After that, by looking at the dataset, we need to find the non-numeric data and encode these columns to make the model consistent data type.
-   4. We tried to encode all of the categorical data using one-hot encoding, for example, features ```'dzgroup', 'race', 'ca'```. And for the binary features for example ```sex```, we manually encoded female to 0, and male to 1;
-   5. After removing null and encoding, we decided to double-check our value and make sure our dataset was ready to be processed. We applied ```heatmap``` to 
+   4. We tried to encode all of the categorical data using one-hot encoding, for example, features ```'dzgroup', 'race', 'ca'```. And for the binary features for example ```'sex'```, we manually encoded female to 0, and male to 1;
+   5. After removing null and encoding, we decided to double-check our value and make sure our dataset was ready to be processed. We applied ```heatmap``` to observe the simulations 
    ##### Relation Simulations
-   1. after
-
+   1. We had no idea how to choose our target, so we applied a pair plot, however, the plot is huge, and hard to observe the pattern between features 
+   2. Then we tried randomly choosing a target: ```'dementia'```, and applied Parallel Coordinates Plot, the result shows there is just one feature that has a strong relationship with ```'dementia'```, Since that, we think use multiple features to predict ```'dementia'``` is not going to meaningful, so we decide to try other features.
+   3. We also tried plot features ```'age'``` and ```'diabetes'``` using Multiple Line Plots, it turns out the plot is hard to observe as well. For the Multiple Line Plots, we also tried to plog the feature ```'hrt'``` and ```'ph'```, but the result looks the same, and still hard to observe the patterns.
+   4. So we were trying to do the observation using other clear models.
+   5. First of all, we tried to find which feature has the most useful data, so we applied a heatmap, it turns out our feature is good enough to be processed.
+   6. 
  ##### Model 1:
  ##### Model 2:
  sequential model, 5 layers NN, tuner, 
