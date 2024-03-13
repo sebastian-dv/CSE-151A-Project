@@ -125,15 +125,15 @@ Your 3rd model must undergo the same requirements as Model 1 and Model 2 for eva
 You will require the following:
 
 1. A complete Introduction
-   For model 1, we used...
-   For model 2, we used...
-   For model 3, we used...
+   For model 1, we used the logistic regression model.
+   For model 2, we used neural network.
+   For model 3, we used support vector machine.
 3. A complete submission of all prior submissions
    [Link to Model 1]()
    [Link to Model 2]()
    [Link to Model 3]()
 5. All code uploaded in the form of Jupiter notebooks that can be easily followed along to your GitHub repo
-   [Link to our GitHub]()
+   [Link to our GitHub](https://github.com/sebastian-dv/CSE-151A-Project)
 6. A completed write that includes the following:
 #### Introduction of your project. Why chosen? why is it cool? General/Broader impact of having a good predictive mode. i.e. why is this important?
 
@@ -157,16 +157,28 @@ No exploration of results is done here. This is mainly just a summary of your re
 4. We one hot encode all of the categorical attributes.
 5. After one hot encoding, we drop all of the original categorical attributes and all of the empty values.
 6. We check again to see whether there is still any empty value in the data frame.
-##### Model 1:
+##### Model 1(logistic regression model):
    ##### Data Preprocessing:
    1. We set 'dzgroup' as our target and the rest of the columns are our features.
    2. We implement minmax normalization to our feature data.
    3. We split the data into training and testing set by 70:30 and set the random state to 0.
-   4. We build eight different logistic regression models that predict each target and report the result using accuracy, classification report, and confusion matrix.
-   5. We generate learning curves for each logistic regression model and calculate mean training and testing scores across different cross-validation folds for each training and testing size.
-   6. We plot learning curves for each logistic regression model.
-##### Model 2:
-##### Model 3:
+   ##### Build Model and Report the Result:
+   1. We build eight different logistic regression models that predict each target and report the result using accuracy, classification report, and confusion matrix.
+   2. We generate learning curves for each logistic regression model and calculate mean training and testing scores across different cross-validation folds for each training and testing size.
+   3. We plot learning curves for each logistic regression model.
+   4. We also build a logistic regression model that predicts multiclass('dzgroup') and report the result using accuracy, classification report, and confusion matrix.
+   5. We generate learning curves for the logistic regression model and calculate mean training and testing scores across different cross-validation folds for each training and testing size.
+   6. We plot learning curves for the logistic regression model.
+##### Model 2(neural network):
+   ##### Data Preprocessing:
+   1.
+   ##### Build Model and Report the Result:
+   1.
+##### Model 3():
+   ##### Data Preprocessing:
+   1.
+   ##### Build Model and Report the Result:
+   1.
 ##### Results:
 
 
@@ -189,16 +201,32 @@ No exploration of results is done here. This is mainly just a summary of your re
    7. After we decided on our target, the first thing to do was encode, we discussed which encoding method we should use, and discussed the future model we were going to use to process the data, and after discussion, we decided to encode our target using one-hot encoding first since we are plan to use the regression model as our first model, so one-hot encoding is more appropriate. And we could re-encoding our target by other encoding methods if we need it later.
    8. After encoding, we displayed the number of each entry for our encoded  ```'dzgroup'``` target. It turns out our data is not balanced, which means we might need to do the OverSamplying before using SVM for our future model.
  ##### Model 1:
+ 
  ##### Model 2:
  sequential model, 5 layers NN, tuner, 
  
-
+ ##### Model 3:
+ 
 #### Conclusion section: This is where you do a mind dump on your opinions and possible future directions. Basically what you wish you could have done differently. Here you close with final thoughts
 
 #### Collaboration section: This is a statement of contribution by each member. This will be taken into consideration when making the final grade for each member in the group. Did you work as a team? was there a team leader? project manager? coding? writer? etc. Please be truthful about this as this will determine individual grades in participation. There is no job that is better than the other. If you did no code but did the entire write up and gave feedback during the steps and collaborated then you would still get full credit. If you only coded but gave feedback on the write up and other things, then you still get full credit. If you managed everyone and the deadlines and setup meetings and communicated with teaching staff only then you get full credit. Every role is important as long as you collaborated and were integral to the completion of the project. If the person did nothing. they risk getting a big fat 0. Just like in any job, if you did nothing, you have the risk of getting fired. Teamwork is one of the most important qualities in industry and academia!!!
 
 #### Start with Name: Title: Contribution. If the person contributed nothing then just put in writing: Did not participate in the project.
 Your final model (model 3) and final results summary (this should be the last paragraph in D)
+1. Name: Pranav Prabu
+   Contribution:
+2. Name: Sebastian Diaz
+   Contribution:
+3. Name: Jou-Chih Chang
+   Contribution:
+4. Name: Juan Yin
+   Contribution:
+5. Name: Irving Zhao
+   Contribution:
+6. Name: Xianzhe Guo
+   Contribution:
+7. Name: Tiankuo Li
+   Contribution:
 
 #### Your GitHub must be made public by the morning of the next day of the submission deadline.
 Note: The 5 left over points will be awarded for participating in the voting event. Voting will be released and you will have 2 days to decide on your top 3 favorite projects.
