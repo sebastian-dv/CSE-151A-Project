@@ -143,14 +143,14 @@ You will require the following:
 Note: A methods section does not include any why. the reason why will be in the discussion section. This is just a summary of your methods
 Results section. This will include the results from the methods listed above (C). You will have figures here about your results as well.
 No exploration of results is done here. This is mainly just a summary of your results. The sub-sections will be the same as the sections in your methods section.
-#### Data Exploration:
+##### Data Exploration:
 1. We take a look at the description of each variable.
 2. We select the features that are related to our topic.
 3. We print out the data frame of the features we selected.
 4. We check the shape of the data frame. For example, the number of observations in our data frame.
 5. We check whether there is any empty value(ex. null) in the data frame.
 6. For each of the categorical attributes, we print out all the unique elements.
-#### Data Preprocessing: 
+##### Data Preprocessing: 
 1. If the value in the 'sex' column is 'female', we replace it with 0. Otherwise, replace it with 1(male).
 2. We print out a correlation matrix plot of the data frame in the form of a heatmap.
 3. We print out the count of the unique elements in the 'dzgroup' column in the form of a bar plot.
@@ -158,9 +158,16 @@ No exploration of results is done here. This is mainly just a summary of your re
 5. After one hot encoding, we drop all of the original categorical attributes and all of the empty values.
 6. We check again to see whether there is still any empty value in the data frame.
 ##### Model 1:
+   ##### Data Preprocessing:
+   1. We set 'dzgroup' as our target and the rest of the columns are our features.
+   2. We implement minmax normalization to our feature data.
+   3. We split the data into training and testing set by 70:30 and set the random state to 0.
+   4. We build eight different logistic regression models that predict each target and report the result using accuracy, classification report, and confusion matrix.
+   5. We generate learning curves for each logistic regression model and calculate mean training and testing scores across different cross-validation folds for each training and testing size.
+   6. We plot learning curves for each logistic regression model.
 ##### Model 2:
 ##### Model 3:
-
+##### Results:
 
 
 #### Discussion section: This is where you will discuss the why, and your interpretation and your though process from beginning to end. This will mimic the sections you have created in your methods section as well as new sections you feel you need to create. You can also discuss how believable your results are at each step. You can discuss any short comings. It's ok to criticize as this shows your intellectual merit, as to how you are thinking about things scientifically and how you are able to correctly scrutinize things and find short comings. In science we never really find the perfect solution, especially since we know something will probably come up int he future (i.e. donkeys) and mess everything up. If you do it's probably a unicorn or the data and model you chose are just perfect for each other!
