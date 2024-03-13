@@ -169,10 +169,12 @@ No exploration of results is done here. This is mainly just a summary of your re
    ##### Relation Simulations
    1. We had no idea how to choose our target, so we applied a pair plot, however, the plot is huge, and hard to observe the pattern between features 
    2. Then we tried randomly choosing a target: ```'dementia'```, and applied Parallel Coordinates Plot, the result shows there is just one feature that has a strong relationship with ```'dementia'```, Since that, we think use multiple features to predict ```'dementia'``` is not going to meaningful, so we decide to try other features.
-   3. We also tried plot features ```'age'``` and ```'diabetes'``` using Multiple Line Plots, it turns out the plot is hard to observe as well. For the Multiple Line Plots, we also tried to plog the feature ```'hrt'``` and ```'ph'```, but the result looks the same, and still hard to observe the patterns.
+   3. We also tried plot features ```'age'``` and ```'diabetes'``` using Multiple Line Plots, it turns out the plot is hard to observe as well. For the Multiple Line Plots, we also tried to plog the features ```'hrt'``` and ```'ph'```, but the result looks the same, and still hard to observe the patterns.
    4. So we were trying to do the observation using other clear models.
    5. First of all, we tried to find which feature has the most useful data, so we applied a heatmap, it turns out our feature is good enough to be processed.
-   6. 
+   6. After discussing and observing the data, we decided to make  ```'dzgroup'``` our target, since the feature includes multiple diseases that are valuable to predict.
+   7. After we decided on our target, the first thing to do was encode, we discussed which encoding method we should use, and discussed the future model we were going to use to process the data, and after discussion, we decided to encode our target using one-hot encoding first since we are plan to use the regression model as our first model, so one-hot encoding is more appropriate. And we could re-encoding our target by other encoding methods if we need it later.
+   8. After encoding, we displayed the number of each entry for our encoded  ```'dzgroup'``` target. It turns out our data is not balanced, which means we might need to do the OverSamplying before using SVM for our future model.
  ##### Model 1:
  ##### Model 2:
  sequential model, 5 layers NN, tuner, 
