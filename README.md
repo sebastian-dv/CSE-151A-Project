@@ -143,14 +143,20 @@ You will require the following:
 Note: A methods section does not include any why. the reason why will be in the discussion section. This is just a summary of your methods
 Results section. This will include the results from the methods listed above (C). You will have figures here about your results as well.
 No exploration of results is done here. This is mainly just a summary of your results. The sub-sections will be the same as the sections in your methods section.
-#### Data Preprocessing: 
+#### Data Exploration:
 1. We take a look at the description of each variable.
 2. We select the features that are related to our topic.
 3. We print out the data frame of the features we selected.
 4. We check the shape of the data frame. For example, the number of observations in our data frame.
 5. We check whether there is any empty value(ex. null) in the data frame.
 6. For each of the categorical attributes, we print out all the unique elements.
-7. We man
+#### Data Preprocessing: 
+1. If the value in the 'sex' column is 'female', we replace it with 0. Otherwise, replace it with 1(male).
+2. We print out a correlation matrix plot of the data frame in the form of a heatmap.
+3. We print out the count of the unique elements in the 'dzgroup' column in the form of a bar plot.
+4. We one hot encode all of the categorical attributes.
+5. After one hot encoding, we drop all of the original categorical attributes and all of the empty values.
+6. We check again to see whether there is still any empty value in the data frame.
 ##### Model 1:
 ##### Model 2:
 ##### Model 3:
