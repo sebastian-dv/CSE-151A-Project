@@ -206,6 +206,27 @@ No exploration of results is done here. This is mainly just a summary of your re
  sequential model, 5 layers NN, tuner, 
  
  ##### Model 3:
+ 1. For the third model, we tried to implement the SVM model, since SVM supports both numerical and categorical data, it is more flexible in data processing compared to Naive Bayes.
+ 2. First we did the data processing for our target using one-hot encoding as we did on the initial data processing part. We also encoded ```'race'``` and ```'sex'``` by one-hone encoding and manually separating.
+ 3. Then we try to scale our data, we were think about using the ```MinMaxScaler()``` or ```StandardScaler()```, since both are fine, we decide to try both.
+ 4. the first time we tried minimax, after implementing the SVM model, we found the accuracy was low, so we Back to the second Scaler method, which is the StandardScaler.
+ 5. However, the StandardScaler needs to reprocess the data, since we have some one-hot encoded features, and StandardScaleris only used to process the numeric data, we need to separate the Numeric data and categorical data.
+ 6. In that case, we utilized ```iloc[:, 19:]``` to extract the categorical encoded features, and drops the ```'sex'``` feature.
+ 7. After getting the scaled X, we combine them using ```np.concatenate()``` method, so now we have the complete ```X_scaled```
+ 8. Before we pass the data to the SVM model, we split data to train:test = 80:20
+ 9. Then we tried our first SVM model, with set parameters ```C = 0.1``` , ```degree = 2```, and ```kernel ='poly'```.
+ 10. When we fit our SVM model, we need to transform our ```y_train``` to 1-D array, so we passed ```y_train.idxmax(axis=1).values``` as my parameters.
+ 11. We also used ```.idxmax(axis=1).values``` to get our t_true in order to pass the data to the ```classification_report```.
+ 12. And we can observe the result of our SVM model.
+ 14. In order to improve the accuracy, We decided to try different parameters to build our SVM model.
+ 15. So seconde time we try to use hyper-parameter-grid to find optemiazed parameters.
+ 16. We set our grid as: ```param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1], 'kernel': ['linear', 'rbf', 'poly']}```
+ 17. We printed the accuracy again after using the hyper parameter, and it shows our model slightly improved our accuracy. And finally we got : ```Best Hyperparameters: {'C': 10, 'gamma': 0.01, 'kernel': 'rbf'}```
+ 18. We still think our accuracy is not high enpugh, so we decide to apply the OverSamplying as we did for HW4, and as we mentioned before, our data is imbalanced, so we think it's better to apply the overSamplying.
+ 19. We also tried two different OverSamplying methods this time, the first is SMOTE, and the second is RandomOverSampler.
+ 20. And we also trying to know wheathr scaling will helping the OverSamplying, so we have four different cases in total: SMOTE with scaled, SMOTE with unscaled, RandomOverSamplerwith scaled, and  RandomOverSampler with unscaled.
+ 21. We compare these four to find the best accuracy using the ```classification_report```
+ 
  
 #### Conclusion section: This is where you do a mind dump on your opinions and possible future directions. Basically what you wish you could have done differently. Here you close with final thoughts
 
