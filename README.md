@@ -157,11 +157,11 @@ No exploration of results is done here. This is mainly just a summary of your re
 4. We one hot encode all of the categorical attributes.
 5. After one hot encoding, we drop all of the original categorical attributes and all of the empty values.
 6. We check again to see whether there is still any empty value in the data frame.
+7. We set 'dzgroup' as our target and the rest of the columns are our features.
 ##### Model 1(logistic regression model):
    ##### Data Preprocessing:
-   1. We set 'dzgroup' as our target and the rest of the columns are our features.
-   2. We implement minmax normalization to our feature data.
-   3. We split the data into training and testing set by 70:30 and set the random state to 0.
+   1. We implement minmax normalization to our feature data.
+   2. We split the data into training and testing set by 70:30 and set the random state to 0.
    ##### Build Model and Report the Result:
    1. We build eight different logistic regression models that predict each target and report the result using accuracy, classification report, and confusion matrix.
    2. We generate learning curves for each logistic regression model and calculate mean training and testing scores across different cross-validation folds for each training and testing size.
@@ -171,9 +171,10 @@ No exploration of results is done here. This is mainly just a summary of your re
    6. We plot learning curves for the logistic regression model.
 ##### Model 2(neural network):
    ##### Data Preprocessing:
-   1.
+   1. We implement minmax normalization to our feature data.
+   2. We split the data into training and testing set by 80:20 and set the random state to 0.
    ##### Build Model and Report the Result:
-   1.
+   1. We build the base model(Keras Sequential Model). We design a 4-layer artificial neural network using the Tanh activation function in each layer and the softmax activation function in the output layer. The Number of nodes in the first layer 
 ##### Model 3():
    ##### Data Preprocessing:
    1.
