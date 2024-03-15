@@ -88,17 +88,17 @@ Here is one of those models, the model itself doesn't look too different from th
 When we compiled the model, we used Stochastic Gradient Descent to minimize the error rate and used Categorical Crossentropy as the loss function. When we fit the model, we set the number of epochs to 100, the batch size to 20, the validation split to 0.1, and the verbose to 0.
 We plotted the linear graph for the training and validation loss of the model we built to see the performance of the model as well as if it was overfitting/underfitting:
 
-### REPEATING TEXT (Anything to keep from this?)
+### REPEATING TEXT (Anything to keep from this?) - START
 
 Next, we built another model (Keras Sequential Model) to predict each target and report the result using average accuracy. We design a 5-layer artificial neural network using the Tanh activation function in each layer and the softmax activation function in the output layer. The Number of nodes in the first layer is 72, the number of nodes in the output layer is 8, and the number of nodes in the rest of the layer is 42. When we compile the model, we use Stochastic Gradient Descent to minimize the error rate, use categorical cross entropy as the loss function, and specific ```MSE``` and ```accuracy``` as the metrics. When we fit the mode, we set the number of epochs to 50, the batch size to 20, and the verbose to 0. 
 
-### REPEATING TEXT
+### REPEATING TEXT - END
 
-  We perform repeat K-Fold Cross-Validation with different random splits of the data. The entire cross-validation will repeat 5 times and in each repetition, the data will be split into 10 subsets. 
-  We calculate the accuracy for each subset of the data when processing cross-validation. Then, take the mean of it to see the performance of our model. The model and result below;
+  We performed K-Fold Cross-Validation with different random splits of the data. The entire cross-validation repeated 5 times and in each repetition, the data was split into 10 subsets. 
+  We calculated the accuracy for each subset of the data when processing cross-validation. Then, took the mean of it to see the performance of our model. The model and results are shown below:
   <img width="796" alt="截屏2024-03-14 18 03 19" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/b924ae2b-fda3-4a52-91ea-178df74ede69">
 
-  Then, we build another model(hyperparameter tuning model) to predict each target and report the result using classification report. We set the range of units in the input layer to 18180, the range of units in hidden layers to 12180, and the units in the output layer to 8. The available choices for the activation function include ```'relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', and 'mish'```. The available choices for optimizer include ```'sgd', 'adam', and 'rmsprop.'``` The range of learning rate is ```0.001~0.1```. The available choices for the loss function include 'categorical_crossentropy', 'mse', and 'binary_crossentropy.' After that, we run the model to find the most optimized parameters and use them to rebuild our model.
+  Then, we built another model(hyperparameter tuning model) to predict each target and report the result using classification report. We set the range of units in the input layer to 18180, the range of units in hidden layers to 12180, and the units in the output layer to 8. The available choices for the activation function include ```'relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', and 'mish'```. The available choices for optimizer include ```'sgd', 'adam', and 'rmsprop.'``` The range of learning rate is ```0.001~0.1```. The available choices for the loss function include 'categorical_crossentropy', 'mse', and 'binary_crossentropy.' After that, we run the model to find the most optimized parameters and use them to rebuild our model.
   the hyperparameter tuning model was set up as below:
   <img width="904" alt="截屏2024-03-14 17 58 18" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/292037a1-333c-47e1-9235-cb4043dfddaa">
 
