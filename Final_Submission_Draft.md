@@ -72,10 +72,44 @@ This plot shows that there is some underfitting in our model and thus a logistic
 ![Screenshot 2024-03-10 at 7 20 21 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/f9e92ef8-55ad-4b95-ad17-ad58568ef99d)
 Here is one of those models, the model itself doesn't look too different from the other models for each target and the results are relatively the same.
 
+### Second Model
+#### Neural Network
+  We apply ```minmax``` normalization to our feature data, and for the ```Keras Sequential Model```, we split the data into training and testing sets with an 80:20 ratio, setting the random state to 0 using ```train_test_split```:
+  whereas for the ```hyperparameter tuning model```, we split the data into training and testing sets with an 85:15 ratio, setting the random state to 1, in order to train more data to fit our data.
+  
+  We build the base model(Keras Sequential Model) to predict each target and report the result using ```classification report```, the model and result are shown below: 
+  <img width="994" alt="截屏2024-03-14 17 50 05" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c7520ece-e0ed-410f-a305-d7d765f0e68c">
+  We also compared the loss between training and validation, which shows not like a perfect fit: 
+  <img width="620" alt="截屏2024-03-14 17 51 48" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a32b5785-6b80-4285-9f65-3a5f06e61ee9">
+
+  After the basic model, we design a 5-layer artificial neural network using the Tanh activation function in each layer and the softmax activation function in the output layer. The Number of nodes in the first layer is 72, the number of nodes in the output layer is 8, and the number of nodes in the rest of the layer is 42, as below:
+  <img width="770" alt="截屏2024-03-14 17 52 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/d9d6c84a-75d8-4aca-97d9-ad20cec7366c">
+  
+  When we compile the model, we use Stochastic Gradient Descent to minimize the error rate and use categorical cross entropy as the loss function. When we fit the mode, we set the number of epochs to 100, the batch size to 20, the validation split to 0.1, and the verbose to 0.
+We plot the linear graph for the training and validation loss of the model we build to see whether the model is overfitting/underfitting:
+
+  Next, We build another model(Keras Sequential Model) to predict each target and report the result using average accuracy. We design a 5-layer artificial neural network using the Tanh activation function in each layer and the softmax activation function in the output layer. The Number of nodes in the first layer is 72, the number of nodes in the output layer is 8, and the number of nodes in the rest of the layer is 42. When we compile the model, we use Stochastic Gradient Descent to minimize the error rate, use categorical cross entropy as the loss function, and specific ```MSE``` and ```accuracy``` as the metrics. When we fit the mode, we set the number of epochs to 50, the batch size to 20, and the verbose to 0.
+
+  We perform repeat K-Fold Cross-Validation with different random splits of the data. The entire cross-validation will repeat 5 times and in each repetition, the data will be split into 10 subsets. 
+  We calculate the accuracy for each subset of the data when processing cross-validation. Then, take the mean of it to see the performance of our model. The model and result below;
+  <img width="796" alt="截屏2024-03-14 18 03 19" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/b924ae2b-fda3-4a52-91ea-178df74ede69">
+
+  Then, we build another model(hyperparameter tuning model) to predict each target and report the result using classification report. We set the range of units in the input layer to 18180, the range of units in hidden layers to 12180, and the units in the output layer to 8. The available choices for the activation function include ```'relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', and 'mish'```. The available choices for optimizer include ```'sgd', 'adam', and 'rmsprop.'``` The range of learning rate is ```0.001~0.1```. The available choices for the loss function include 'categorical_crossentropy', 'mse', and 'binary_crossentropy.' After that, we run the model to find the most optimized parameters and use them to rebuild our model.
+  the hyperparameter tuning model was set up as below:
+  <img width="904" alt="截屏2024-03-14 17 58 18" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/292037a1-333c-47e1-9235-cb4043dfddaa">
+
+  We report the result using a classification report and plot the linear graph for the training and validation loss of the model we build to see whether the model is overfitting/underfitting. And it turns out a fair accuracy and the diagram shows below:
+<img width="632" alt="截屏2024-03-14 17 59 17" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a065caa2-7af9-4242-a78f-21a66eca88bf">
+  
+  The last thing we do is we apply OverSamplying (SMOTE) to our train datasets. Then, applying the oversampling data to our best model from our hyperparameter tuning. Then, report the result using a classification report and plot the linear graph for the training and validation loss of the model we build to see whether the model is overfitting/underfitting.
+  The decreased accuracy: 
+  <img width="491" alt="截屏2024-03-14 17 59 55" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c8496de3-3381-4072-b4bd-31ebfb36d64c">
+  And crazy diagram:
+<img width="611" alt="截屏2024-03-14 18 00 25" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4ffb68b8-b8a0-4271-9ce4-23903a450315">
 
 
-### SVM - Third model
-#### First Try
+### Third Model
+#### SVM
 
   For the third model, we tried to implement the SVM model, since SVM supports both numerical and categorical data, it is more flexible in data processing compared to Naive Bayes. First we did the data processing for our target using one-hot encoding as we did on the initial data processing part. We also encoded 'race' and 'sex' by one-hone encoding and manually separating. Then we try to scale our data, we were think about using the ```MinMaxScaler()``` or ```StandardScaler()```, since both are fine, we decide to try both. 
   
@@ -95,7 +129,7 @@ Here is one of those models, the model itself doesn't look too different from th
   We think 0.53 should be the best accuracy we can get from the SVM model.
 
 
-#### Second try
+#### Decision Tree Learning
   Another model we tried for the third model is ```Decision Tree Learning``` model.
 
   The data preprocessing are the same, we applied encoding and StandardScaler to make our data clean, but this time we tried ```XgBoost``` model, we set our parameter as follows: 
@@ -116,7 +150,7 @@ And inorder to minimize the error, we set the same parameter as ```RandomizedSea
   
   Alhough it turns out the accuarcy has a tlitle bits decrease due to some training issue that out of our control, we think that is the best accuracy we can get so far.
 
-### Third try
+### Gradient boosted Tree
 Gradient boosted Tree is the third method we choosed.
 Same thing as before, we manully tried one set of parameters that we think is worth to try, we set parameter as ```n_estimators=100, learning_rate=0.1, max_depth=3, random_state=21```, after we print the output of the ```classification report```, it gives us a really high accuracy, it is 0.56!(compare to teh previous results):
 <img width="456" alt="截屏2024-03-14 17 21 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c6087504-a4cf-4818-9333-3fc70bab96c1">
@@ -125,7 +159,7 @@ Same thing as before, we manully tried one set of parameters that we think is wo
   <img width="439" alt="截屏2024-03-14 17 28 22" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/75220e47-7dab-40ce-9f42-89c85be67dbc">
 
 
-### Fourth try
+### KNN Model
 KNN is our last try for the third model.
 
 We simply applied ```KNeighborsClassifier``` function, and printed the result using ```classification_report```:
