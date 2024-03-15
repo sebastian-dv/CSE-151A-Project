@@ -74,12 +74,12 @@ Here is one of those models, the model itself doesn't look too different from th
 
 ### Second Model
 #### Neural Network
-  We apply ```minmax``` normalization to our feature data, and for the ```Keras Sequential Model```, we split the data into training and testing sets with an 80:20 ratio, setting the random state to 0 using ```train_test_split```:
-  whereas for the ```hyperparameter tuning model```, we split the data into training and testing sets with an 85:15 ratio, setting the random state to 1, in order to train more data to fit our data.
+  We used a ```MinMaxScaler``` to apply minmax normalization to our feature data, and for the Keras Sequential Model, we split the data into training and testing sets with an 80:20 ratio, setting the random state to 0 using ```train_test_split```:
+  whereas for the hyperparameter tuning model, we split the data into training and testing sets with an 85:15 ratio, setting the random state to 1, in order to train more data to fit our data.
   
-  We build the base model(Keras Sequential Model) to predict each target and report the result using ```classification report```, the model and result are shown below: 
+  We built the base model(Keras Sequential Model) to predict each target and report the result using ```classification_report```. The model and results are shown below: 
   <img width="994" alt="截屏2024-03-14 17 50 05" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c7520ece-e0ed-410f-a305-d7d765f0e68c">
-  We also compared the loss between training and validation, which shows not like a perfect fit: 
+  We also compared the loss between training and validation, which shows a stark difference in loss rate, representing the fact that th model was nowhere near the perfect fit: 
   <img width="620" alt="截屏2024-03-14 17 51 48" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a32b5785-6b80-4285-9f65-3a5f06e61ee9">
 
   After the basic model, we design a 5-layer artificial neural network using the Tanh activation function in each layer and the softmax activation function in the output layer. The Number of nodes in the first layer is 72, the number of nodes in the output layer is 8, and the number of nodes in the rest of the layer is 42, as below:
