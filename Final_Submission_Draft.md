@@ -65,6 +65,14 @@ Here is one of those models, the model itself doesn't look too different from th
   Then we tried our first SVM model, with set parameters ```C = 0.1``` , ```degree = 2```, and ```kernel ='poly'```. When we fit our SVM model, we need to transform our y_train to 1-D array, so we passed ```y_train.idxmax(axis=1).values``` as my parameters. We also used ```.idxmax(axis=1).values``` to get our t_true in order to pass the data to the ```classification_report```. And we can observe the result of our SVM model. In order to improve the accuracy, we decided to try different parameters to build our SVM model. So second time we try to use hyper-parameter-grid to find optimized parameters. We set our grid as: ```param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1], 'kernel': ['linear', 'rbf', 'poly']}``` as follows: 
   <img width="765" alt="截屏2024-03-14 17 03 19" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/451bc212-dea4-4ec1-a14e-1fedaf738c0b">
 
+  We also applied OverSamplying using ```SMOTE``` and ```RandomOverSampler```, but it turns out decreased the accuracy: 
+   - Evaluation after ```SMOTE```:
+
+<img width="580" alt="截屏2024-03-14 17 33 01" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/6610ab7f-50ac-4a1f-a002-ab08c690bd06">
+
+   - Evaluation after ```RandomOverSampler```:
+<img width="569" alt="截屏2024-03-14 17 33 57" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c5e7741f-5925-427d-a3aa-2639c6649272">
+
   We think 0.53 should be the best accuracy we can get from the SVM model.
 
 
@@ -90,8 +98,18 @@ And inorder to minimize the error, we set the same parameter as ```RandomizedSea
   Alhough it turns out the accuarcy has a tlitle bits decrease due to some training issue that out of our control, we think that is the best accuracy we can get so far.
 
 ### Third try
-Gradient boosted Tree
+Gradient boosted Tree is the third method we choosed.
+Same thing as before, we manully tried one set of parameters that we think is worth to try, we set parameter as ```n_estimators=100, learning_rate=0.1, max_depth=3, random_state=21```, after we print the output of the ```classification report```, it gives us a really high accuracy, it is 0.56!(compare to teh previous results):
+<img width="456" alt="截屏2024-03-14 17 21 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c6087504-a4cf-4818-9333-3fc70bab96c1">
 
+  After get the high results, we also tried OverSamplying, trying to make the number of our data balance, in that case, we applied ```SMOTE```, the finally we found that the accuarcy decreased: 
+  <img width="439" alt="截屏2024-03-14 17 28 22" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/75220e47-7dab-40ce-9f42-89c85be67dbc">
+
+
+### Fourth try
+KNN is our last try for the third model.
+
+We simply applied ```KNeighborsClassifier``` function, and 
 
 
 
