@@ -11,14 +11,14 @@ This project aims to investigate and identify key factors that contribute to the
 
 ![Figure 1](images/figure1.png)
 
-*Figure 1.—Overall schematic presentation of phases I and II of the Study to Understand Prognoses and Preferences for Outcomes and Risks of Treatment (SUPPORT) project, 1989 to 1994. DNR indicates do not resuscitate; CPR, cardiopulmonary resuscitation; and ICU, intensive care unit.*
+*Figure 1 — Overall schematic presentation of phases I and II of the Study to Understand Prognoses and Preferences for Outcomes and Risks of Treatment (SUPPORT) project, 1989 to 1994. DNR indicates do not resuscitate; CPR, cardiopulmonary resuscitation; and ICU, intensive care unit.*
 
 
 ## Table 1: UCI Dataset Features Detailed Information
 
 ![Table 1](images/table1.png)
 
-*Table 1.-UCI Dataset selected features descriptions.*
+*Table 1 - UCI Dataset selected features descriptions.*
 
 
 The rest of the paper is organized as follows: the Method Section will present the models we executed in the order we explored them. The Results Section will include findings from the aforementioned methods. The Discussion Section will present our interpretations, thought processes, and critiques from beginning to end. Finally, the Conclusion Section will offer our final thoughts.
@@ -26,32 +26,29 @@ The rest of the paper is organized as follows: the Method Section will present t
 
 # Methods: 
 #### Data Preprocessing: 
-  For data exploration, we called [pd.DataFrame()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=RA1zgeeIgR2p&line=3&uniqifier=1) function to display the variable name and descriptions, and we found that there are 47 variables in total, which is a large dataset.
-  Then we created a data frame using [read_csv](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=YC0o6IQ1i-ec&line=1&uniqifier=1), after transferring, we selected 21 features that we think worth to work with, they are: 'age','sex','dzgroup','scoma','race','sps','aps','diabetes','dementia','ca','meanbp','wblc','hrt','resp','temp','pafi','alb','bili','crea','sod','ph'
-  The next step is checking for null. We used [df.isnull().sum()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=KtldNNfpP723&line=1&uniqifier=1) function to calculate null value for each feature we selected.
-  The result of df.isnull().sum() shows some features contain a bunch of null values, we are considering how to deal with this data, we will either completely remove them or refill them with mean/median data depending on the number of null values for that feature.
-  For the features containing value type string, we applied [unique()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=CpA9bV6xP9K9&line=1&uniqifier=1) function to make it easy to distinguish.
-  For the binary feature like "sex", we divided them into integers 0 and 1 using the function :
+  For data exploration, we called the [pd.DataFrame()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=RA1zgeeIgR2p&line=3&uniqifier=1) function to display the variable name and descriptions, and we found that there are 47 variables in total, which is a large dataset.
+  Then we created a data frame using [read_csv](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=YC0o6IQ1i-ec&line=1&uniqifier=1), after transferring, we selected 21 features to work with: 'age', 'sex', 'dzgroup', 'scoma', 'race', 'sps', 'aps', 'diabetes', 'dementia', 'ca', 'meanbp', 'wblc', 'hrt', 'resp', 'temp', 'pafi', 'alb', 'bili', 'crea', 'sod', and 'ph'.
+  The next step we took was to check for null values in the dataset. We used the [df.isnull().sum()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=KtldNNfpP723&line=1&uniqifier=1) function to calculate the null values for each feature we selected.
+  The result of df.isnull().sum() showed that some features contained several null values, and so we decided to deal with this data by either completely removing them or refilling them with mean/median data depending on the number of null values found for that feature.
+  For the features containing value type string, we applied the [unique()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=CpA9bV6xP9K9&line=1&uniqifier=1) function to make it easy to distinguish.
+  For binary features like ```'sex'```, we divided them into integers 0 and 1 using the function
 [df['sex'].replace('female', 0, inplace=True)](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=1&uniqifier=1)
-  For nonbinary features, we applied [OneHotEncoder()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=4&uniqifier=1) function
-  After the above data exploration and preprocessing, we are able to apply some visualization tools to help us explore the pattern of data
+  For nonbinary features, we applied the [OneHotEncoder()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=4&uniqifier=1) function to get them in a binary format.
+  After the above data exploration and preprocessing, we were able to apply some visualization tools to help us explore the pattern of data.
 ##### Data Preprocessing: 
-2. We print out a correlation matrix plot of the data frame in the form of a heatmap.
-3. We print out the count of the unique elements in the 'dzgroup' column in the form of a bar plot.
-4. We one hot encode all of the categorical attributes.
-5. After one hot encoding, we drop all of the original categorical attributes and all of the empty values.
-6. We check again to see whether there is still any empty value in the data frame.
+2. We printed out a correlation matrix plot of the data frame in the form of a heatmap.
+3. We printed out the count of the unique elements in the 'dzgroup' column in the form of a bar plot.
+4. We one-hot encoded all of the categorical attributes.
+5. After one-hot encoding, we dropped all of the original categorical attributes and all of the empty values.
 
 #### Visualization Tool
-1.Parallel Coordinates Plot: we applied this function to visualize the relationship between "dementia" and other features.
+1. Parallel Coordinates Plot: we applied this function to visualize the relationship between ```'dementia'``` and other features.
 
-2. Plotly Express interface: This function is used to observe the relationship between "age" and dimensions=['age', 'sps', 'meanbp','scoma','aps'], it seems like people's physical features change around 50.
+2. Multiple Line Plots: this function was used to check the pattern of two particular features.
+   - First, we applied an ```'age'```-```'diabetes'``` pair, which shows people between 40 to 80 are the main group to have diabetes
+   - Second, we applied the ```'bili'```-```'hrt'``` pair and ```'bili'```-```'ph'``` pair, their diagram has a similar pattern, and We think we should implement more data to see the pattern between them.
 
-3. Multiple Line Plots: this function is used to check the pattern of two particular features.
-   - first, we applied an age-diabetes pair, which shows people between 40 to 80 are the main group to have diabetes
-   - second, we applied the bili-hrt pair and bili-ph pair, their diagram has a similar pattern, and We think we should implement more data to see the pattern between them.
-
-4. We apply the Pairplot for the entire dataset twice, before and after we split the data using one-hot encoding.
+3. We applied the pairplot for the entire dataset twice, before and after we split the data using one-hot encoding.
 
 
 ### multi-class logistic regression - First model:
