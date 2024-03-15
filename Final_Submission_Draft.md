@@ -37,7 +37,7 @@ The rest of the paper is organized as follows: the Method Section will present t
   After the above data exploration and preprocessing, we were able to apply some visualization tools to help us explore the pattern of data.
 ##### Data Preprocessing: 
 2. We printed out a correlation matrix plot of the data frame in the form of a heatmap.
-3. We printed out the count of the unique elements in the 'dzgroup' column in the form of a bar plot.
+3. We printed out the count of the unique elements in the ```'dzgroup'``` column in the form of a bar plot.
 4. We one-hot encoded all of the categorical attributes.
 5. After one-hot encoding, we dropped all of the original categorical attributes and all of the empty values.
 
@@ -50,16 +50,17 @@ The rest of the paper is organized as follows: the Method Section will present t
 
 3. We applied the pairplot for the entire dataset twice, before and after we split the data using one-hot encoding.
 
-
-### multi-class logistic regression - First model:
+### Multi-Class Logistic Regression - First Model:
   In order to make it easy to observe some patterns, we decided to apply multi-class logistic regression first.
   
-  The first model is not the most precise, as there is a relatively clear sign of overfitting due to the cross-validation score being lower at the start than the training score, and only a relative evening out towards the end of the graph. We can possibly improve this model by selecting different features for training use to further finetune the results and not have overfitting or underfitting for the model.
+  The first model was not the most precise, as there was a relatively clear sign of underfitting due to the cross-validation score being lower at the start than the training score, and only a relative evening out towards the end of the graph. 
   
-  In our first model, we set ```'dzgroup'``` as our target and used the rest of the columns as our features. To ensure that our feature data was normalized, we implemented minmax normalization. We then split the data into training and testing sets, with a 70:30 ratio and a random state of 0. We built eight different logistic regression models for single-class regression to predict each target and reported the results using ```accuracy```, ```classification_report```, and ```confusion_matrix```. We also generated learning curves for each logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size.   
-  In addition, we built a logistic regression model that predicts multiclass('dzgroup') and reported the results using ```accuracy```, ```classification_report```, and ```confusion_matrix```. We also generated learning curves for the logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size. Finally, We plot learning curves for the logistic regression model.
+  We can possibly improve this model by selecting different features for training use to further finetune the results and not have overfitting or underfitting for the model.
   
-  Overall, our analysis was thorough and rigorous, ensuring that our results were accurate and reliable.
+  In our first model, we set ```'dzgroup'``` as our target and used the rest of the columns as our features. To ensure that our feature data was normalized, we implemented minmax normalization. We then split the data into training and testing sets, with a 70:30 ratio and a random state of 0. We built eight different logistic regression models for single-class regression to predict each target and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. We also generated learning curves for each logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size.   
+  In addition, we built a logistic regression model that predicts multiclass(```'dzgroup'```) and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. We also generated learning curves for the logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size. Finally, We plotted learning curves for the logistic regression model.
+  
+  Overall, our analysis was thorough and rigorous, ensuring that our results were accurate and reliable about the state of the model.
 
 #### First Model Visualization 
 ![Screenshot 2024-03-10 at 7 16 17 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/90e3f1ea-bb2b-4f66-ad46-c7322d1a7d89)
@@ -67,7 +68,7 @@ This is our plot for our multi-class regression model, comparing our training sc
 This plot shows that there is some underfitting in our model and thus a logistic regression model likely isn't the best model we could use for our data, which is useful to know for our future models. We also had other similar plots for our logistic regression models that we did for each target rather than multiple at once.
 
 ![Screenshot 2024-03-10 at 7 20 21 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/f9e92ef8-55ad-4b95-ad17-ad58568ef99d)
-Here is one of those models, the model itself doesn't look too different from the other models for each target and the results are relatively the same.
+Here is one of single-target models, and when comparing the multi-target results with the single-target results, the model itself doesn't look too different and the results are relatively the same.
 
 ### Second Model
 #### Neural Network
