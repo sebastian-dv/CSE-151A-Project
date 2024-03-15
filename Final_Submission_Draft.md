@@ -128,9 +128,8 @@ Same thing as before, we manully tried one set of parameters that we think is wo
 ### Fourth try
 KNN is our last try for the third model.
 
-We simply applied ```KNeighborsClassifier``` function, and 
-
-
+We simply applied ```KNeighborsClassifier``` function, and printed the result using ```classification_report```:
+<img width="504" alt="截屏2024-03-14 17 39 16" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/5ba49df3-f499-47c9-af02-abac6b840a47">
 
 
 # Results : 
