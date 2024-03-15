@@ -47,12 +47,10 @@
 
 #### First Model Visualization 
 ![Screenshot 2024-03-10 at 7 16 17 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/90e3f1ea-bb2b-4f66-ad46-c7322d1a7d89)
-
 This is our plot for our multi-class regression model, comparing our training score vs our cross validation score.
 This plot shows that there is some underfitting in our model and thus a logistic regression model likely isn't the best model we could use for our data, which is useful to know for our future models. We also had other similar plots for our logistic regression models that we did for each target rather than multiple at once.
 
 ![Screenshot 2024-03-10 at 7 20 21 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/f9e92ef8-55ad-4b95-ad17-ad58568ef99d)
-
 Here is one of those models, the model itself doesn't look too different from the other models for each target and the results are relatively the same.
 
 
