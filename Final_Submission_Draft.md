@@ -64,20 +64,52 @@ Here is one of those models, the model itself doesn't look too different from th
   
   The first time we tried minimax, after implementing the SVM model, we found the accuracy was low, so we went back to the second Scaler method, which is the StandardScaler. However, the StandardScaler needs to reprocess the data, since we have some one-hot encoded features, and StandardScaler is only used to process the numeric data, we need to separate the Numeric data and categorical data. In that case, we utilized ```iloc[:, 19:]``` to extract the categorical encoded features, and drops the 'sex' feature. After getting the scaled X, we combine them using np.concatenate() method, so now we have the complete X_scaled. Before we pass the data to the SVM model, we split data to train:test = 80:20. 
   
-  Then we tried our first SVM model, with set parameters ```C = 0.1``` , ```degree = 2```, and ```kernel ='poly'```. When we fit our SVM model, we need to transform our y_train to 1-D array, so we passed ```y_train.idxmax(axis=1).values``` as my parameters. We also used ```.idxmax(axis=1).values``` to get our t_true in order to pass the data to the ```classification_report```. And we can observe the result of our SVM model. In order to improve the accuracy, we decided to try different parameters to build our SVM model. So second time we try to use hyper-parameter-grid to find optimized parameters. We set our grid as: ```param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1], 'kernel': ['linear', 'rbf', 'poly']}```.
+  Then we tried our first SVM model, with set parameters ```C = 0.1``` , ```degree = 2```, and ```kernel ='poly'```. When we fit our SVM model, we need to transform our y_train to 1-D array, so we passed ```y_train.idxmax(axis=1).values``` as my parameters. We also used ```.idxmax(axis=1).values``` to get our t_true in order to pass the data to the ```classification_report```. And we can observe the result of our SVM model. In order to improve the accuracy, we decided to try different parameters to build our SVM model. So second time we try to use hyper-parameter-grid to find optimized parameters. We set our grid as: ```param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1], 'kernel': ['linear', 'rbf', 'poly']}``` as follows: 
+  <img width="765" alt="截屏2024-03-14 17 03 19" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/451bc212-dea4-4ec1-a14e-1fedaf738c0b">
+
+  We think 0.53 should be the best accuracy we can get from the SVM model.
+
 
 #### Second try
+  Another model we tried for the third model is ```Decision Tree Learning``` model.
+
+  The data preprocessing are the same, we applied encoding and StandardScaler to make our data clean, but this time we tried ```XgBoost``` model, we set our parameter as follows: 
+  <img width="830" alt="截屏2024-03-14 17 01 28" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/5621a169-42e4-4b7f-a4c4-9ac41731245d">
+
+  It turns out a not bad result, whcih with 0.57-ish accuracy, and better then the tunered SVM model. And we decided to try different parameter as well to improve the accuracy by ```RandomizedSearchCV```. As the diagram shows below, we selected four parameters: ```'max_depth'```, ```'learning_rate'```, ```'n_estimators'```, and ```'subsample'```:
+  <img width="398" alt="截屏2024-03-14 17 07 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4a03bae0-649e-4da1-9f6d-dead4ca3a3a3">
+
+  After the get the best parameter, we rebuild the model, and finaly get good accuracy which is 0.58, the result displays below:
+  <img width="805" alt="截屏2024-03-14 17 08 48" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/68ed1809-e36c-4605-98f1-33eb56a80a72">
+
+  We also tried another parameter search method, which is ```GridSearchCV```, inorder to get best model parameter.
+And inorder to minimize the error, we set the same parameter as ```RandomizedSearchCV```, and finally we got the result: 
+<img width="832" alt="截屏2024-03-14 17 11 10" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/69580227-0f0c-415c-b913-431d657bc45a">
+
+  The accuracy increased again! It is worth to try different tuner method!. As the result shows, we decided to use the result from the ```GridSearchCV``` to do the ```clasiffication report```: 
+  <img width="434" alt="截屏2024-03-14 17 12 50" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/42b27107-5c23-4672-80ae-40052f7f2c76">
+  
+  Alhough it turns out the accuarcy has a tlitle bits decrease due to some training issue that out of our control, we think that is the best accuracy we can get so far.
+
+### Third try
+Gradient boosted Tree
+
+
+
 
 
 # Results : 
 
 # Discussion: 
 ### How we choose the model:
-After data preprocessing: #### Summary: 
+After data preprocessing:
+
   We chose to use a ```multi-class logistic regression model``` to train and fit the model with the preprocessed data. We then used the results to test for overfitting vs underfitting, accuracy and error for train vs test data. We are thinking of testing with a ```multi-class classification model``` and a ```Keras Sequential model``` next to look for better results. This is because we need models which are capable of outputing multiple different classes since our targets are multiple different diseases. These next two models should be more powerful and hopefully better at predicting our targets.
+  
   In conclution, we thoroughly analyzed the description of each variable to understand their significance, carefully selecting features pertinent to our topic to ensure effective data preprocessing. We meticulously printed out the data frame containing the chosen features, meticulously verifying its shape to ascertain the number of observations accurately. We conducted a meticulous check for any empty values, such as null, within the data frame, ensuring data integrity before proceeding. Additionally, for each categorical attribute, we meticulously listed out all unique elements, ensuring comprehensive understanding and meticulous preprocessing of the data.
 
 After getting result for model 1:
+
 
 
 # Conclusion section: 
