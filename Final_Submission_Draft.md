@@ -118,11 +118,26 @@ Finally, we applied oversampling, specifically SMOTE, to our train datasets. We 
   
   The first time we tried ```MinMaxScaler()``` after implementing the SVM model, we found the accuracy was low, so we then used ```StandardScaler()```. However, ```StandardScaler()``` needs to reprocess the data, since we had one-hot encoded features, and ```StandardScaler()``` is only used for numerical data. To separate the numerical data from the categorical data, we utilized ```iloc[:, 19:]``` to extract the categorical encoded features, and dropped the ```'sex'``` feature. After getting the scaled X, we combined them using np.concatenate() methodto get the complete X_scaled. Before we passed the data to the SVM model, we split the data with a ratio of train:test = 80:20 using ```train_test_split```. 
   
-  Then we tried our first SVM model, with set parameters ```C = 0.1``` , ```degree = 2```, and ```kernel ='poly'```. When we fit our SVM model, we needed to transform ```y_train``` to a 1-D array, so we passed ```y_train.idxmax(axis=1).values``` as the parameters. We also used ```.idxmax(axis=1).values``` to get ```t_true``` in order to pass the data to ```classification_report```. However, the result of our SVM model was a low accuracy score, so to improve the accuracy, we decided to try different parameters to build our SVM model. The second time, we used ```GridSearch``` to find optimized parameters. We set our grid as: ```param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1], 'kernel': ['linear', 'rbf', 'poly']}``` as follows: 
+  Then we tried our first SVM model, with set parameters ```C = 0.1``` , ```degree = 2```, and ```kernel ='poly'```. When we fit our SVM model, we needed to transform ```y_train``` to a 1-D array, so we passed ```y_train.idxmax(axis=1).values``` as the parameters. We also used ```.idxmax(axis=1).values``` to get ```t_true``` in order to pass the data to ```classification_report```. However, the result of our SVM model was a low accuracy score, so to improve the accuracy, we decided to try different parameters to build our SVM model. The second time, we used ```GridSearch``` to find optimized parameters. We set our grid as: ```param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1], 'kernel': ['linear', 'rbf', 'poly']}```.
+
+1. Use of the ```'poly'``` kernel:
+
+<img width="550" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/f4471a67-0176-42f1-8351-25ac5fed92ff">
+
+2. Hyperparameter tuning using ```GridSearch```: 
+
 <img width="770" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/f00b8140-44f6-4668-a84c-61f712ddda55">
 
-  We also applied OverSampling using ```SMOTE``` and ```RandomOverSampler```, but it also resulted in a low accuracy.
-  
+We also used oversampling with ```SMOTE``` and ```RandomOverSampler```, but it also resulted in a low accuracy, as shown in the results section.
+
+1. Use of ```SMOTE```:
+
+<img width="813" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/60bd08ee-299b-411f-9b0d-7ccbccefd86c">
+
+2. Use of ```RandomOverSampler```: 
+
+<img width="813" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/f5caa2be-7c8e-47cc-85da-e29970c8bad0">
+
 #### Decision Tree Learning
   Another model we tried for the third model is ```Decision Tree Learning``` model.
 
