@@ -331,7 +331,9 @@ Over-Sampling model train/validation error.
 
 <img width="456" alt="截屏2024-03-14 17 21 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c6087504-a4cf-4818-9333-3fc70bab96c1">
 
-After OverSamplying, then finally we found that the accuracy decreased:: <img width="439" alt="截屏2024-03-14 17 28 22" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/75220e47-7dab-40ce-9f42-89c85be67dbc">
+After OverSamplying, then finally we found that the accuracy decreased:
+
+<img width="439" alt="截屏2024-03-14 17 28 22" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/75220e47-7dab-40ce-9f42-89c85be67dbc">
 
 ### KNN Model
 
