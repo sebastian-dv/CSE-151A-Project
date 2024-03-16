@@ -267,10 +267,45 @@ y_pred = knn_classifier.predict(X_test)
 
 
 # Results : 
+### Data Exploration
 
-### Model 1
+### Data Preposessing
 
-### Model 2
+<img width="1316" alt="截屏2024-03-15 下午8 52 29" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/147887997/e07aa042-c77c-4764-a521-cf22d6c816cd">
+The final preposessed dataframe.
+
+### First Model
+#### Multi-Class Logistic Regression
+![Screenshot 2024-03-10 at 7 16 17 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/90e3f1ea-bb2b-4f66-ad46-c7322d1a7d89)
+This is our plot for our multi-class regression model, comparing our training score vs our cross-validation score.
+![Screenshot 2024-03-10 at 7 20 21 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/f9e92ef8-55ad-4b95-ad17-ad58568ef99d)
+Here is one of single-target models, and when comparing the multi-target results with the single-target results, the model itself doesn't look too different and the results are relatively the same.
+
+### Second Model
+#### Neural Network
+  <img width="994" alt="截屏2024-03-14 17 50 05" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c7520ece-e0ed-410f-a305-d7d765f0e68c">
+  
+  Base model classification report.
+  
+  <img width="620" alt="截屏2024-03-14 17 51 48" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a32b5785-6b80-4285-9f65-3a5f06e61ee9">
+  
+  Base model train/validation error.
+  
+  <img width="796" alt="截屏2024-03-14 18 0319" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/b924ae2b-fda3-4a52-91ea-178df74ede69">
+  
+  10-Fold Cross validation accuracy.
+  
+  <img width="632" alt="截屏2024-03-14 17 59 17" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a065caa2-7af9-4242-a78f-21a66eca88bf">
+  
+  Hyperparameter tuning model classification report and train/validation error.
+  
+  <img width="491" alt="截屏2024-03-14 17 59 55" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c8496de3-3381-4072-b4bd-31ebfb36d64c">
+  
+  Over-Sampling model classification report.
+  
+<img width="611" alt="截屏2024-03-14 18 00 25" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4ffb68b8-b8a0-4271-9ce4-23903a450315">
+
+Over-Sampling model train/validation error.
 
 ### Model 3
 
