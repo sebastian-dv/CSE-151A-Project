@@ -367,7 +367,7 @@ print(classification_report(y_true, y_pred, zero_division = 0))
 
 All 47 of the datasets features
 
-After understanding the meanning of different features, and from the output data we got after print the entire dataset, it shows we have inbalanced data: we have some null value, and some feature that is not clean enough to ba training using model, that indicates we need to do some data preprocessing:
+After we chose our targets and features for our project, we plotted out the counts and found that we have imbalanced data. We also found many null values, all of which we dealt with during preprocessing.
 
 ![Barchart](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/66afc575-09cd-4fc2-b152-805c58aabf06)
 
