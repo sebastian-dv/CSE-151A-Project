@@ -357,6 +357,7 @@ y_true = y_test
 y_pred = knn_classifier.predict(X_test)
 print(classification_report(y_true, y_pred, zero_division = 0))
 ```
+
 # Results : 
 ### Data Exploration
 ![Screenshot 2024-03-15 at 9 15 24 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/ac763465-a001-48d8-914a-12a3bed1d63e)
@@ -367,7 +368,7 @@ print(classification_report(y_true, y_pred, zero_division = 0))
 
 All 47 of the datasets features
 
-After we chose our targets and features for our project, we plotted out the counts and found that we have imbalanced data. We also found many null values, all of which we dealt with during preprocessing.
+After understanding the meaning of different features, and from the output data we got after printing the entire dataset, it shows we have imbalanced data: we have some null values, and some features that are not clean enough to be used for training models, which indicates that we need to do some data preprocessing:
 
 ![Barchart](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/66afc575-09cd-4fc2-b152-805c58aabf06)
 
@@ -377,21 +378,21 @@ Counts of each of our targets
 
 Plot of features (out of the ones we chose) which contained NaN values as well as how many
 
-![11111](https://github.com/sebastian-dv/CSE-151A-Project/assets/147887997/f776e7ce-7da9-4b16-be76-5e1c89e2a4fa)
-
-Heatmap of the entire dataset
-
 ### Data Preposessing
 
 <img width="1316" alt="截屏2024-03-15 下午8 52 29" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/147887997/e07aa042-c77c-4764-a521-cf22d6c816cd">
-The final preposessed dataframe.
+
+The final preprocessed dataframe.
 
 ### First Model
 #### Multi-Class Logistic Regression
 ![Screenshot 2024-03-10 at 7 16 17 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/90e3f1ea-bb2b-4f66-ad46-c7322d1a7d89)
+
 This is our plot for our multi-class regression model, comparing our training score vs our cross-validation score.
+
 ![Screenshot 2024-03-10 at 7 20 21 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/f9e92ef8-55ad-4b95-ad17-ad58568ef99d)
-Here is one of single-target models, and when comparing the multi-target results with the single-target results, the model itself doesn't look too different and the results are relatively the same.
+
+Here is one of the single-target models, and when comparing the multi-target results with the single-target results, the model itself doesn't look too different and the results are relatively the same.
 
 ### Second Model
 #### Neural Network
@@ -405,7 +406,7 @@ Here is one of single-target models, and when comparing the multi-target results
   
   <img width="796" alt="截屏2024-03-14 18 0319" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/b924ae2b-fda3-4a52-91ea-178df74ede69">
   
-  10-Fold Cross validation accuracy.
+  10-fold cross validation accuracy.
   
   <img width="632" alt="截屏2024-03-14 17 59 17" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a065caa2-7af9-4242-a78f-21a66eca88bf">
   
@@ -413,57 +414,53 @@ Here is one of single-target models, and when comparing the multi-target results
   
   <img width="491" alt="截屏2024-03-14 17 59 55" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c8496de3-3381-4072-b4bd-31ebfb36d64c">
   
-  Over-Sampling model classification report.
+  Oversampling model classification report.
   
 <img width="611" alt="截屏2024-03-14 18 00 25" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4ffb68b8-b8a0-4271-9ce4-23903a450315">
 
-Over-Sampling model train/validation error.
+Oversampling model train/validation error.
 
 ### Model 3
 
 #### SVM
 
-- Evaluation after ```SMOTE```:
+  Evaluation after ```SMOTE```:
 
 <img width="580" alt="截屏2024-03-14 17 33 01" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/6610ab7f-50ac-4a1f-a002-ab08c690bd06">
 
-- Evaluation after ```RandomOverSampler```:
+  Evaluation after ```RandomOverSampler```:
   
 <img width="569" alt="截屏2024-03-14 17 33 57" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c5e7741f-5925-427d-a3aa-2639c6649272">
 
 #### Decision Tree Learning
 
-- RandomizedSearch
+  RandomizedSearch Accuracy
 
 <img width="832" alt="截屏2024-03-14 17 11 10" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/69580227-0f0c-415c-b913-431d657bc45a">
 
-- GridSearch Classification Report
+  GridSearch Classification Report
 
 <img width="434" alt="截屏2024-03-14 17 12 50" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/42b27107-5c23-4672-80ae-40052f7f2c76">
 
 ### Gradient boosted Tree
 
-- Base Model Classification Report
+Base Model Classification Report
 
 <img width="456" alt="截屏2024-03-14 17 21 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c6087504-a4cf-4818-9333-3fc70bab96c1">
 
-After OverSamplying, then finally we found that the accuracy decreased:
+Result after oversampling data:
 
 <img width="439" alt="截屏2024-03-14 17 28 22" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/75220e47-7dab-40ce-9f42-89c85be67dbc">
 
 ### KNN Model
 
-- KNN Model Classification Report
+KNN model classification report
 
 <img width="504" alt="截屏2024-03-14 17 39 16" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/5ba49df3-f499-47c9-af02-abac6b840a47">
 
 
-
-
-
-
 # Discussion: 
-### How we choose the model:
+## How we chose the model:
 
 ### Data Exploration
 
