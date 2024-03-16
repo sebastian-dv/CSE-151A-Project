@@ -232,3 +232,18 @@ If we started our project over, there are several things we wished we could have
 
 
 # Collaboration section: 
+
+1. Name: Pranav Prabu
+   Contribution:
+2. Name: Sebastian Diaz
+   Contribution:
+3. Name: Jou-Chih Chang
+   Contribution:
+4. Name: Juan Yin
+   Contribution:
+5. Name: Irving Zhao
+   Contribution:
+6. Name: Xianzhe Guo
+   Contribution:
+7. Name: Tiankuo Li
+   Contribution:
