@@ -534,18 +534,21 @@ Prior to preprocessing, we found the total number of NaN values present in our c
 
 ### Model 3
 
-  We first tried the SVM model since the model is good for One-Hot encoding targets compared to the Naive Bayes model. Also, according to the resource: Kernel SVMs can effectively handle non-linear decision boundaries, making them useful for tasks where data is not linearly separable. [What are the advantages and disadvantages of using a kernel SVM algorithm? - Quora](https://www.quora.com/What-are-the-advantages-and-disadvantages-of-using-a-kernel-SVM-algorithm), So we decided to try the SVM first.
-After we got the result from the classification report of the SVM tuner and OverSampling, although the accuracy score is fair, we found that SVM is limited by choosing an appropriate kernel or manually transforming features to capture non-linear relationships effectively. So we think we may need to try other models to do the comparison. 
+  We first tried the SVM model since the model is good for One-Hot encoding targets compared to the Naive Bayes model. Also, according to the resource: Kernel SVMs can effectively handle non-linear decision boundaries, making them useful for tasks where data is not linearly separable. (What are the advantages and disadvantages of using a kernel SVM algorithm? - Quora), So we decided to try the SVM first.
 
-  One of our members visited office hours and the Professor suggested we try XGboost. XGboost offers some very attractive features for us. It incorporates regularization, handles missing values, and is able to handle unbalanced datasets. On top of that, it is fast and achieves high accuracy. However, after training our Xgboost classifier, there was not a significant improvement over other models with its 0.57 testing accuracy. We tried random search and grid search to obtain the best parameters, but neither were that effective, improving the accuracy to 0.58.
+We fit a base SVM model using the polynomial kernel with degree 2, the result was average at 0.51 accuracy for the test set. Due to the fact that the model performed similarly in the train set, we concluded that no overfitting occurred. We then tried GridSearchCV to fine tune the model and found the ‘rbf’ kernel to be much better. Mirroring what we did in homework, we also tried to perform oversampling techniques for our SVM. However, neither SMOTE nor Random Oversampling increases our accuracy.
 
-  In the meantime, we also tried Gradient Boosted Tree as an alternative to XGboost, but the results were not as good. We also displayed the ranking of importance of each feature, results are shown below:
+One of our members visited office hours and the Professor suggested we try XGboost. XGboost offers some very attractive features for us. It incorporates regularization, handles missing values, and is able to handle unbalanced datasets. On top of that, it is fast and achieves high accuracy.
+After training our base Xgboost classifier, there was not a significant improvement over other models with its 0.55 testing accuracy at max_depth = 2. We could have increased its accuracy by giving it a higher max_depth, but that came with the cost of overfitting, reflected by the training curve. In order to truly improve its performance, we did GridSearch to obtain the best parameters and was able to increase the accuracy to 0.58, making XGboost Classifier our best model yet.
+
+  We also displayed the ranking of importance of each feature, results are shown below:
   <img width="717" alt="截屏2024-03-15 18 27 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/2bc722a5-6367-4467-939a-36a2c2b67c9b">
 
-  As the picture shows, surprisingly, the ```race``` is the most important feature to discuss about towards our target.
+  As the picture shows, surprisingly, the ```race``` is the most important feature.
 
+  In the meantime, we also tried Gradient Boosted Tree as an alternative to XGboost, but the results were not as good, and there were signs of overfitting as the tree performed much better on our test set. 
 
-  At this point, we have tried essentially every model besides KNN that has been discussed in this class. We ended up trying KNN as well. Our KNN model only yielded 0.5 testing accuracy, quite a bit worse than XGboost.
+  We ended up trying KNN as well, since that was also a classification model discussed in class. Our KNN model only yielded 0.5 testing accuracy, quite a bit worse than XGboost.
 
 
 
