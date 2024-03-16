@@ -269,9 +269,11 @@ KNN was our final version for the third model. We simply applied the ```KNeighbo
 ### Data Exploration
 
 ![Barchart](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/66afc575-09cd-4fc2-b152-805c58aabf06)
+
 Counts of each of our targets
 
 ![Screenshot 2024-03-15 at 8 42 12 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/5a15641a-fd11-4260-952f-42b6d960342b)
+
 Plot of features which contained NaN values as well as how many
 
 ### Data Preposessing
