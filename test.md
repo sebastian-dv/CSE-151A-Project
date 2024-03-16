@@ -57,7 +57,16 @@ The rest of the paper is organized as follows: the Method Section will present t
   
   We can possibly improve this model by selecting different features for training use to further finetune the results and not have overfitting or underfitting for the model.
   
-  In our first model, we set ```'dzgroup'``` as our target and used the rest of the columns as our features. To ensure that our feature data was normalized, we implemented minmax normalization. We then split the data into training and testing sets, with a 70:30 ratio and a random state of 0. We built eight different logistic regression models for single-class regression to predict each target and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. We also generated learning curves for each logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size.   
+  In our first model, we set ```'dzgroup'``` as our target and used the rest of the columns as our features. To ensure that our feature data was normalized, we implemented minmax normalization. We then split the data into training and testing sets, with a 70:30 ratio and a random state of 0. We built eight different logistic regression models for single-class regression to predict each target and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. 
+  ```
+  for i in targets_ohe.columns:
+  X_train, X_test, y_train, y_test = train_test_split(features, targets_ohe[i], test_size=0.3, random_state=0)
+  logreg = LogisticRegression(max_iter = 1000, solver = 'liblinear')
+  logregmodel = logreg.fit(X_train, y_train)
+  yhat_train = logreg.predict(X_train)
+  yhat_test = logreg.predict(X_test)
+  ```
+  We also generated learning curves for each logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size.   
   In addition, we built a logistic regression model that predicts multiclass(```'dzgroup'```) and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. We also generated learning curves for the logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size. Finally, We plotted learning curves for the logistic regression model.
   
   Overall, our analysis was thorough and rigorous, ensuring that our results were accurate and reliable about the state of the model.
