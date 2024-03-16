@@ -230,41 +230,30 @@ We also used oversampling with ```SMOTE``` and ```RandomOverSampler```, but it a
   Another model we tried for the third model was the ```Decision Tree Learning``` model.
 
   The data preprocessing was the same as processing for SVM, where we applied encoding and ```StandardScaler``` to make our data clean, but this time we tried ```XgBoost``` model, setting the parameters as follows: 
+
 <img width="815" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/7332c03b-0863-433a-ac35-55cd5608e167">
 
 
 We then decided to try different parameters as well to improve the accuracy by ```RandomizedSearchCV```. As the diagram shows below, we selected four parameters: ```'max_depth'```, ```'learning_rate'```, ```'n_estimators'```, and ```'subsample'```:
-  <img width="398" alt="截屏2024-03-14 17 07 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4a03bae0-649e-4da1-9f6d-dead4ca3a3a3">
+
+<img width="398" alt="截屏2024-03-14 17 07 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4a03bae0-649e-4da1-9f6d-dead4ca3a3a3">
 
 We also tried another parameter search method, ```GridSearchCV```, in order to get the best model parameters.
 In order to minimize error, we used the same parameters as ```RandomizedSearchCV```. 
 
 We also printed the ranking of the importance of each feature: 
+
 <img width="717" alt="截屏2024-03-15 18 27 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/57e56250-556b-4db5-8a26-fa4443c9cc93">
 
 
-### Gradient boosted Tree
-Gradient boosted Tree is the third method we chose.
-Same thing as before, we manually tried one set of parameters that we think is worth trying, we set parameters as ```n_estimators=100, learning_rate=0.1, max_depth=3, random_state=21```, after we print the output of the ```classification report```, it gives us a really high accuracy, it is 0.56! (compared to the previous results):
-<img width="456" alt="截屏2024-03-14 17 21 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c6087504-a4cf-4818-9333-3fc70bab96c1">
-
-  After getting high results, we also tried OverSamplying, trying to make the number of our data balance, in that case, we applied ```SMOTE```, 
-  
-
+### Gradient Boosted Tree
+Gradient Boosted Tree was the third method we chose.
+We manually tried one set of parameters for the model as ```n_estimators=100, learning_rate=0.1, max_depth=3, random_state=21```. After training the model,  we used ```classification_report``` to evaluate the model.
 
 ### KNN Model
-KNN is our last try for the third model. We simply applied ```KNeighborsClassifier``` function, and below is the detail about our parameters in our KNN model: 
-```
-#KNN. similar result to SVM
-k = 10
-knn_classifier = KNeighborsClassifier(n_neighbors=k)
-knn_classifier.fit(X_train, y_train)
+KNN was our final version for the third model. We simply applied the ```KNeighborsClassifier``` function, and below are the details about our parameters in the KNN model:
 
-# Predict the labels for the test set
-y_true = y_test
-y_pred = knn_classifier.predict(X_test)
-```
-
+<img width="530" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/c8b7328f-2344-445a-bd2e-f1b7b76a174d">
 
 # Results : 
 ### Data Exploration
@@ -312,32 +301,34 @@ Over-Sampling model train/validation error.
 #### SVM
 
 - Evaluation after ```SMOTE```:
-  
+
 <img width="580" alt="截屏2024-03-14 17 33 01" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/6610ab7f-50ac-4a1f-a002-ab08c690bd06">
 
-   - Evaluation after ```RandomOverSampler```:
-     
+- Evaluation after ```RandomOverSampler```:
+  
 <img width="569" alt="截屏2024-03-14 17 33 57" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c5e7741f-5925-427d-a3aa-2639c6649272">
 
 #### Decision Tree Learning
 
 - RandomizedSearch
-  
+
 <img width="832" alt="截屏2024-03-14 17 11 10" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/69580227-0f0c-415c-b913-431d657bc45a">
 
 - GridSearch Classification Report
-  
+
 <img width="434" alt="截屏2024-03-14 17 12 50" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/42b27107-5c23-4672-80ae-40052f7f2c76">
 
 ### Gradient boosted Tree
 
-After OverSamplying, then finally we found that the accuracy decreased: 
+- Base Model Classification Report
 
-<img width="439" alt="截屏2024-03-14 17 28 22" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/75220e47-7dab-40ce-9f42-89c85be67dbc">
+<img width="456" alt="截屏2024-03-14 17 21 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c6087504-a4cf-4818-9333-3fc70bab96c1">
+
+After OverSamplying, then finally we found that the accuracy decreased:: <img width="439" alt="截屏2024-03-14 17 28 22" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/75220e47-7dab-40ce-9f42-89c85be67dbc">
 
 ### KNN Model
 
-We printed the result using ```classification_report``` for our KNN model:
+- KNN Model Classification Report
 
 <img width="504" alt="截屏2024-03-14 17 39 16" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/5ba49df3-f499-47c9-af02-abac6b840a47">
 
