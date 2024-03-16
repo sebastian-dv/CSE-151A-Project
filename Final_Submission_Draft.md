@@ -178,6 +178,12 @@ y_pred = knn_classifier.predict(X_test)
 
 #### SVM
 
+- Evaluation after ```SMOTE```:
+<img width="580" alt="截屏2024-03-14 17 33 01" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/6610ab7f-50ac-4a1f-a002-ab08c690bd06">
+
+   - Evaluation after ```RandomOverSampler```:
+<img width="569" alt="截屏2024-03-14 17 33 57" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c5e7741f-5925-427d-a3aa-2639c6649272">
+
 #### Decision Tree Learning
 
 ### Gradient boosted Tree
