@@ -217,36 +217,118 @@ X_train_resample, y_train_resample = smote.fit_resample(X_train, y_train)
 
 1. Use of the ```'poly'``` kernel:
 
-<img width="550" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/f4471a67-0176-42f1-8351-25ac5fed92ff">
+```
+svm = SVC(kernel ='poly', degree = 2)
+svm.fit(X_train,y_train)
+
+y_true = y_test
+y_pred = svm.predict(X_test)
+
+print(classification_report(y_true, y_pred, zero_division=0))
+accuracy = accuracy_score(y_true, y_pred)
+print(f"Accuracy: {accuracy}")
+```
 
 2. Hyperparameter tuning using ```GridSearch```: 
 
-<img width="770" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/f00b8140-44f6-4668-a84c-61f712ddda55">
+```
+param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1], 'kernel': ['linear', 'rbf', 'poly']}
+
+svm_classifier = SVC()
+grid_search = GridSearchCV(svm_classifier, param_grid, cv=3, scoring='accuracy')
+grid_search.fit(X_train,y_train.idxmax(axis=1).values)
+
+best_params = grid_search.best_params_
+best_model = grid_search.best_estimator_
+
+accuracy = best_model.score(X_test, y_test.idxmax(axis=1).values)
+print(f"Best Hyperparameters: {best_params}")
+print(f"Accuracy on Test Set: {accuracy}")
+```
 
 We also used oversampling with ```SMOTE``` and ```RandomOverSampler```, but it also resulted in a low accuracy, as shown in the results section.
 
 1. Use of ```SMOTE```:
 
-<img width="813" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/60bd08ee-299b-411f-9b0d-7ccbccefd86c">
+```
+smote = SMOTE(random_state=21)
+X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train.idxmax(axis=1).values)
+unique_classes_resampled, class_counts_resampled = np.unique(y_train_resampled, return_counts=True)
+
+for class_label, count in zip(unique_classes_resampled, class_counts_resampled):
+    print(f"Frequency of Class {class_label}: {count} instances")
+```
 
 2. Use of ```RandomOverSampler```: 
 
-<img width="813" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/f5caa2be-7c8e-47cc-85da-e29970c8bad0">
+```
+rs = RandomOverSampler(random_state=11)
+X_train_resampled, y_train_resampled = rs.fit_resample(X_train, y_train.idxmax(axis=1).values)
+unique_classes_resampled, class_counts_resampled = np.unique(y_train_resampled, return_counts=True)
+
+for class_label, count in zip(unique_classes_resampled, class_counts_resampled):
+    print(f"Frequency of Class {class_label}: {count} instances")
+```
 
 #### Decision Tree Learning
   Another model we tried for the third model was the ```Decision Tree Learning``` model.
 
   The data preprocessing was the same as processing for SVM, where we applied encoding and ```StandardScaler``` to make our data clean, but this time we tried ```XgBoost``` model, setting the parameters as follows: 
 
-<img width="815" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/7332c03b-0863-433a-ac35-55cd5608e167">
+```
+eval_set = [(X_train, y_train), (X_test, y_test)]
+model = xgb.XGBClassifier(objective='multi:softmax', max_depth=2, learning_rate=0.1, n_estimators=100, eval_metric='mlogloss')
+model.fit(X_train, y_train, eval_set=eval_set, verbose=0)
+
+results = model.evals_result()
+epochs = len(results['validation_0']['mlogloss'])
+
+train_error = results['validation_0']['mlogloss']
+test_error = results['validation_1']['mlogloss']
+```
 
 
 We then decided to try different parameters as well to improve the accuracy by ```RandomizedSearchCV```. As the diagram shows below, we selected four parameters: ```'max_depth'```, ```'learning_rate'```, ```'n_estimators'```, and ```'subsample'```:
 
-<img width="398" alt="截屏2024-03-14 17 07 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4a03bae0-649e-4da1-9f6d-dead4ca3a3a3">
+```
+model = xgb.XGBClassifier()
+
+param_dist = {
+    'max_depth': [3, 4, 5, 6, 7],
+    'learning_rate': [0.1, 0.01, 0.05],
+    'n_estimators': [100, 200, 300, 400, 500],
+    'subsample': [0.6, 0.7, 0.8, 0.9, 1.0]
+}
+
+random_search = RandomizedSearchCV(model, param_distributions=param_dist, n_iter=25, scoring='accuracy', cv=3, verbose=1, random_state=0)
+
+random_search.fit(X_train, y_train)
+
+print("Best parameters found: ", random_search.best_params_)
+print("Best accuracy found: ", random_search.best_score_)
+```
 
 We also tried another parameter search method, ```GridSearchCV```, in order to get the best model parameters.
 In order to minimize error, we used the same parameters as ```RandomizedSearchCV```. 
+
+```
+model = xgb.XGBClassifier()
+
+param_grid = {
+    'max_depth': [3, 4, 5, 6, 7],
+    'learning_rate': [0.1, 0.01, 0.05],
+    'n_estimators': [100, 200, 300, 400, 500],
+    'subsample': [0.6, 0.7, 0.8, 0.9, 1.0]
+}
+
+grid_search = GridSearchCV(estimator=model, param_grid=param_grid, scoring='accuracy', cv=3, verbose=1)
+
+grid_search.fit(X_train, y_train)
+
+print("Best parameters found: ", grid_search.best_params_)
+print("Best accuracy found: ", grid_search.best_score_)
+     
+```
 
 We also printed the ranking of the importance of each feature: 
 
@@ -257,14 +339,27 @@ We also printed the ranking of the importance of each feature:
 Gradient Boosted Tree was the third method we chose.
 We manually tried one set of parameters for the model as ```n_estimators=100, learning_rate=0.1, max_depth=3, random_state=21```. After training the model,  we used ```classification_report``` to evaluate the model.
 
-<img width="822" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/a07ca15f-f09a-4bc1-a258-89ca5ad34b4f">
+```
+model = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=2, random_state=21)
 
+model.fit(X_train, y_train)
+
+train_error = [log_loss(y_train, y_pred_proba) for y_pred_proba in model.staged_predict_proba(X_train)]
+test_error = [log_loss(y_test, y_pred_proba) for y_pred_proba in model.staged_predict_proba(X_test)]
+```
 
 ### KNN Model
 KNN was our final version for the third model. We simply applied the ```KNeighborsClassifier``` function, and below are the details about our parameters in the KNN model:
 
-<img width="530" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/c8b7328f-2344-445a-bd2e-f1b7b76a174d">
+```
+k = 10
+knn_classifier = KNeighborsClassifier(n_neighbors=k)
+knn_classifier.fit(X_train, y_train)
 
+y_true = y_test
+y_pred = knn_classifier.predict(X_test)
+print(classification_report(y_true, y_pred, zero_division = 0))
+```
 # Results : 
 ### Data Exploration
 
