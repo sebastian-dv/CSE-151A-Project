@@ -477,9 +477,13 @@ Log-loss Train vs Test fitting curve:
 
 ### KNN Model
 
-KNN model classification report
+KNN performance Train:
 
-<img width="504" alt="截屏2024-03-14 17 39 16" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/5ba49df3-f499-47c9-af02-abac6b840a47">
+<img width="463" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/f6f1321f-de8b-49d6-a30d-67e6af7a2cf7">
+
+KNN Performance Test:
+
+<img width="475" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/df2176da-dcbe-4f75-94ff-2dfebcb3b738">
 
 
 # Discussion: 
