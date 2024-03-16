@@ -554,7 +554,7 @@ After training our base Xgboost classifier, there was not a significant improvem
 
 # Conclusion
 
-  We believe there are several reasons why our models did not perform as well as we liked. 
+  We believe there are several reasons why our models did not perform to our expectation. 
   
 1. imbalanced dataset. Some of our classes have significantly fewer instances than others. For example, Colon Cancer has 98 instances while ARF/MOSF w/Sepsis has 1725 instances. Classifier can be biased toward majority groups
  
