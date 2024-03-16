@@ -84,13 +84,7 @@ Here is one of single-target models, and when comparing the multi-target results
   <img width="770" alt="截屏2024-03-14 17 52 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/d9d6c84a-75d8-4aca-97d9-ad20cec7366c">
   
 When we compiled the model, we used Stochastic Gradient Descent to minimize the error rate and used Categorical Crossentropy as the loss function. When we fit the model, we set the number of epochs to 100, the batch size to 20, the validation split to 0.1, and the verbose to 0.
-We plotted the linear graph for the training and validation loss of the model we built to see the performance of the model as well as if it was overfitting/underfitting:
-
-### REPEATING TEXT (Anything to keep from this?) - START
-
-Next, we built another model (Keras Sequential Model) to predict each target and report the result using average accuracy. We design a 5-layer artificial neural network using the Tanh activation function in each layer and the softmax activation function in the output layer. The Number of nodes in the first layer is 72, the number of nodes in the output layer is 8, and the number of nodes in the rest of the layer is 42. When we compile the model, we use Stochastic Gradient Descent to minimize the error rate, use categorical cross entropy as the loss function, and specific ```MSE``` and ```accuracy``` as the metrics. When we fit the mode, we set the number of epochs to 50, the batch size to 20, and the verbose to 0. 
-
-### REPEATING TEXT - END
+We plotted the linear graph for the training and validation loss of the model we built to see the performance of the model as well as if it was overfitting/underfitting, and specific ```MSE``` and ```accuracy``` as the metrics. When we fit the mode, we set the number of epochs to 50, the batch size to 20, and the verbose to 0.
 
   We performed K-Fold Cross-Validation with different random splits of the data. The entire cross-validation was repeated 5 times and in each repetition, the data was split into 10 subsets. 
   We calculated the accuracy for each subset of the data when processing cross-validation. Then, took the mean of it to see the performance of our model. The model and results are shown below:
@@ -268,3 +262,9 @@ If we started our project over, there are several things we wished we could have
    Contribution:
 7. Name: Tiankuo Li
    Contribution:
+
+# Colab Files of Our 3 Models
+[Preprocessing](https://colab.research.google.com/drive/1nzW6bMa3XklLFByw_Fc9XWii4gMwAa67?usp=sharing)
+[Model 1](https://colab.research.google.com/drive/1PFt7mk4PJi3zmMCn9rKbJEDA61fFsDZk?usp=sharing)
+[Model 2](https://colab.research.google.com/drive/1GBM_WtSZDAe_ifttldpFGWvh5ttAP842?usp=sharing)
+[Model 3](https://colab.research.google.com/drive/1X1-l40jQnPeq46wu0CgNISCQnN9mFe1C?usp=sharing)
