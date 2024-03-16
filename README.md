@@ -453,23 +453,27 @@ Oversampling model train/validation error.
   
   <img width="455" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/8e69a843-4ad8-43a6-951f-9a6b474bf834">
 
+  Log-loss Train vs Test fitting curve:
+ 
+ <img width="902" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/364e37ca-ea56-4faa-bf2c-3ce3e34c0cb0">
+
   Evaluation after Gridsearch:
 
  <img width="832" alt="截屏2024-03-14 17 11 10" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/69580227-0f0c-415c-b913-431d657bc45a">
 
- Log-loss fitting curve:
- 
- <img width="902" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/364e37ca-ea56-4faa-bf2c-3ce3e34c0cb0">
-
 ### Gradient boosted Tree
 
-Base Model Classification Report
+Base Model Performance Train:
+
+<img width="449" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/ea966c74-d0a4-4c1c-b52f-7af03fa233e2">
+
+Base Model Performance Test:
 
 <img width="456" alt="截屏2024-03-14 17 21 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c6087504-a4cf-4818-9333-3fc70bab96c1">
 
-Result after oversampling data:
+Log-loss Train vs Test fitting curve:
 
-<img width="439" alt="截屏2024-03-14 17 28 22" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/75220e47-7dab-40ce-9f42-89c85be67dbc">
+<img width="895" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/7aa51565-0614-48a5-84ad-1bd06b8cea0e">
 
 ### KNN Model
 
