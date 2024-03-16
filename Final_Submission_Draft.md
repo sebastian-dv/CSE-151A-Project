@@ -362,6 +362,13 @@ print(classification_report(y_true, y_pred, zero_division = 0))
 ```
 # Results : 
 ### Data Exploration
+![Screenshot 2024-03-15 at 9 15 24 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/ac763465-a001-48d8-914a-12a3bed1d63e)
+
+![Screenshot 2024-03-15 at 9 16 27 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/45bf61de-303e-4b75-8055-55ed719e477a)
+
+![Screenshot 2024-03-15 at 9 17 03 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/6c31f9d2-325f-4bb0-b1ab-b0cd883556df)
+
+All 47 of the datasets features
 
 After understanding the meanning of different features, and from the output data we got after print the entire dataset, it shows we have inbalanced data: we have some null value, and some feature that is not clean enough to ba training using model, that indicates we need to do some data preprocessing:
 
@@ -371,7 +378,7 @@ Counts of each of our targets
 
 ![Screenshot 2024-03-15 at 8 42 12 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/5a15641a-fd11-4260-952f-42b6d960342b)
 
-Plot of features which contained NaN values as well as how many
+Plot of features (out of the ones we chose) which contained NaN values as well as how many
 
 ### Data Preposessing
 
