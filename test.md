@@ -71,9 +71,19 @@ The rest of the paper is organized as follows: the Method Section will present t
   print(classification_report(y_test, yhat_test))
   conf_matrix = confusion_matrix(y_test, yhat_test)
   ```
-  We also generated learning curves for each logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size.   
+  We also generated learning curves for each logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size. 
+  ```
+  train_sizes, train_scores, test_scores = learning_curve(logreg, X, y, cv=5, scoring='accuracy', n_jobs=-1)
+  ```
   
   In addition, we built a logistic regression model that predicts multiclass(```'dzgroup'```) and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. We also generated learning curves for the logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size. Finally, We plotted learning curves for the logistic regression model.
+  ```
+X_train, X_test, y_train, y_test = train_test_split(features, targets, test_size=0.3, random_state=0)
+logreg = LogisticRegression(max_iter=1000, multi_class='multinomial', solver='lbfgs')
+logregmodel = logreg.fit(X_train, y_train)
+yhat_train = logreg.predict(X_train)
+yhat_test = logreg.predict(X_test)
+```
   
   Overall, our analysis was thorough and rigorous, ensuring that our results were accurate and reliable about the state of the model.
 
