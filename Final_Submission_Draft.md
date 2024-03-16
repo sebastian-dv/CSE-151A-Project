@@ -101,7 +101,10 @@ We plotted the linear graph for the training and validation loss of the model we
   It turns out a fair accuracy and the diagram shown below:
 <img width="632" alt="截屏2024-03-14 17 59 17" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a065caa2-7af9-4242-a78f-21a66eca88bf">
   
-Finally, we applied oversampling, specifically SMOTE, to our train datasets. Then, applying the oversampling data to our best model from our hyperparameter tuning. Then, report the result using a classification report and plot the linear graph for the training and validation loss of the model we build to see whether the model is overfitting/underfitting.
+Finally, we applied oversampling, specifically SMOTE, to our train datasets. We then trained the best model from hyperparameter tuning using the oversampling data. Using the fitted model, we reported the resulting accuracy using ```classification_report``` and plotted the graph for the training and validation loss of the model to check for overfitting/underfitting.
+
+##### FIX BELOW
+
   The decreased accuracy: 
   <img width="491" alt="截屏2024-03-14 17 59 55" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c8496de3-3381-4072-b4bd-31ebfb36d64c">
   And crazy diagram:
@@ -168,6 +171,10 @@ y_pred = knn_classifier.predict(X_test)
 
 
 # Results : 
+
+### Model 1
+
+### Model 2
 
 ### Model 3
 
