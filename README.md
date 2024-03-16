@@ -439,9 +439,10 @@ Oversampling model train/validation error.
   
   <img width="494" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/9a30e385-0f18-46d2-a314-c667c504f782">
 
-  Evaluation after ```RandomOverSampler```:
+  Evaluation after ```SMOTE```:
   
- <img width="569" alt="截屏2024-03-14 17 33 57" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c5e7741f-5925-427d-a3aa-2639c6649272">
+ <img width="558" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/164df233-f075-4456-8040-5869b7eebbf7">
+
 
 #### XGboost
 
