@@ -107,24 +107,15 @@ We plotted the linear graph for the training and validation loss of the model we
 ### Third Model
 #### SVM
 
-  For the third model, we tried to implement the SVM model, since SVM supports both numerical and categorical data, it is more flexible in data processing compared to Naive Bayes. First, we did the data processing for our target using one-hot encoding as we did on the initial data processing part. We also encoded 'race' and 'sex' by one-hone encoding and manually separating. Then we tried to scale our data, and we were thinking about using the ```MinMaxScaler()``` or ```StandardScaler()```, since both are fine, we decided to try both. 
+  For the third model, we tried to implement the SVM model, since SVM supports both numerical and categorical data, so it was more flexible in data processing compared to Naive Bayes. First, we did the data processing for our target using one-hot encoding as we did on the initial data processing part. We also encoded 'race' and 'sex' by one-hot encoding and manually separating the values. Then we scaled our data, using both ```MinMaxScaler()``` and ```StandardScaler()```. 
   
-  The first time we tried minimax, after implementing the SVM model, we found the accuracy was low, so we went back to the second Scaler method, which is the StandardScaler. However, the StandardScaler needs to reprocess the data, since we have some one-hot encoded features, and StandardScaler is only used to process the numeric data, we need to separate the Numeric data and categorical data. In that case, we utilized ```iloc[:, 19:]``` to extract the categorical encoded features, and drop the 'sex' feature. After getting the scaled X, we combine them using np.concatenate() method, so now we have the complete X_scaled. Before we pass the data to the SVM model, we split the data to train:test = 80:20. 
+  The first time we tried ```MinMaxScaler()``` after implementing the SVM model, we found the accuracy was low, so we then used ```StandardScaler()```. However, ```StandardScaler()``` needs to reprocess the data, since we had one-hot encoded features, and ```StandardScaler()``` is only used for numerical data. To separate the numerical data from the categorical data, we utilized ```iloc[:, 19:]``` to extract the categorical encoded features, and dropped the ```'sex'``` feature. After getting the scaled X, we combined them using np.concatenate() methodto get the complete X_scaled. Before we passed the data to the SVM model, we split the data with a ratio of train:test = 80:20 using ```train_test_split```. 
   
-  Then we tried our first SVM model, with set parameters ```C = 0.1``` , ```degree = 2```, and ```kernel ='poly'```. When we fit our SVM model, we need to transform our y_train to a 1-D array, so we passed ```y_train.idxmax(axis=1).values``` as my parameters. We also used ```.idxmax(axis=1).values``` to get our t_true in order to pass the data to the ```classification_report```. And we can observe the result of our SVM model. In order to improve the accuracy, we decided to try different parameters to build our SVM model. So second time we try to use hyper-parameter-grid to find optimized parameters. We set our grid as: ```param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1], 'kernel': ['linear', 'rbf', 'poly']}``` as follows: 
-  <img width="765" alt="截屏2024-03-14 17 03 19" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/451bc212-dea4-4ec1-a14e-1fedaf738c0b">
+  Then we tried our first SVM model, with set parameters ```C = 0.1``` , ```degree = 2```, and ```kernel ='poly'```. When we fit our SVM model, we needed to transform ```y_train``` to a 1-D array, so we passed ```y_train.idxmax(axis=1).values``` as the parameters. We also used ```.idxmax(axis=1).values``` to get ```t_true``` in order to pass the data to ```classification_report```. However, the result of our SVM model was a low accuracy score, so to improve the accuracy, we decided to try different parameters to build our SVM model. The second time, we used ```GridSearch``` to find optimized parameters. We set our grid as: ```param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1], 'kernel': ['linear', 'rbf', 'poly']}``` as follows: 
+<img width="770" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/f00b8140-44f6-4668-a84c-61f712ddda55">
 
-  We also applied OverSamplying using ```SMOTE``` and ```RandomOverSampler```, but it turns out decreased the accuracy: 
-   - Evaluation after ```SMOTE```:
-
-<img width="580" alt="截屏2024-03-14 17 33 01" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/6610ab7f-50ac-4a1f-a002-ab08c690bd06">
-
-   - Evaluation after ```RandomOverSampler```:
-<img width="569" alt="截屏2024-03-14 17 33 57" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c5e7741f-5925-427d-a3aa-2639c6649272">
-
-  We think 0.53 should be the best accuracy we can get from the SVM model.
-
-
+  We also applied OverSampling using ```SMOTE``` and ```RandomOverSampler```, but it also resulted in a low accuracy.
+  
 #### Decision Tree Learning
   Another model we tried for the third model is ```Decision Tree Learning``` model.
 
