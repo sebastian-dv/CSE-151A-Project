@@ -150,7 +150,6 @@ We then decided to try different parameters as well to improve the accuracy by `
 
 We also tried another parameter search method, ```GridSearchCV```, in order to get the best model parameters.
 In order to minimize error, we used the same parameters as ```RandomizedSearchCV```. 
-<img width="434" alt="截屏2024-03-14 17 12 50" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/42b27107-5c23-4672-80ae-40052f7f2c76">
 
 We also printed the ranking of the importance of each feature: 
 <img width="717" alt="截屏2024-03-15 18 27 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/57e56250-556b-4db5-8a26-fa4443c9cc93">
