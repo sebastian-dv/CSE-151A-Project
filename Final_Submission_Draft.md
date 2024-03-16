@@ -312,27 +312,33 @@ Over-Sampling model train/validation error.
 #### SVM
 
 - Evaluation after ```SMOTE```:
+  
 <img width="580" alt="截屏2024-03-14 17 33 01" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/6610ab7f-50ac-4a1f-a002-ab08c690bd06">
 
    - Evaluation after ```RandomOverSampler```:
+     
 <img width="569" alt="截屏2024-03-14 17 33 57" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c5e7741f-5925-427d-a3aa-2639c6649272">
 
 #### Decision Tree Learning
 
 - RandomizedSearch
+  
 <img width="832" alt="截屏2024-03-14 17 11 10" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/69580227-0f0c-415c-b913-431d657bc45a">
 
 - GridSearch Classification Report
+  
 <img width="434" alt="截屏2024-03-14 17 12 50" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/42b27107-5c23-4672-80ae-40052f7f2c76">
 
 ### Gradient boosted Tree
 
 After OverSamplying, then finally we found that the accuracy decreased: 
+
 <img width="439" alt="截屏2024-03-14 17 28 22" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/75220e47-7dab-40ce-9f42-89c85be67dbc">
 
 ### KNN Model
 
 We printed the result using ```classification_report``` for our KNN model:
+
 <img width="504" alt="截屏2024-03-14 17 39 16" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/5ba49df3-f499-47c9-af02-abac6b840a47">
 
 
