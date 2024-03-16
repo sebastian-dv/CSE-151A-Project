@@ -28,8 +28,9 @@ The rest of the paper is organized as follows: the Method Section will present t
 #### Data Exploration:
 
 For data exploration, we called the [pd.DataFrame()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=RA1zgeeIgR2p&line=3&uniqifier=1) function to display the variable name and descriptions, and we found that there are 47 variables in total, which is a large dataset.
-Then we wanted to see the counts of each class and plot it in order to see if there was any disparity between the classes. We used seaborn to plot our data on a barplot to easily visualize the different in counts between our targets.
   Then we created a data frame using [read_csv](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=YC0o6IQ1i-ec&line=1&uniqifier=1), after transferring, we selected 21 columns, with 20 features: ```'age'```, ```'sex'```, ```'scoma'```, ```'race'```, ```'sps'```, ```'aps'```, ```'diabetes'```, ```'dementia'```, ```'ca'```, ```'meanbp'```, ```'wblc'```, ```'hrt'```, ```'resp'```, ```'temp'```, ```'pafi'```, ```'alb'```, ```'bili'```, ```'crea'```, ```'sod'```, ```'ph'```, and ```'dzgroup'``` as our target.
+  
+  Then we wanted to see the counts of each class (unique values in dzgroup) and plot it in order to see if there was any disparity between the classes. We used seaborn to plot our data on a barplot to easily visualize the different in counts between our targets.
 
 ```
 df = pd.read_csv('https://archive.ics.uci.edu/static/public/880/data.csv')
