@@ -29,17 +29,17 @@ The rest of the paper is organized as follows: the Method Section will present t
   For data exploration, we called the [pd.DataFrame()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=RA1zgeeIgR2p&line=3&uniqifier=1) function to display the variable name and descriptions, and we found that there are 47 variables in total, which is a large dataset.
   Then we created a data frame using [read_csv](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=YC0o6IQ1i-ec&line=1&uniqifier=1), after transferring, we selected 21 columns, with 20 features: ```'age'```, ```'sex'```, ```'scoma'```, ```'race'```, ```'sps'```, ```'aps'```, ```'diabetes'```, ```'dementia'```, ```'ca'```, ```'meanbp'```, ```'wblc'```, ```'hrt'```, ```'resp'```, ```'temp'```, ```'pafi'```, ```'alb'```, ```'bili'```, ```'crea'```, ```'sod'```, ```'ph'```, and ```'dzgroup'``` as our target.
   The next step we took was to check for null values in the dataset. We used the [df.isnull().sum()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=KtldNNfpP723&line=1&uniqifier=1) function to calculate the null values for each feature we selected.
-  The result of df.isnull().sum() showed that some features contained several null values, and so we decided to deal with this data by either completely removing them or refilling them with mean/median data depending on the number of null values found for that feature.
+  The result of df.isnull().sum() showed that some features contained several null values, and so we decided to deal with this data by removing them.
   For the features containing value type string, we applied the [unique()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=CpA9bV6xP9K9&line=1&uniqifier=1) function to make it easy to distinguish.
   For binary features like ```'sex'```, we divided them into integers 0 and 1 using the function
 [df['sex'].replace('female', 0, inplace=True)](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=1&uniqifier=1)
   For nonbinary features, we applied the [OneHotEncoder()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=4&uniqifier=1) function to get them in a binary format.
   After the above data exploration and preprocessing, we were able to apply some visualization tools to help us explore the pattern of data.
 ##### Data Preprocessing: 
-2. We printed out a correlation matrix plot of the data frame in the form of a heatmap.
-3. We printed out the count of the unique elements in the ```'dzgroup'``` column in the form of a bar plot.
-4. We one-hot encoded all of the categorical attributes.
-5. After one-hot encoding, we dropped all of the original categorical attributes and all of the empty values.
+1. We printed out a correlation matrix plot of the data frame in the form of a heatmap.
+2. We printed out the count of the unique elements in the ```'dzgroup'``` column in the form of a bar plot.
+3. We one-hot encoded all of the categorical attributes.
+4. After one-hot encoding, we dropped all of the original categorical attributes and all of the empty values.
 
 #### Visualization Tool
 1. Parallel Coordinates Plot: we applied this function to visualize the relationship between ```'dementia'``` and other features.
@@ -181,6 +181,9 @@ We simply applied ```KNeighborsClassifier``` function, and printed the result us
 Our objective was to find a populous dataset with multiple indicators of health as well as firm confirmations of the existence of diseases based on those indicators. Therefore, the SUPPORT2 dataset looked exactly like what we were searching for. It had all of the indicators, like ```’age’```, ```’sex’```, ```’race’```, ```’heart rate’```, ```’respiration rate’```, ```’temperature’```, and more that we could use for our targets during model construction and training. However, through further inspection at some of the classes, we found that some had missing values, with some columns having far more null values than complete values. 
 
 Similarly, through our EDA, we found that the number of target classes within ```‘dzgroup’``` were imbalanced. Some of the target diseases appeared much more than others, which we knew could lead to some issues in the future and as a result we might have to perform some oversampling in order to allow our models to better learn from our data.
+![Barchart](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/66afc575-09cd-4fc2-b152-805c58aabf06)
+
+
 
 ### Data Preprocessing
 
