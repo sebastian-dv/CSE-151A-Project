@@ -87,52 +87,98 @@ yhat_test = logreg.predict(X_test)
   
   Overall, our analysis was thorough and rigorous, ensuring that our results were accurate and reliable about the state of the model.
 
-#### First Model Visualization 
-![Screenshot 2024-03-10 at 7 16 17 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/90e3f1ea-bb2b-4f66-ad46-c7322d1a7d89)
-This is our plot for our multi-class regression model, comparing our training score vs our cross-validation score.
-This plot shows that there is some underfitting in our model and thus a logistic regression model likely isn't the best model we could use for our data, which is useful to know for our future models. We also had other similar plots for our logistic regression models that we did for each target rather than multiple at once.
-
-![Screenshot 2024-03-10 at 7 20 21 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/f9e92ef8-55ad-4b95-ad17-ad58568ef99d)
-Here is one of single-target models, and when comparing the multi-target results with the single-target results, the model itself doesn't look too different and the results are relatively the same.
-
 ### Second Model
 #### Neural Network
   We used a ```MinMaxScaler``` to apply minmax normalization to our feature data, and for the Keras Sequential Model, we split the data into training and testing sets with an 80:20 ratio, setting the random state to 0 using ```train_test_split```:
   whereas for the hyperparameter tuning model, we split the data into training and testing sets with an 85:15 ratio, setting the random state to 1, in order to train more data to fit our data.
   
-  We built the base model (Keras Sequential Model) to predict each target and report the result using ```classification_report```. The model and results are shown below: 
-  <img width="994" alt="截屏2024-03-14 17 50 05" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c7520ece-e0ed-410f-a305-d7d765f0e68c">
-  We also compared the loss between training and validation, which shows a stark difference in loss rate, representing the fact that the model was nowhere near the perfect fit: 
-  <img width="620" alt="截屏2024-03-14 17 51 48" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a32b5785-6b80-4285-9f65-3a5f06e61ee9">
+  We built the base model (Keras Sequential Model) to predict each target and report the result using ```classification_report```. 
+  ```
+def buildmodel():
+    model = Sequential([
+        Dense(units = 72, activation = 'tanh', input_dim = 24),
+        Dense(units = 42, activation = 'tanh'),
+        Dense(units = 42, activation = 'tanh'),
+        Dense(units = 42, activation = 'tanh'),
+        Dense(units = 8, activation = 'softmax')
+    ])
+    model.compile(optimizer ='SGD', loss='categorical_crossentropy')
+    return(model)
+```
 
-  After the basic model, we designed a 5-layer artificial neural network using the ```tanh``` activation function in each layer and the ```softmax``` activation function in the output layer. The number of nodes in the first layer was 72, the number of nodes in the output layer was 8, and the number of nodes in the remaining hidden layers of the mode was 42, as shown below:
-  <img width="770" alt="截屏2024-03-14 17 52 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/d9d6c84a-75d8-4aca-97d9-ad20cec7366c">
   
 When we compiled the model, we used Stochastic Gradient Descent to minimize the error rate and used Categorical Crossentropy as the loss function. When we fit the model, we set the number of epochs to 100, the batch size to 20, the validation split to 0.1, and the verbose to 0.
-We plotted the linear graph for the training and validation loss of the model we built to see the performance of the model as well as if it was overfitting/underfitting:
 
-### REPEATING TEXT (Anything to keep from this?) - START
-
-Next, we built another model (Keras Sequential Model) to predict each target and report the result using average accuracy. We design a 5-layer artificial neural network using the Tanh activation function in each layer and the softmax activation function in the output layer. The Number of nodes in the first layer is 72, the number of nodes in the output layer is 8, and the number of nodes in the rest of the layer is 42. When we compile the model, we use Stochastic Gradient Descent to minimize the error rate, use categorical cross entropy as the loss function, and specific ```MSE``` and ```accuracy``` as the metrics. When we fit the mode, we set the number of epochs to 50, the batch size to 20, and the verbose to 0. 
-
-### REPEATING TEXT - END
-
-  We performed K-Fold Cross-Validation with different random splits of the data. The entire cross-validation was repeated 5 times and in each repetition, the data was split into 10 subsets. 
-  We calculated the accuracy for each subset of the data when processing cross-validation. Then, took the mean of it to see the performance of our model. The model and results are shown below:
-  <img width="796" alt="截屏2024-03-14 18 03 19" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/b924ae2b-fda3-4a52-91ea-178df74ede69">
+  We performed K-Fold Cross-Validation with different random splits of the data. The entire cross-validation was repeated 5 times and in each repetition, the data was split into 10 subsets. We also calculated the accuracy for each subset of the data when processing cross-validation. 
+  ```
+estimator = KerasClassifier(model=buildmodel, epochs=50, batch_size=20, verbose=0) 
+kfold = RepeatedKFold(n_splits = 10, n_repeats = 5)
+results = cross_val_score(estimator, X_train, y_train, cv=kfold, n_jobs = 1,scoring = 'accuracy')
+```
 
   Then, we built another model(hyperparameter tuning model) to predict each target and report the result using classification report. We set the range of units in the input layer to 18180, the range of units in hidden layers to 12180, and the units in the output layer to 8. The available choices for the activation function include ```'relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', and 'mish'```. The available choices for optimizer include ```'sgd', 'adam', and 'rmsprop.'``` The range of learning rate is ```0.001~0.1```. The available choices for the loss function include 'categorical_crossentropy', 'mse', and 'binary_crossentropy.' After that, we run the model to find the most optimized parameters and use them to rebuild our model.
-  the hyperparameter tuning model was set up as below:
-  <img width="904" alt="截屏2024-03-14 17 58 18" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/292037a1-333c-47e1-9235-cb4043dfddaa">
+```
+def build_model(hp):
+    model = keras.Sequential()
+    activation = hp.Choice("activation", ['relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', 'mish'])
+    # input layer
+    model.add(
+        layers.Dense(units = hp.Int("units", min_value = 18, max_value = 180, step = 20),
+              activation = activation,
+              input_dim = X.shape[1]
+        )
+    )
+    # hidden layers
+    for i in range(3):
+      model.add(
+          layers.Dense(
+              units = hp.Int("units", min_value = 12, max_value = 180, step = 20),
+              activation = activation,
+          )
+      )
+    # output layer
+    model.add(
+          layers.Dense(
+              units = 8,
+              activation = 'softmax'
+          )
+      )
+    loss = hp.Choice("loss", values = ["categorical_crossentropy", "mse", "binary_crossentropy"])
+    learning_rate = hp.Float("lr", min_value = 0.001, max_value = 0.1, step = 0.01)
+    optimizer = hp.Choice("optimizer", values = ["sgd", "adam", "rmsprop"])
+    if optimizer == "sgd":
+        optimizer = keras.optimizers.Adam(learning_rate=learning_rate)
+    elif optimizer == "adam":
+        optimizer = keras.optimizers.SGD(learning_rate=learning_rate)
+    elif optimizer == "rmsprop":
+        optimizer = keras.optimizers.RMSprop(learning_rate=learning_rate)
 
-  We report the result using a classification report and plot the linear graph for the training and validation loss of the model we build to see whether the model is overfitting/underfitting. It turns out a fair accuracy and the diagram shown below:
-<img width="632" alt="截屏2024-03-14 17 59 17" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a065caa2-7af9-4242-a78f-21a66eca88bf">
-  
+    model.compile(
+        optimizer = optimizer,
+        loss = loss,
+        metrics = ["accuracy"],
+    )
+    return model
+
+```
+
+```
+tuner = keras_tuner.RandomSearch(
+    hypermodel=build_model,
+    objective="val_accuracy",
+    max_trials=10,
+    overwrite=True,
+    directory="my_dir",
+    project_name="hypertune",
+)
+tuner.search(X_train, y_train, epochs=50, validation_split = 0.2, callbacks = [early_stopping], verbose = 0)
+```
   The last thing we do is we apply OverSamplying (SMOTE) to our train datasets. Then, applying the oversampling data to our best model from our hyperparameter tuning. Then, report the result using a classification report and plot the linear graph for the training and validation loss of the model we build to see whether the model is overfitting/underfitting.
-  The decreased accuracy: 
-  <img width="491" alt="截屏2024-03-14 17 59 55" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c8496de3-3381-4072-b4bd-31ebfb36d64c">
-  And crazy diagram:
-<img width="611" alt="截屏2024-03-14 18 00 25" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4ffb68b8-b8a0-4271-9ce4-23903a450315">
+
+```
+smote = SMOTE(random_state = 21)
+X_train_resample, y_train_resample = smote.fit_resample(X_train, y_train)
+```
 
 
 ### Third Model
