@@ -228,6 +228,10 @@ Our objective was to find a populous dataset with multiple indicators of health 
 Similarly, through our EDA, we found that the number of target classes within ```‘dzgroup’``` were imbalanced. Some of the target diseases appeared much more than others, which we knew could lead to some issues in the future and as a result we might have to perform some oversampling in order to allow our models to better learn from our data.
 ![Barchart](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/66afc575-09cd-4fc2-b152-805c58aabf06)
 
+Prior to preprocessing, we found the total number of NaN values present in our chosen features and plotted them in a bar plot. The ones with seemingly no NaN values had very few which is why the bar cannot be seen for those. We had to figure out how to deal with these NaN values and with so many, it was difficult to decide what exactly to do.
+
+![Screenshot 2024-03-15 at 8 42 12 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/5a15641a-fd11-4260-952f-42b6d960342b)
+
 
 
 ### Data Preprocessing
