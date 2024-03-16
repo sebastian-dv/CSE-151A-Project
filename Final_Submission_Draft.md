@@ -105,9 +105,10 @@ Finally, we applied oversampling, specifically SMOTE, to our train datasets. We 
 
 ##### FIX BELOW
 
-  The decreased accuracy: 
-  <img width="491" alt="截屏2024-03-14 17 59 55" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c8496de3-3381-4072-b4bd-31ebfb36d64c">
-  And crazy diagram:
+The decreased accuracy: 
+<img width="491" alt="截屏2024-03-14 17 59 55" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c8496de3-3381-4072-b4bd-31ebfb36d64c">
+
+And crazy diagram:
 <img width="611" alt="截屏2024-03-14 18 00 25" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4ffb68b8-b8a0-4271-9ce4-23903a450315">
 
 
@@ -157,7 +158,7 @@ We also printed the ranking of the importance of each feature:
 
 ### Gradient boosted Tree
 Gradient boosted Tree is the third method we chose.
-Same thing as before, we manually tried one set of parameters that we think is worth trying, we set parameters as ```n_estimators=100, learning_rate=0.1, max_depth=3, random_state=21```, after we print the output of the ```classification report```, it gives us a really high accuracy, it is 0.56! (compare to the previous results):
+Same thing as before, we manually tried one set of parameters that we think is worth trying, we set parameters as ```n_estimators=100, learning_rate=0.1, max_depth=3, random_state=21```, after we print the output of the ```classification report```, it gives us a really high accuracy, it is 0.56! (compared to the previous results):
 <img width="456" alt="截屏2024-03-14 17 21 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c6087504-a4cf-4818-9333-3fc70bab96c1">
 
   After getting high results, we also tried OverSamplying, trying to make the number of our data balance, in that case, we applied ```SMOTE```, 
