@@ -427,18 +427,25 @@ Oversampling model train/validation error.
 ### Model 3
 
 #### SVM
+  Base model Performance Train:
 
-  Evaluation after ```SMOTE```:
+  <img width="452" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/8b045ba9-758a-4aca-b03f-3fa164fbde0c">
 
-<img width="580" alt="截屏2024-03-14 17 33 01" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/6610ab7f-50ac-4a1f-a002-ab08c690bd06">
+  Base model Performance Test:
+  
+  <img width="549" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/9b04376f-3b0d-4f56-ac81-963fc7812b50">
+
+  Evaluation after Gridsearch:
+  
+  <img width="494" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/9a30e385-0f18-46d2-a314-c667c504f782">
 
   Evaluation after ```RandomOverSampler```:
   
-<img width="569" alt="截屏2024-03-14 17 33 57" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c5e7741f-5925-427d-a3aa-2639c6649272">
+ <img width="569" alt="截屏2024-03-14 17 33 57" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c5e7741f-5925-427d-a3aa-2639c6649272">
 
-#### Decision Tree Learning
+#### XGboost
 
-  RandomizedSearch Accuracy
+   Grid search Accuracy
 
 <img width="832" alt="截屏2024-03-14 17 11 10" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/69580227-0f0c-415c-b913-431d657bc45a">
 
