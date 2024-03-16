@@ -25,92 +25,179 @@ The rest of the paper is organized as follows: the Method Section will present t
 
 
 # Methods: 
+#### Data Exploration:
+
 #### Data Preprocessing: 
   For data exploration, we called the [pd.DataFrame()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=RA1zgeeIgR2p&line=3&uniqifier=1) function to display the variable name and descriptions, and we found that there are 47 variables in total, which is a large dataset.
   Then we created a data frame using [read_csv](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=YC0o6IQ1i-ec&line=1&uniqifier=1), after transferring, we selected 21 columns, with 20 features: ```'age'```, ```'sex'```, ```'scoma'```, ```'race'```, ```'sps'```, ```'aps'```, ```'diabetes'```, ```'dementia'```, ```'ca'```, ```'meanbp'```, ```'wblc'```, ```'hrt'```, ```'resp'```, ```'temp'```, ```'pafi'```, ```'alb'```, ```'bili'```, ```'crea'```, ```'sod'```, ```'ph'```, and ```'dzgroup'``` as our target.
+
+```
+df = pd.read_csv('https://archive.ics.uci.edu/static/public/880/data.csv')
+df = df[['age','sex','death','dzgroup','scoma','race','sps','aps','diabetes','dementia','ca','meanbp','wblc','hrt','resp','temp','pafi','alb','bili','crea','sod','ph']]
+```
   The next step we took was to check for null values in the dataset. We used the [df.isnull().sum()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=KtldNNfpP723&line=1&uniqifier=1) function to calculate the null values for each feature we selected.
   The result of df.isnull().sum() showed that some features contained several null values, and so we decided to deal with this data by removing them.
+
   For the features containing value type string, we applied the [unique()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=CpA9bV6xP9K9&line=1&uniqifier=1) function to make it easy to distinguish.
+
   For binary features like ```'sex'```, we divided them into integers 0 and 1 using the function
 [df['sex'].replace('female', 0, inplace=True)](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=1&uniqifier=1)
-  For nonbinary features, we applied the [OneHotEncoder()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=4&uniqifier=1) function to get them in a binary format.
+```
+df['sex'].replace('female', 0, inplace=True)
+df['sex'].replace('male', 1, inplace=True)
+```
+  For nonbinary features, we applied the [OneHotEncoder()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=89lDyDJ4QAdB&line=4&uniqifier=1) function to get them in a binary format. The column 32 was dropped because it is the nan value from race.
+  ```
+ohe = OneHotEncoder()
+list1 = ['dzgroup', 'race', 'ca']
+for i in list1:
+  myohedzgroup = ohe.fit_transform(df[i].values.reshape(-1,1)).toarray()
+  myohedzgroup=pd.DataFrame(myohedzgroup, columns=ohe.categories_[0])
+  df=df.drop([i], axis=1)
+  df=pd.concat([df,myohedzgroup],axis=1)
+
+df = df.dropna(axis = 0, how = 'any')
+df.drop(df.columns[32], axis=1)
+```
   After the above data exploration and preprocessing, we were able to apply some visualization tools to help us explore the pattern of data.
-##### Data Preprocessing: 
-1. We printed out a correlation matrix plot of the data frame in the form of a heatmap.
-2. We printed out the count of the unique elements in the ```'dzgroup'``` column in the form of a bar plot.
-3. We one-hot encoded all of the categorical attributes.
-4. After one-hot encoding, we dropped all of the original categorical attributes and all of the empty values.
 
-#### Visualization Tool
-1. Parallel Coordinates Plot: we applied this function to visualize the relationship between ```'dementia'``` and other features.
 
-2. Multiple Line Plots: this function was used to check the pattern of two particular features.
-   - First, we applied an ```'age'```-```'diabetes'``` pair, which shows people between 40 to 80 are the main group to have diabetes
-   - Second, we applied the ```'bili'```-```'hrt'``` pair and ```'bili'```-```'ph'``` pair, their diagram has a similar pattern, and We think we should implement more data to see the pattern between them.
 
-3. We applied the pairplot for the entire dataset twice, before and after we split the data using one-hot encoding.
-
-### Multi-Class Logistic Regression - First Model:
+### First Model
+#### Multi-Class Logistic Regression
   In order to make it easy to observe some patterns, we decided to apply multi-class logistic regression first.
   
   The first model was not the most precise, as there was a relatively clear sign of underfitting due to the cross-validation score being lower at the start than the training score, and only a relative evening out towards the end of the graph. 
   
   We can possibly improve this model by selecting different features for training use to further finetune the results and not have overfitting or underfitting for the model.
   
-  In our first model, we set ```'dzgroup'``` as our target and used the rest of the columns as our features. To ensure that our feature data was normalized, we implemented minmax normalization. We then split the data into training and testing sets, with a 70:30 ratio and a random state of 0. We built eight different logistic regression models for single-class regression to predict each target and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. We also generated learning curves for each logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size.   
+  In our first model, we set ```'dzgroup'``` as our target and used the rest of the columns as our features. To ensure that our feature data was normalized, we implemented minmax normalization. We then split the data into training and testing sets, with a 70:30 ratio and a random state of 0. We built eight different logistic regression models for single-class regression to predict each target and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. 
+  ```
+  for i in targets_ohe.columns:
+  X_train, X_test, y_train, y_test = train_test_split(features, targets_ohe[i], test_size=0.3, random_state=0)
+  logreg = LogisticRegression(max_iter = 1000, solver = 'liblinear')
+  logregmodel = logreg.fit(X_train, y_train)
+  yhat_train = logreg.predict(X_train)
+  yhat_test = logreg.predict(X_test)
+
+  train_accuracy = accuracy_score(y_train, yhat_train)
+  test_accuracy = accuracy_score(y_test, yhat_test)
+  print(classification_report(y_test, yhat_test))
+  conf_matrix = confusion_matrix(y_test, yhat_test)
+  ```
+  We also generated learning curves for each logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size. 
+  ```
+  train_sizes, train_scores, test_scores = learning_curve(logreg, X, y, cv=5, scoring='accuracy', n_jobs=-1)
+  ```
+  
   In addition, we built a logistic regression model that predicts multiclass(```'dzgroup'```) and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. We also generated learning curves for the logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size. Finally, We plotted learning curves for the logistic regression model.
+  ```
+X_train, X_test, y_train, y_test = train_test_split(features, targets, test_size=0.3, random_state=0)
+logreg = LogisticRegression(max_iter=1000, multi_class='multinomial', solver='lbfgs')
+logregmodel = logreg.fit(X_train, y_train)
+yhat_train = logreg.predict(X_train)
+yhat_test = logreg.predict(X_test)
+```
   
   Overall, our analysis was thorough and rigorous, ensuring that our results were accurate and reliable about the state of the model.
-
-#### First Model Visualization 
-![Screenshot 2024-03-10 at 7 16 17 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/90e3f1ea-bb2b-4f66-ad46-c7322d1a7d89)
-This is our plot for our multi-class regression model, comparing our training score vs our cross-validation score.
-This plot shows that there is some underfitting in our model and thus a logistic regression model likely isn't the best model we could use for our data, which is useful to know for our future models. We also had other similar plots for our logistic regression models that we did for each target rather than multiple at once.
-
-![Screenshot 2024-03-10 at 7 20 21 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/f9e92ef8-55ad-4b95-ad17-ad58568ef99d)
-Here is one of single-target models, and when comparing the multi-target results with the single-target results, the model itself doesn't look too different and the results are relatively the same.
 
 ### Second Model
 #### Neural Network
   We used a ```MinMaxScaler``` to apply minmax normalization to our feature data, and for the Keras Sequential Model, we split the data into training and testing sets with an 80:20 ratio, setting the random state to 0 using ```train_test_split```:
   whereas for the hyperparameter tuning model, we split the data into training and testing sets with an 85:15 ratio, setting the random state to 1, in order to train more data to fit our data.
+```
+# scaling data
+scaler = MinMaxScaler()
+X = pd.DataFrame(scaler.fit_transform(X), columns = X.columns)
+```
   
-  We built the base model (Keras Sequential Model) to predict each target and report the result using ```classification_report```. The model and results are shown below: 
-  <img width="994" alt="截屏2024-03-14 17 50 05" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c7520ece-e0ed-410f-a305-d7d765f0e68c">
-  We also compared the loss between training and validation, which shows a stark difference in loss rate, representing the fact that the model was nowhere near the perfect fit: 
-  <img width="620" alt="截屏2024-03-14 17 51 48" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a32b5785-6b80-4285-9f65-3a5f06e61ee9">
+  We built the base model (Keras Sequential Model) to predict each target and report the result using ```classification_report```. 
+  ```
+def buildmodel():
+    model = Sequential([
+        Dense(units = 72, activation = 'tanh', input_dim = 24),
+        Dense(units = 42, activation = 'tanh'),
+        Dense(units = 42, activation = 'tanh'),
+        Dense(units = 42, activation = 'tanh'),
+        Dense(units = 8, activation = 'softmax')
+    ])
+    model.compile(optimizer ='SGD', loss='categorical_crossentropy')
+    return(model)
+```
 
-  After the basic model, we designed a 5-layer artificial neural network using the ```tanh``` activation function in each layer and the ```softmax``` activation function in the output layer. The number of nodes in the first layer was 72, the number of nodes in the output layer was 8, and the number of nodes in the remaining hidden layers of the mode was 42, as shown below:
-  
-  <img width="770" alt="截屏2024-03-14 17 52 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/d9d6c84a-75d8-4aca-97d9-ad20cec7366c">
   
 When we compiled the model, we used Stochastic Gradient Descent to minimize the error rate and used Categorical Crossentropy as the loss function. When we fit the model, we set the number of epochs to 100, the batch size to 20, the validation split to 0.1, and the verbose to 0.
-We plotted the linear graph for the training and validation loss of the model we built to see the performance of the model as well as if it was overfitting/underfitting, and specific ```MSE``` and ```accuracy``` as the metrics. When we fit the model, we set the number of epochs to 50, the batch size to 20, and the verbose to 0.
 
-  We performed K-Fold Cross-Validation with different random splits of the data. The entire cross-validation was repeated 5 times and in each repetition, the data was split into 10 subsets. 
-  We calculated the accuracy for each subset of the data when processing cross-validation. Then, took the mean of it to see the performance of our model. The model and results are shown below:
-  <img width="796" alt="截屏2024-03-14 18 03 19" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/b924ae2b-fda3-4a52-91ea-178df74ede69">
+  We performed K-Fold Cross-Validation with different random splits of the data. The entire cross-validation was repeated 5 times and in each repetition, the data was split into 10 subsets. We also calculated the accuracy for each subset of the data when processing cross-validation. 
+  ```
+estimator = KerasClassifier(model=buildmodel, epochs=50, batch_size=20, verbose=0) 
+kfold = RepeatedKFold(n_splits = 10, n_repeats = 5)
+results = cross_val_score(estimator, X_train, y_train, cv=kfold, n_jobs = 1,scoring = 'accuracy')
+```
 
-  Then, we built a hyperparameter tuning model to predict each target and report the result using ```classification_report```. We set the range of units in the input layer to 18-180, the range of units in hidden layers to 12-180, and the units in the output layer to 8. The available choices for the activation function were ```'relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', and 'mish'```. The available choices for optimizer were ```'sgd', 'adam', and 'rmsprop.'``` The range of learning rate was ```0.001~0.1```. Finally, the available choices for the loss function were 'categorical_crossentropy', 'mse', and 'binary_crossentropy.' After setting the parameters for testing, we ran the model to find the most optimized parameters and used them to rebuild our model. The hyperparameter tuning model was set up as shown:
-  <img width="904" alt="截屏2024-03-14 17 58 18" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/292037a1-333c-47e1-9235-cb4043dfddaa">
+  Then, we built another model(hyperparameter tuning model) to predict each target and report the result using classification report. We set the range of units in the input layer to 18180, the range of units in hidden layers to 12180, and the units in the output layer to 8. The available choices for the activation function include ```'relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', and 'mish'```. The available choices for optimizer include ```'sgd', 'adam', and 'rmsprop.'``` The range of learning rate is ```0.001~0.1```. The available choices for the loss function include 'categorical_crossentropy', 'mse', and 'binary_crossentropy.' After that, we run the model to find the most optimized parameters and use them to rebuild our model.
+```
+def build_model(hp):
+    model = keras.Sequential()
+    activation = hp.Choice("activation", ['relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', 'mish'])
+    # input layer
+    model.add(
+        layers.Dense(units = hp.Int("units", min_value = 18, max_value = 180, step = 20),
+              activation = activation,
+              input_dim = X.shape[1]
+        )
+    )
+    # hidden layers
+    for i in range(3):
+      model.add(
+          layers.Dense(
+              units = hp.Int("units", min_value = 12, max_value = 180, step = 20),
+              activation = activation,
+          )
+      )
+    # output layer
+    model.add(
+          layers.Dense(
+              units = 8,
+              activation = 'softmax'
+          )
+      )
+    loss = hp.Choice("loss", values = ["categorical_crossentropy", "mse", "binary_crossentropy"])
+    learning_rate = hp.Float("lr", min_value = 0.001, max_value = 0.1, step = 0.01)
+    optimizer = hp.Choice("optimizer", values = ["sgd", "adam", "rmsprop"])
+    if optimizer == "sgd":
+        optimizer = keras.optimizers.Adam(learning_rate=learning_rate)
+    elif optimizer == "adam":
+        optimizer = keras.optimizers.SGD(learning_rate=learning_rate)
+    elif optimizer == "rmsprop":
+        optimizer = keras.optimizers.RMSprop(learning_rate=learning_rate)
 
-  We reported the result using ```classification_report``` and plotted the linear graph for the training and validation loss of the model we built to see whether the model was overfitting/underfitting.
+    model.compile(
+        optimizer = optimizer,
+        loss = loss,
+        metrics = ["accuracy"],
+    )
+    return model
 
-##### FIX BELOW
-  
-  It turns out a fair accuracy and the diagram shown below:
-<img width="632" alt="截屏2024-03-14 17 59 17" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a065caa2-7af9-4242-a78f-21a66eca88bf">
-  
-Finally, we applied oversampling, specifically SMOTE, to our train datasets. We then trained the best model from hyperparameter tuning using the oversampling data. Using the fitted model, we reported the resulting accuracy using ```classification_report``` and plotted the graph for the training and validation loss of the model to check for overfitting/underfitting.
+```
 
-##### FIX BELOW
+```
+tuner = keras_tuner.RandomSearch(
+    hypermodel=build_model,
+    objective="val_accuracy",
+    max_trials=10,
+    overwrite=True,
+    directory="my_dir",
+    project_name="hypertune",
+)
+tuner.search(X_train, y_train, epochs=50, validation_split = 0.2, callbacks = [early_stopping], verbose = 0)
+```
+  The last thing we do is we apply OverSamplying (SMOTE) to our train datasets. Then, applying the oversampling data to our best model from our hyperparameter tuning. Then, report the result using a classification report and plot the linear graph for the training and validation loss of the model we build to see whether the model is overfitting/underfitting.
 
-The decreased accuracy: 
-<img width="491" alt="截屏2024-03-14 17 59 55" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c8496de3-3381-4072-b4bd-31ebfb36d64c">
-
-And crazy diagram:
-<img width="611" alt="截屏2024-03-14 18 00 25" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4ffb68b8-b8a0-4271-9ce4-23903a450315">
-
+```
+smote = SMOTE(random_state = 21)
+X_train_resample, y_train_resample = smote.fit_resample(X_train, y_train)
+```
 
 ### Third Model
 #### SVM
