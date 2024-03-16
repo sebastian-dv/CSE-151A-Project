@@ -1,6 +1,6 @@
 # CSE 151A Project
 
-# Abstract about the course and our project
+# Predicting Diseases
 
 # Introduction 
 
