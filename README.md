@@ -448,7 +448,8 @@ Oversampling model train/validation error.
 
   Base Model Performance Train:
   
-  <img width="461" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/a12d7df8-0627-400c-acde-9316cb3dcfbd">
+  <img width="465" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/c44483e2-1f3a-4f5f-8c54-5471d226e827">
+
 
   Base Model Performance Test:
   
