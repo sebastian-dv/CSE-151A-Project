@@ -330,9 +330,6 @@ print("Best accuracy found: ", grid_search.best_score_)
      
 ```
 
-We also printed the ranking of the importance of each feature: 
-
-<img width="717" alt="截屏2024-03-15 18 27 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/57e56250-556b-4db5-8a26-fa4443c9cc93">
 
 
 ### Gradient Boosted Tree
