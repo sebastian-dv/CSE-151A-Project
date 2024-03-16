@@ -148,20 +148,13 @@ We also used oversampling with ```SMOTE``` and ```RandomOverSampler```, but it a
 We then decided to try different parameters as well to improve the accuracy by ```RandomizedSearchCV```. As the diagram shows below, we selected four parameters: ```'max_depth'```, ```'learning_rate'```, ```'n_estimators'```, and ```'subsample'```:
   <img width="398" alt="截屏2024-03-14 17 07 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4a03bae0-649e-4da1-9f6d-dead4ca3a3a3">
 
-  After getting the best parameter, we rebuilt the model and finally got good accuracy which is 0.58, the result is displayed below:
-  <img width="805" alt="截屏2024-03-14 17 08 48" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/68ed1809-e36c-4605-98f1-33eb56a80a72">
+We also tried another parameter search method, ```GridSearchCV```, in order to get the best model parameters.
+In order to minimize error, we used the same parameters as ```RandomizedSearchCV```. 
+<img width="434" alt="截屏2024-03-14 17 12 50" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/42b27107-5c23-4672-80ae-40052f7f2c76">
 
-  We also tried another parameter search method, which is ```GridSearchCV```, in order to get the best model parameter.
-In order to minimize the error, we set the same parameter as ```RandomizedSearchCV```, and finally we got the result: 
-<img width="832" alt="截屏2024-03-14 17 11 10" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/69580227-0f0c-415c-b913-431d657bc45a">
-
-  The accuracy increased again! It is worth trying different tuner methods! As the result shows, we decided to use the result from the ```GridSearchCV``` to do the ```classification report```: 
-  <img width="434" alt="截屏2024-03-14 17 12 50" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/42b27107-5c23-4672-80ae-40052f7f2c76">
-
-  Although it turns out the accuracy is a little bit decreased due to some training issues that are out of our control, we think that is the best accuracy we can get so far.
-
-  We also printed the ranking of the importance of each feature: 
+We also printed the ranking of the importance of each feature: 
 <img width="717" alt="截屏2024-03-15 18 27 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/57e56250-556b-4db5-8a26-fa4443c9cc93">
+
 
 ### Gradient boosted Tree
 Gradient boosted Tree is the third method we chose.
@@ -203,6 +196,12 @@ y_pred = knn_classifier.predict(X_test)
 <img width="569" alt="截屏2024-03-14 17 33 57" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c5e7741f-5925-427d-a3aa-2639c6649272">
 
 #### Decision Tree Learning
+
+- RandomizedSearch
+<img width="832" alt="截屏2024-03-14 17 11 10" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/69580227-0f0c-415c-b913-431d657bc45a">
+
+- GridSearch Classification Report
+<img width="434" alt="截屏2024-03-14 17 12 50" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/42b27107-5c23-4672-80ae-40052f7f2c76">
 
 ### Gradient boosted Tree
 
