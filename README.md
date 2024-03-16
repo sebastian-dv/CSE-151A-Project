@@ -426,7 +426,7 @@ Oversampling model train/validation error.
 
 ### Model 3
 
-#### XGboost
+#### SVM
 
   Evaluation after ```SMOTE```:
 
