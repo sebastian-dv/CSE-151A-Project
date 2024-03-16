@@ -349,7 +349,7 @@ After OverSamplying, then finally we found that the accuracy decreased:
 # Discussion: 
 ### How we choose the model:
 
-### EDA
+### Data Exploration
 
 Our objective was to find a populous dataset with multiple indicators of health as well as firm confirmations of the existence of diseases based on those indicators. Therefore, the SUPPORT2 dataset looked exactly like what we were searching for. It had all of the indicators, like ```’age’```, ```’sex’```, ```’race’```, ```’heart rate’```, ```’respiration rate’```, ```’temperature’```, and more that we could use for our targets during model construction and training. However, through further inspection at some of the classes, we found that some had missing values, with some columns having far more null values than complete values. 
 
@@ -368,14 +368,15 @@ Prior to preprocessing, we found the total number of NaN values present in our c
   
   In conclusion, we thoroughly analyzed the description of each variable to understand their significance, carefully selecting features pertinent to our topic to ensure effective data preprocessing. We meticulously printed out the data frame containing the chosen features, meticulously verifying its shape to ascertain the number of observations accurately. We conducted a meticulous check for any empty values, such as null, within the data frame, ensuring data integrity before proceeding. Additionally, for each categorical attribute, we meticulously listed out all unique elements, ensuring comprehensive understanding and meticulous preprocessing of the data.
 
-### Model 1:
+### Model 1
+
   For our Model1, our goal is to build a baseline model that can help us understand the dataset better, and serve as comparison for our more complex future models. We decided to implement a logistic classifier for its ease of implementation and high interpretability. By default, logistic classifiers are designed for binary classification. However, using the parameter multi_class='multinomial', they are able to handle multi-class classification.
 
   Our Model1 achieved 0.55 training accuracy and 0.54 testing accuracy, with the cross-validation score also being very similar to the training score. Based on these observations, we concluded that no overfitting occurred. 
 
   Although the accuracy is not great, at this point, we were satisfied with Model 1 and its performance. We believed that the low accuracy was mainly due to the poor choice of model as a logistic classifier is a binary classification algorithm at the end of the day. With more advanced models and careful tuning, we should be able to level up that accuracy in the future.
 
-### Model2
+### Model 2
 
   For Model 2, we decided to go with something much more powerful, a Neural Network. 
 
@@ -390,6 +391,7 @@ Prior to preprocessing, we found the total number of NaN values present in our c
   Model 2 overall was not ideal, we expected much more out of our Neural Network model. We suspect that advanced feature engineering may be needed and potentially changing the number of layers in our sequential model can also be helpful.
 
 ### Model 3
+
   We first tried the SVM model since the model is good for One-Hot encoding targets compared to the Naive Bayes model. Also, according to the resource: Kernel SVMs can effectively handle non-linear decision boundaries, making them useful for tasks where data is not linearly separable. [What are the advantages and disadvantages of using a kernel SVM algorithm? - Quora](https://www.quora.com/What-are-the-advantages-and-disadvantages-of-using-a-kernel-SVM-algorithm), So we decided to try the SVM first.
 After we got the result from the classification report of the SVM tuner and OverSampling, although the accuracy score is fair, we found that SVM is limited by choosing an appropriate kernel or manually transforming features to capture non-linear relationships effectively. So we think we may need to try other models to do the comparison. 
 
@@ -405,7 +407,8 @@ After we got the result from the classification report of the SVM tuner and Over
 
 
 
-# Conclusion: 
+# Conclusion
+
   We believe there are several reasons why our models did not perform that well. 
   
 1. imbalanced dataset. Some of our classes have significantly fewer instances than others. For example, Colon Cancer has 98 instances while ARF/MOSF w/Sepsis has 1725 instances. Classifier can be biased toward majority groups
