@@ -81,23 +81,27 @@ Here is one of single-target models, and when comparing the multi-target results
   <img width="620" alt="截屏2024-03-14 17 51 48" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a32b5785-6b80-4285-9f65-3a5f06e61ee9">
 
   After the basic model, we designed a 5-layer artificial neural network using the ```tanh``` activation function in each layer and the ```softmax``` activation function in the output layer. The number of nodes in the first layer was 72, the number of nodes in the output layer was 8, and the number of nodes in the remaining hidden layers of the mode was 42, as shown below:
+  
   <img width="770" alt="截屏2024-03-14 17 52 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/d9d6c84a-75d8-4aca-97d9-ad20cec7366c">
   
 When we compiled the model, we used Stochastic Gradient Descent to minimize the error rate and used Categorical Crossentropy as the loss function. When we fit the model, we set the number of epochs to 100, the batch size to 20, the validation split to 0.1, and the verbose to 0.
-We plotted the linear graph for the training and validation loss of the model we built to see the performance of the model as well as if it was overfitting/underfitting, and specific ```MSE``` and ```accuracy``` as the metrics. When we fit the mode, we set the number of epochs to 50, the batch size to 20, and the verbose to 0.
+We plotted the linear graph for the training and validation loss of the model we built to see the performance of the model as well as if it was overfitting/underfitting, and specific ```MSE``` and ```accuracy``` as the metrics. When we fit the model, we set the number of epochs to 50, the batch size to 20, and the verbose to 0.
 
   We performed K-Fold Cross-Validation with different random splits of the data. The entire cross-validation was repeated 5 times and in each repetition, the data was split into 10 subsets. 
   We calculated the accuracy for each subset of the data when processing cross-validation. Then, took the mean of it to see the performance of our model. The model and results are shown below:
   <img width="796" alt="截屏2024-03-14 18 03 19" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/b924ae2b-fda3-4a52-91ea-178df74ede69">
 
-  Then, we built another model(hyperparameter tuning model) to predict each target and report the result using classification report. We set the range of units in the input layer to 18-180, the range of units in hidden layers to 12-180, and the units in the output layer to 8. The available choices for the activation function include ```'relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', and 'mish'```. The available choices for optimizer include ```'sgd', 'adam', and 'rmsprop.'``` The range of learning rate is ```0.001~0.1```. The available choices for the loss function include 'categorical_crossentropy', 'mse', and 'binary_crossentropy.' After that, we run the model to find the most optimized parameters and use them to rebuild our model.
-  the hyperparameter tuning model was set up as below:
+  Then, we built a hyperparameter tuning model to predict each target and report the result using ```classification_report```. We set the range of units in the input layer to 18-180, the range of units in hidden layers to 12-180, and the units in the output layer to 8. The available choices for the activation function were ```'relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', and 'mish'```. The available choices for optimizer were ```'sgd', 'adam', and 'rmsprop.'``` The range of learning rate was ```0.001~0.1```. Finally, the available choices for the loss function were 'categorical_crossentropy', 'mse', and 'binary_crossentropy.' After setting the parameters for testing, we ran the model to find the most optimized parameters and used them to rebuild our model. The hyperparameter tuning model was set up as shown:
   <img width="904" alt="截屏2024-03-14 17 58 18" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/292037a1-333c-47e1-9235-cb4043dfddaa">
 
-  We report the result using a classification report and plot the linear graph for the training and validation loss of the model we build to see whether the model is overfitting/underfitting. It turns out a fair accuracy and the diagram shown below:
+  We reported the result using ```classification_report``` and plotted the linear graph for the training and validation loss of the model we built to see whether the model was overfitting/underfitting.
+
+##### FIX BELOW
+  
+  It turns out a fair accuracy and the diagram shown below:
 <img width="632" alt="截屏2024-03-14 17 59 17" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a065caa2-7af9-4242-a78f-21a66eca88bf">
   
-  The last thing we do is we apply OverSamplying (SMOTE) to our train datasets. Then, applying the oversampling data to our best model from our hyperparameter tuning. Then, report the result using a classification report and plot the linear graph for the training and validation loss of the model we build to see whether the model is overfitting/underfitting.
+Finally, we applied oversampling, specifically SMOTE, to our train datasets. Then, applying the oversampling data to our best model from our hyperparameter tuning. Then, report the result using a classification report and plot the linear graph for the training and validation loss of the model we build to see whether the model is overfitting/underfitting.
   The decreased accuracy: 
   <img width="491" alt="截屏2024-03-14 17 59 55" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c8496de3-3381-4072-b4bd-31ebfb36d64c">
   And crazy diagram:
