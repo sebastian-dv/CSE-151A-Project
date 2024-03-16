@@ -28,33 +28,41 @@ The rest of the paper is organized as follows: the Method Section will present t
 #### Data Exploration:
 
 For data exploration, we called the ```pd.DataFrame()``` function to display the variable name and descriptions, and we found that there are 47 variables in total, which is a large dataset.
-  Then we created a data frame using ```read_csv```, after transferring, we selected 21 columns, with 20 features: ```'age'```, ```'sex'```, ```'scoma'```, ```'race'```, ```'sps'```, ```'aps'```, ```'diabetes'```, ```'dementia'```, ```'ca'```, ```'meanbp'```, ```'wblc'```, ```'hrt'```, ```'resp'```, ```'temp'```, ```'pafi'```, ```'alb'```, ```'bili'```, ```'crea'```, ```'sod'```, ```'ph'```, and ```'dzgroup'``` as our target.
+Then we created a data frame using ```read_csv```, after transferring, we selected 21 columns, with 20 features: ```'age'```, ```'sex'```, ```'scoma'```, ```'race'```, ```'sps'```, ```'aps'```, ```'diabetes'```, ```'dementia'```, ```'ca'```, ```'meanbp'```, ```'wblc'```, ```'hrt'```, ```'resp'```, ```'temp'```, ```'pafi'```, ```'alb'```, ```'bili'```, ```'crea'```, ```'sod'```, ```'ph'```, and ```'dzgroup'``` as our target.
   
-  Then we wanted to see the counts of each class (unique values in dzgroup) and plot it in order to see if there was any disparity between the classes. We used seaborn to plot our data on a barplot to easily visualize the different in counts between our targets.
+Then we wanted to see the counts of each class (unique values in dzgroup) and plot it in order to see if there was any disparity between the classes. We used seaborn to plot our data on a barplot to easily visualize the different in counts between our targets.
 
 ```
 df = pd.read_csv('https://archive.ics.uci.edu/static/public/880/data.csv')
 df = df[['age','sex','death','dzgroup','scoma','race','sps','aps','diabetes','dementia','ca','meanbp','wblc','hrt','resp','temp','pafi','alb','bili','crea','sod','ph']]
 ```
-  The next step we took was to check for null values in the dataset. We used the ```df.isnull().sum()``` function to calculate the null values for each feature we selected.
+
+The next step we took was to check for null values in the dataset. We used the ```df.isnull().sum()``` function to calculate the null values for each feature we selected.
   
 #### Data Preprocessing: 
   
 To deal with the NaN values we found in our dataset, we decided to drop them. We dropped them using 
+
 ```
 df = df.dropna(axis = 0, how = 'any')
 ```
 
-  For the features containing value type string, we applied the ```unique()``` function to make it easy to distinguish.
+For the features containing value type string, we applied the ```unique()``` function to make it easy to distinguish.
 
-  For binary features like ```'sex'```, we divided them into integers 0 and 1 using the function
-```df['sex'].replace('female', 0, inplace=True)```
+For binary features like ```'sex'```, we divided them into integers 0 and 1 using the function
+
+```
+df['sex'].replace('female', 0, inplace=True)
+```
+
 ```
 df['sex'].replace('female', 0, inplace=True)
 df['sex'].replace('male', 1, inplace=True)
 ```
-  For nonbinary features, we applied the ```OneHotEncoder()``` function to get them in a binary format. The column 32 was dropped because it is the nan value from race.
-  ```
+
+For nonbinary features, we applied the ```OneHotEncoder()``` function to get them in a binary format. The column 32 was dropped because it is the nan value from race.
+
+```
 ohe = OneHotEncoder()
 list1 = ['dzgroup', 'race', 'ca']
 for i in list1:
@@ -66,39 +74,44 @@ for i in list1:
 df = df.dropna(axis = 0, how = 'any')
 df.drop(df.columns[32], axis=1)
 ```
-  After the above data exploration and preprocessing, we were able to apply some visualization tools to help us explore the pattern of data.
+
+After the above data exploration and preprocessing, we were able to apply some visualization tools to help us explore the pattern of data.
 
 
 
 ### First Model
 #### Multi-Class Logistic Regression
-  In order to make it easy to observe some patterns, we decided to apply multi-class logistic regression first.
+In order to make it easy to observe some patterns, we decided to apply multi-class logistic regression first.
   
-  The first model was not the most precise, as there was a relatively clear sign of underfitting due to the cross-validation score being lower at the start than the training score, and only a relative evening out towards the end of the graph. 
+The first model was not the most precise, as there was a relatively clear sign of underfitting due to the cross-validation score being lower at the start than the training score, and only a relative evening out towards the end of the graph. 
   
-  We can possibly improve this model by selecting different features for training use to further finetune the results and not have overfitting or underfitting for the model.
+We can possibly improve this model by selecting different features for training use to further finetune the results and not have overfitting or underfitting for the model.
   
-  In our first model, we set ```'dzgroup'``` as our target and used the rest of the columns as our features. To ensure that our feature data was normalized, we implemented minmax normalization. We then split the data into training and testing sets, with a 70:30 ratio and a random state of 0. We built eight different logistic regression models for single-class regression to predict each target and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. 
-  ```
-  for i in targets_ohe.columns:
-      X_train, X_test, y_train, y_test = train_test_split(features, targets_ohe[i], test_size=0.3, random_state=0)
-      logreg = LogisticRegression(max_iter = 1000, solver = 'liblinear')
-      logregmodel = logreg.fit(X_train, y_train)
-      yhat_train = logreg.predict(X_train)
-      yhat_test = logreg.predict(X_test)
+In our first model, we set ```'dzgroup'``` as our target and used the rest of the columns as our features. To ensure that our feature data was normalized, we implemented minmax normalization. We then split the data into training and testing sets, with a 70:30 ratio and a random state of 0. We built eight different logistic regression models for single-class regression to predict each target and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. 
 
-  train_accuracy = accuracy_score(y_train, yhat_train)
-  test_accuracy = accuracy_score(y_test, yhat_test)
-  print(classification_report(y_test, yhat_test))
-  conf_matrix = confusion_matrix(y_test, yhat_test)
-  ```
-  We also generated learning curves for each logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size. 
-  ```
-  train_sizes, train_scores, test_scores = learning_curve(logreg, X, y, cv=5, scoring='accuracy', n_jobs=-1)
-  ```
+```
+for i in targets_ohe.columns:
+  X_train, X_test, y_train, y_test = train_test_split(features, targets_ohe[i], test_size=0.3, random_state=0)
+  logreg = LogisticRegression(max_iter = 1000, solver = 'liblinear')
+  logregmodel = logreg.fit(X_train, y_train)
+  yhat_train = logreg.predict(X_train)
+  yhat_test = logreg.predict(X_test)
+
+train_accuracy = accuracy_score(y_train, yhat_train)
+test_accuracy = accuracy_score(y_test, yhat_test)
+print(classification_report(y_test, yhat_test))
+conf_matrix = confusion_matrix(y_test, yhat_test)
+```
+
+We also generated learning curves for each logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size. 
+
+```
+train_sizes, train_scores, test_scores = learning_curve(logreg, X, y, cv=5, scoring='accuracy', n_jobs=-1)
+```
   
-  In addition, we built a logistic regression model that predicts multiclass(```'dzgroup'```) and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. We also generated learning curves for the logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size. Finally, We plotted learning curves for the logistic regression model.
-  ```
+In addition, we built a logistic regression model that predicts multiclass(```'dzgroup'```) and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. We also generated learning curves for the logistic regression model, calculating mean training and testing scores across different cross-validation folds for each training and testing size. Finally, we plotted learning curves for the logistic regression model.
+
+```
 X_train, X_test, y_train, y_test = train_test_split(features, targets, test_size=0.3, random_state=0)
 logreg = LogisticRegression(max_iter=1000, multi_class='multinomial', solver='lbfgs')
 logregmodel = logreg.fit(X_train, y_train)
@@ -106,20 +119,21 @@ yhat_train = logreg.predict(X_train)
 yhat_test = logreg.predict(X_test)
 ```
   
-  Overall, our analysis was thorough and rigorous, ensuring that our results were accurate and reliable about the state of the model.
+Overall, our analysis was thorough and rigorous, ensuring that our results were accurate and reliable about the state of the model.
 
 ### Second Model
 #### Neural Network
-  We used a ```MinMaxScaler``` to apply minmax normalization to our feature data, and for the Keras Sequential Model, we split the data into training and testing sets with an 80:20 ratio, setting the random state to 0 using ```train_test_split```:
-  whereas for the hyperparameter tuning model, we split the data into training and testing sets with an 85:15 ratio, setting the random state to 1, in order to train more data to fit our data.
+We used a ```MinMaxScaler``` to apply minmax normalization to our feature data, and for the Keras Sequential Model, we split the data into training and testing sets with an 80:20 ratio, setting the random state to 0 using ```train_test_split```, whereas for the hyperparameter tuning model, we split the data into training and testing sets with an 85:15 ratio, setting the random state to 1, in order to train more data to fit our data.
+
 ```
 # scaling data
 scaler = MinMaxScaler()
 X = pd.DataFrame(scaler.fit_transform(X), columns = X.columns)
 ```
   
-  We built the base model (Keras Sequential Model) to predict each target and report the result using ```classification_report```. 
-  ```
+We built the base model (Keras Sequential Model) to predict each target and report the result using ```classification_report```. 
+
+```
 def buildmodel():
     model = Sequential([
         Dense(units = 72, activation = 'tanh', input_dim = 24),
@@ -135,14 +149,16 @@ def buildmodel():
   
 When we compiled the model, we used Stochastic Gradient Descent to minimize the error rate and used Categorical Crossentropy as the loss function. When we fit the model, we set the number of epochs to 100, the batch size to 20, the validation split to 0.1, and the verbose to 0.
 
-  We performed K-Fold Cross-Validation with different random splits of the data. The entire cross-validation was repeated 5 times and in each repetition, the data was split into 10 subsets. We also calculated the accuracy for each subset of the data when processing cross-validation. 
-  ```
+We performed K-Fold Cross-Validation with different random splits of the data. The entire cross-validation was repeated 5 times and in each repetition, the data was split into 10 subsets. We also calculated the accuracy for each subset of the data when processing cross-validation. 
+
+```
 estimator = KerasClassifier(model=buildmodel, epochs=50, batch_size=20, verbose=0) 
 kfold = RepeatedKFold(n_splits = 10, n_repeats = 5)
 results = cross_val_score(estimator, X_train, y_train, cv=kfold, n_jobs = 1,scoring = 'accuracy')
 ```
 
-  Then, we built another model(hyperparameter tuning model) to predict each target and report the result using classification report. We set the range of units in the input layer to 18180, the range of units in hidden layers to 12180, and the units in the output layer to 8. The available choices for the activation function include ```'relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', and 'mish'```. The available choices for optimizer include ```'sgd', 'adam', and 'rmsprop.'``` The range of learning rate is ```0.001~0.1```. The available choices for the loss function include 'categorical_crossentropy', 'mse', and 'binary_crossentropy.' After that, we run the model to find the most optimized parameters and use them to rebuild our model.
+Then, we built a hyperparameter tuning model to predict each target and report the result using classification report. We set the range of units in the input layer to 18180, the range of units in hidden layers to 12180, and the units in the output layer to 8. The available choices for the activation function were ```'relu', 'sigmoid', 'tanh', 'softmax', 'linear', 'leaky_relu', and 'mish'```. The available choices for optimizer were ```'sgd', 'adam', and 'rmsprop.'``` The range of learning rate was ```0.001~0.1```. The available choices for the loss function were ```'categorical_crossentropy'```, ```'mse'```, and ```'binary_crossentropy'```. After that, we ran the model to find the most optimized parameters and used them to rebuild our model.
+
 ```
 def build_model(hp):
     model = keras.Sequential()
@@ -168,7 +184,7 @@ def build_model(hp):
               units = 8,
               activation = 'softmax'
           )
-      )
+    )
     loss = hp.Choice("loss", values = ["categorical_crossentropy", "mse", "binary_crossentropy"])
     learning_rate = hp.Float("lr", min_value = 0.001, max_value = 0.1, step = 0.01)
     optimizer = hp.Choice("optimizer", values = ["sgd", "adam", "rmsprop"])
@@ -199,7 +215,8 @@ tuner = keras_tuner.RandomSearch(
 )
 tuner.search(X_train, y_train, epochs=50, validation_split = 0.2, callbacks = [early_stopping], verbose = 0)
 ```
-  The last thing we do is we apply OverSamplying (SMOTE) to our train datasets. Then, applying the oversampling data to our best model from our hyperparameter tuning. Then, report the result using a classification report and plot the linear graph for the training and validation loss of the model we build to see whether the model is overfitting/underfitting.
+
+The last thing we did was applying oversampling (SMOTE) to our train datasets. Then, using the oversampling data, we trained our model using the parameters from the hyperparameter tuning. Finally, we reported the result using ```'classification_report'``` and plotted the graph for the training and validation loss of the model to check for overfitting/underfitting.
 
 ```
 smote = SMOTE(random_state = 21)
@@ -209,11 +226,11 @@ X_train_resample, y_train_resample = smote.fit_resample(X_train, y_train)
 ### Third Model
 #### SVM
 
-  For the third model, we tried to implement the SVM model, since SVM supports both numerical and categorical data, so it was more flexible in data processing compared to Naive Bayes. First, we did the data processing for our target using one-hot encoding as we did on the initial data processing part. We also encoded 'race' and 'sex' by one-hot encoding and manually separating the values. Then we scaled our data, using both ```MinMaxScaler()``` and ```StandardScaler()```. 
+For the third model, we first implemented the SVM model, since SVM supports both numerical and categorical data, so it was more flexible in data processing compared to Naive Bayes. First, we did the data processing for our target using one-hot encoding as we did on the initial data processing part. We also encoded ```'race'``` and ```'sex'``` by one-hot encoding and manually separating the values. Then we scaled our data, using both ```MinMaxScaler``` and ```StandardScaler```. 
   
-  The first time we tried ```MinMaxScaler()``` after implementing the SVM model, we found the accuracy was low, so we then used ```StandardScaler()```. However, ```StandardScaler()``` needs to reprocess the data, since we had one-hot encoded features, and ```StandardScaler()``` is only used for numerical data. To separate the numerical data from the categorical data, we utilized ```iloc[:, 19:]``` to extract the categorical encoded features, and dropped the ```'sex'``` feature. After getting the scaled X, we combined them using np.concatenate() methodto get the complete X_scaled. Before we passed the data to the SVM model, we split the data with a ratio of train:test = 80:20 using ```train_test_split```. 
+The first time we tried ```MinMaxScaler``` after implementing the SVM model, we found the accuracy was low, so we then used ```StandardScaler```. However, ```StandardScaler``` needed to reprocess the data, since we had one-hot encoded features, and ```StandardScaler``` was only used for numerical data. To separate the numerical data from the categorical data, we utilized ```iloc[:, 19:]``` to extract the categorical encoded features, and dropped the ```'sex'``` feature. After getting the categorical set scaled, we combined them using np.concatenate() method to get the complete ```X_scaled```. Before we passed the data to the SVM model, we split the data with a ratio of train:test = 80:20 using ```train_test_split```. 
   
-  Then we tried our first SVM model, with set parameters ```C = 0.1``` , ```degree = 2```, and ```kernel ='poly'```. When we fit our SVM model, we needed to transform ```y_train``` to a 1-D array, so we passed ```y_train.idxmax(axis=1).values``` as the parameters. We also used ```.idxmax(axis=1).values``` to get ```t_true``` in order to pass the data to ```classification_report```. However, the result of our SVM model was a low accuracy score, so to improve the accuracy, we decided to try different parameters to build our SVM model. The second time, we used ```GridSearch``` to find optimized parameters. We set our grid as: ```param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1], 'kernel': ['linear', 'rbf', 'poly']}```.
+Then we tried our first SVM model, with set parameters ```C = 0.1``` , ```degree = 2```, and ```kernel ='poly'```. When we fit our SVM model, we needed to transform ```y_train``` to a 1-D array, so we passed ```y_train.idxmax(axis=1).values``` as the parameters. We also used ```.idxmax(axis=1).values``` to get ```t_true``` in order to pass the data to ```classification_report```. However, the result of our SVM model was a low accuracy score, so to improve the accuracy, we decided to try different parameters to build our SVM model. The second time, we used ```GridSearch``` to find optimized parameters. We set our grid as: ```param_grid = {'C': [0.1, 1, 10], 'gamma': [0.01, 0.1, 1], 'kernel': ['linear', 'rbf', 'poly']}```.
 
 1. Use of the ```'poly'``` kernel:
 
@@ -246,7 +263,7 @@ print(f"Best Hyperparameters: {best_params}")
 print(f"Accuracy on Test Set: {accuracy}")
 ```
 
-We also used oversampling with ```SMOTE``` and ```RandomOverSampler```, but it also resulted in a low accuracy, as shown in the results section.
+We also used oversampling with ```SMOTE``` and ```RandomOverSampler```, but it also resulted in a low accuracy.
 
 1. Use of ```SMOTE```:
 
@@ -271,9 +288,9 @@ for class_label, count in zip(unique_classes_resampled, class_counts_resampled):
 ```
 
 #### XGboost
-  Another model we tried for the third model was the ```XGboost``` model.
+Another model we tried for the third model was the ```XGboost``` model.
 
-  The data preprocessing was the same as processing for SVM, where we applied encoding and ```StandardScaler``` to make our data clean, but this time we tried ```XgBoost``` model, setting the parameters as follows: 
+The data preprocessing was the same as processing for SVM, where we applied encoding and ```StandardScaler``` to make our data clean, but this time we tried ```XgBoost``` model, setting the parameters as follows: 
 
 ```
 eval_set = [(X_train, y_train), (X_test, y_test)]
@@ -287,8 +304,7 @@ train_error = results['validation_0']['mlogloss']
 test_error = results['validation_1']['mlogloss']
 ```
 
-
-We then decided to try different parameters as well to improve the accuracy by ```RandomizedSearchCV```. As the diagram shows below, we selected four parameters: ```'max_depth'```, ```'learning_rate'```, ```'n_estimators'```, and ```'subsample'```:
+We then decided to try different parameters as well to improve the accuracy by ```RandomizedSearchCV```. As the code shows below, we selected the parameters ```'max_depth'```, ```'learning_rate'```, ```'n_estimators'```, and ```'subsample'```:
 
 ```
 model = xgb.XGBClassifier()
@@ -329,8 +345,6 @@ print("Best parameters found: ", grid_search.best_params_)
 print("Best accuracy found: ", grid_search.best_score_)
      
 ```
-
-
 
 ### Gradient Boosted Tree
 Gradient Boosted Tree was the third method we chose.
@@ -386,110 +400,111 @@ Heatmap of the entire dataset
 
 <img width="1316" alt="截屏2024-03-15 下午8 52 29" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/147887997/e07aa042-c77c-4764-a521-cf22d6c816cd">
 
-The final preprocessed dataframe.
+The final preprocessed dataframe
 
 ### First Model
 #### Multi-Class Logistic Regression
 ![Screenshot 2024-03-10 at 7 16 17 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/90e3f1ea-bb2b-4f66-ad46-c7322d1a7d89)
 
-This is our plot for our multi-class regression model, comparing our training score vs our cross-validation score.
+Learning curve plot for the multi-class regression model
 
 ![Screenshot 2024-03-10 at 7 20 21 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/f9e92ef8-55ad-4b95-ad17-ad58568ef99d)
 
-Here is one of the single-target models, and when comparing the multi-target results with the single-target results, the model itself doesn't look too different and the results are relatively the same.
+Learning curve plot for the single-target models
 
 ### Second Model
 #### Neural Network
   <img width="994" alt="截屏2024-03-14 17 50 05" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c7520ece-e0ed-410f-a305-d7d765f0e68c">
   
-  Base model classification report.
+  Base model classification report
   
   <img width="620" alt="截屏2024-03-14 17 51 48" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a32b5785-6b80-4285-9f65-3a5f06e61ee9">
   
-  Base model train/validation error.
+  Base model train/validation error
   
   <img width="796" alt="截屏2024-03-14 18 0319" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/b924ae2b-fda3-4a52-91ea-178df74ede69">
   
-  10-fold cross validation accuracy.
+  10-fold cross validation accuracy
   
   <img width="632" alt="截屏2024-03-14 17 59 17" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/a065caa2-7af9-4242-a78f-21a66eca88bf">
   
-  Hyperparameter tuning model classification report and train/validation error.
+  Hyperparameter tuning model classification report and train/validation error
   
   <img width="491" alt="截屏2024-03-14 17 59 55" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c8496de3-3381-4072-b4bd-31ebfb36d64c">
   
-  Oversampling model classification report.
+  Oversampling model classification report
   
 <img width="611" alt="截屏2024-03-14 18 00 25" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4ffb68b8-b8a0-4271-9ce4-23903a450315">
 
-Oversampling model train/validation error.
+Oversampling model train/validation error
 
 ### Model 3
 
 #### SVM
-  Base Model Performance Train:
+  Base model train performance
 
   <img width="452" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/8b045ba9-758a-4aca-b03f-3fa164fbde0c">
 
-  Base Model Performance Test:
+  Base model test performance
   
   <img width="466" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/49860168-edae-4775-b669-3b3fda45c5c8">
 
-  Evaluation after Gridsearch:
+  Evaluation after ```GridSearch```
   
   <img width="494" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/9a30e385-0f18-46d2-a314-c667c504f782">
 
-  Evaluation after ```SMOTE```:
+  Evaluation after ```SMOTE```
   
  <img width="558" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/164df233-f075-4456-8040-5869b7eebbf7">
 
 
 #### XGboost
 
-  Base Model Performance Train:
+  Base model train performance
   
   <img width="465" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/c44483e2-1f3a-4f5f-8c54-5471d226e827">
 
 
-  Base Model Performance Test:
+  Base model test performance
   
   <img width="455" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/8e69a843-4ad8-43a6-951f-9a6b474bf834">
 
-  Log-loss Train vs Test fitting curve:
+  Log-loss train vs test fitting curve
  
  <img width="902" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/364e37ca-ea56-4faa-bf2c-3ce3e34c0cb0">
 
-  Evaluation after Gridsearch:
+  Evaluation after ```GridSearch```
 
  <img width="832" alt="截屏2024-03-14 17 11 10" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/69580227-0f0c-415c-b913-431d657bc45a">
 
-### Gradient boosted Tree
+### Gradient Boosted Tree
 
-Base Model Performance Train:
+Base model train performance
 
 <img width="449" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/ea966c74-d0a4-4c1c-b52f-7af03fa233e2">
 
-Base Model Performance Test:
+Base model test performance
 
 <img width="456" alt="截屏2024-03-14 17 21 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c6087504-a4cf-4818-9333-3fc70bab96c1">
 
-Log-loss Train vs Test fitting curve:
+Log-loss train vs test fitting curve:
 
 <img width="895" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/7aa51565-0614-48a5-84ad-1bd06b8cea0e">
 
 ### KNN Model
 
-KNN performance Train:
+KNN model train performance
 
 <img width="463" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/f6f1321f-de8b-49d6-a30d-67e6af7a2cf7">
 
-KNN Performance Test:
+KNN model test performance
 
 <img width="475" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/68130529/df2176da-dcbe-4f75-94ff-2dfebcb3b738">
 
 
 # Discussion: 
-## How we chose the model:
+
+## How We Chose the Model:
 
 ### Data Exploration
 
@@ -512,41 +527,43 @@ Prior to preprocessing, we found the total number of NaN values present in our c
 
 ### Model 1
 
-  For our Model1, our goal is to build a baseline model that can help us understand the dataset better, and serve as comparison for our more complex future models. We decided to implement a logistic classifier for its ease of implementation and high interpretability. By default, logistic classifiers are designed for binary classification. However, using the parameter multi_class='multinomial', they are able to handle multi-class classification.
+  For Model 1, our goal was to build a baseline model that would help us understand the dataset better, and serve as comparison for our more complex future models. We decided to implement a logistic classifier for its ease of implementation and high interpretability. 
+  
+  By default, logistic classifiers are designed for binary classification. However, using the parameter multi_class='multinomial', they are able to handle multi-class classification.
 
-  Our Model1 achieved 0.55 training accuracy and 0.54 testing accuracy, with the cross-validation score also being very similar to the training score. Based on these observations, we concluded that no overfitting occurred. 
+  Model 1 achieved 0.55 training accuracy and 0.54 testing accuracy, with the cross-validation score also being very similar to the training score. Based on these observations, we concluded that no overfitting occurred. 
 
-  Although the accuracy is not great, at this point, we were satisfied with Model 1 and its performance. We believed that the low accuracy was mainly due to the poor choice of model as a logistic classifier is a binary classification algorithm at the end of the day. With more advanced models and careful tuning, we should be able to level up that accuracy in the future.
+  Although the accuracy was not great, at this point, we were satisfied with Model 1 and its performance. We believed that the low accuracy was mainly due to the poor choice of model, as logistic classifiers are binary classification algorithms, which did not fit perfectly with our chosen dataset. With more advanced models and careful tuning, we believed we could level up that accuracy in the future.
 
 ### Model 2
 
-  For Model 2, we decided to go with something much more powerful, a Neural Network. 
+  For Model 2, we decided to go with something much more powerful, a neural network. 
 
-  We started out by building a base model that has 4 hidden layers and 1 output layer. From our experiences in HW2, we know that softmax for output activation and categorical cross entropy for loss are very solid choices in a multi-class setting. We then experimented with a couple of different activation functions and chose tanh which yielded relatively good performance. This base model only achieved 0.55 testing accuracy, which is definitely lower than we expected. We also saw signs of overfitting, since our training loss is much lower than our validation loss, leading us to believe that our real accuracy is likely to be even lower. 
+  We started out by building a base model with 4 hidden layers and 1 output layer. From our experiences in HW2, we knew that softmax for output activation and categorical cross entropy for loss was very solid choices in a multi-class setting. We then experimented with a couple of different activation functions and chose tanh which yielded a relatively good performance. However, this base model only achieved 0.55 testing accuracy, which was definitely lower than we expected. We also saw signs of overfitting, since our training loss was much lower than our validation loss, leading us to believe that our real accuracy was likely to be even lower. 
 
-  To get a sense of how our model truly performs to unseen data, we utilize K-fold cross-validation. Our K-fold cross-validation score was indeed lower at 0.52 accuracy. 
+  To get a sense of how our model truly performed to unseen data, we utilized K-fold cross-validation. Our K-fold cross-validation score was indeed lower at 0.52 accuracy. 
 
-  In an attempt to improve the accuracy, we used hyperparameter tuning. Since we’re certain that softmax is the correct output activation function, we tuned the activation function for the rest of the layers, number of units, learning rate, and loss functions. At first, we attempted a large range of values on choosing the number of units in each layer, and the train/validation loss graph shows the result was extremely overfitting. We also increased the number of max trials to check if it could help the tuner explore more combinations, but we found out that such an attempt would increase the validation error as well. We proposed that lowering the number of units and layers might reduce the sign of overfitting, so we attempted multiple combinations to find a fitting graph. After tuning, the accuracy remained low at 0.52, with no overfitting this time according to our graph.
+  In an attempt to improve the accuracy, we used hyperparameter tuning. Since we were certain that softmax was the correct output activation function, we tuned the activation function for the rest of the layers, number of units, learning rate, and loss functions. At first, we attempted a large range of values on choosing the number of units in each layer, and the train/validation loss graph shows the result was extremely overfitting. We also increased the number of max trials to check if it could help the tuner explore more combinations, but we found out that such an attempt would increase the validation error as well. We proposed that lowering the number of units and layers might reduce the sign of overfitting, so we attempted multiple combinations to find a fitting graph. After tuning, the accuracy remained low at 0.52, with no overfitting this time according to our graph.
 
-  As HP tuning did not improve our accuracy, we resorted to another technique we learned in class, which is oversampling. The reason we chose this technique is because we have an extremely imbalanced dataset, our most populated target has 1725 entries while the least populated target has 98 entries. However, Oversampling actually decreased our accuracy, and our accuracy decreased to 0.38 after oversampling. We believe there are two main reasons why oversampling did not work. One is that our dataset is too imbalanced and the other is that we have a small dataset. Our model is overfitting after oversampling due to these reasons.
+  As HP tuning did not improve our accuracy, we resorted to another technique we learned in class, which is oversampling. The reason we chose this technique is because we had an extremely imbalanced dataset, our most populated target having 1725 entries while the least populated target had 98 entries. However, oversampling actually decreased our accuracy to 0.38. We believe there were two main reasons why oversampling did not work. One is that our dataset was too imbalanced and the other is that we had a small dataset. Our model was overfitting after oversampling due to these reasons.
 
-  Model 2 overall was not ideal, we expected much more out of our Neural Network model. We suspect that advanced feature engineering may be needed and potentially changing the number of layers in our sequential model can also be helpful.
+  Model 2 overall was not ideal, as we expected much more out of our neural network model. We suspected that advanced feature engineering may be needed and potentially changing the number of layers in our sequential model could also be helpful.
 
 ### Model 3
 
-  We first tried the SVM model since the model is good for One-Hot encoding targets compared to the Naive Bayes model. Also, according to the resource: Kernel SVMs can effectively handle non-linear decision boundaries, making them useful for tasks where data is not linearly separable. (What are the advantages and disadvantages of using a kernel SVM algorithm? - Quora), So we decided to try the SVM first.
+  We first tried the SVM model since the model was good for one-hot encoding targets compared to the Naive Bayes model. Also, kernel SVMs can effectively handle non-linear decision boundaries, making them useful for tasks where data is not linearly separable. So we decided to try the SVM model first.
 
-We fit a base SVM model using the polynomial kernel with degree 2, the result was average at 0.51 accuracy for the test set. Due to the fact that the model performed similarly in the train set, we concluded that no overfitting occurred. We then tried GridSearchCV to fine tune the model and found the ‘rbf’ kernel to be much better. Mirroring what we did in homework, we also tried to perform oversampling techniques for our SVM. However, neither SMOTE nor Random Oversampling increases our accuracy.
+When fitting a base SVM model using the polynomial kernel with degree 2, the result was average at 0.51 accuracy for the test set. Due to the fact that the model performed similarly in the train set, we concluded that no overfitting occurred. We then tried GridSearchCV to fine tune the model and found the ‘rbf’ kernel to be much better. Mirroring what we did in homework, we also tried to perform oversampling techniques for our SVM. However, neither ```SMOTE``` nor ```RandomOverSampling``` increases our accuracy.
 
-One of our members visited office hours and the Professor suggested we try XGboost. XGboost offers some very attractive features for us. It incorporates regularization, handles missing values, and is able to handle unbalanced datasets. On top of that, it is fast and achieves high accuracy.
-After training our base Xgboost classifier, there was not a significant improvement over other models with its 0.55 testing accuracy at max_depth = 2. We could have increased its accuracy by giving it a higher max_depth, but that came with the cost of overfitting, reflected by the training curve. In order to truly improve its performance, we did GridSearch to obtain the best parameters and was able to increase the accuracy to 0.58, making XGboost Classifier our best model yet.
+One of our members visited office hours and the professor suggested we try XGBoost. XGBoost offered some very attractive features for us. It incorporated regularization, handled missing values, and was able to handle unbalanced datasets. On top of that, it was fast and achieved high accuracy.
+After training our base Xgboost classifier, there was not a significant improvement over other models with its 0.55 testing accuracy at max_depth = 2. We could have increased its accuracy by giving it a higher max_depth, but that came with the cost of overfitting, reflected by the training curve. In order to truly improve its performance, we did GridSearch to obtain the best parameters and was able to increase the accuracy to 0.58, making XGBoost Classifier our best model yet.
 
   We also displayed the ranking of importance of each feature, results are shown below:
   <img width="717" alt="截屏2024-03-15 18 27 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/2bc722a5-6367-4467-939a-36a2c2b67c9b">
 
   As the picture shows, surprisingly, the ```race``` is the most important feature.
 
-  In the meantime, we also tried Gradient Boosted Tree as an alternative to XGboost, but the results were not as good, and there were signs of overfitting as the tree performed much better on our test set. 
+  In the meantime, we also tried Gradient Boosted Tree as an alternative to XGBoost, but the results were not as good, and there were signs of overfitting as the tree performed much better on our test set. 
 
   We ended up trying KNN as well, since that was also a classification model discussed in class. Our KNN model only yielded 0.5 testing accuracy, quite a bit worse than XGboost.
 
@@ -570,23 +587,23 @@ If we started our project over, there are several things we wished we could have
 
 2. Allocate more time for feature engineering. Good features can significantly enhance a model's ability to capture patterns and relationships in the data.
 
-3. Play around with Neural Network’s number of layers. Although we spent a lot of time tuning Neural Network parameters, we might have benefited from experimenting with different numbers of hidden layers
+3. Play around with number of layers in Neural Network. Although we spent a lot of time tuning Neural Network parameters, we might have benefited from experimenting with different numbers of hidden layers
 
 
 # Collaboration section: 
 
 1. Name: Pranav Prabu
 
-   Contribution: Abstract, Preprocessing, Model 1, Final Report
+   Contribution: Abstract, Preprocessing, Model 2, Model 3, Final Report
 2. Name: Sebastian Diaz
 
-   Contribution: Abstract, Preprocessing, Model 1, Final Report
+   Contribution: Abstract, Preprocessing, Model 2, Model 3, Final Report
 3. Name: Jou-Chih Chang
 
    Contribution: Abstract, Model 2, Model 3, Final Report
 4. Name: Juan Yin
 
-   Contribution: Abstract, Model 1, Model 3, Final Report
+   Contribution: Abstract, Model 1, Model 2, Model 3, Final Report
 5. Name: Irving Zhao
 
    Contribution: Abstract, Model 2, Model 3, Final Report
@@ -596,7 +613,7 @@ If we started our project over, there are several things we wished we could have
 
 7. Name: Tiankuo Li
    
-   Contribution: Abstract, Model 1, Model 3, Final Report
+   Contribution: Abstract, Preprocessing, Model 1, Model 3, Final Report
 
 # Colab Files of Our 3 Models
 [Preprocessing](https://colab.research.google.com/drive/1nzW6bMa3XklLFByw_Fc9XWii4gMwAa67?usp=sharing)
