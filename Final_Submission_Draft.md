@@ -154,18 +154,45 @@ Gradient boosted Tree is the third method we chose.
 Same thing as before, we manually tried one set of parameters that we think is worth trying, we set parameters as ```n_estimators=100, learning_rate=0.1, max_depth=3, random_state=21```, after we print the output of the ```classification report```, it gives us a really high accuracy, it is 0.56! (compare to the previous results):
 <img width="456" alt="截屏2024-03-14 17 21 33" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/c6087504-a4cf-4818-9333-3fc70bab96c1">
 
-  After getting high results, we also tried OverSamplying, trying to make the number of our data balance, in that case, we applied ```SMOTE```, then finally we found that the accuracy decreased: 
-  <img width="439" alt="截屏2024-03-14 17 28 22" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/75220e47-7dab-40ce-9f42-89c85be67dbc">
+  After getting high results, we also tried OverSamplying, trying to make the number of our data balance, in that case, we applied ```SMOTE```, 
+  
 
 
 ### KNN Model
-KNN is our last try for the third model.
+KNN is our last try for the third model. We simply applied ```KNeighborsClassifier``` function, and below is the detail about our parameters in our KNN model: 
+```
+#KNN. similar result to SVM
+k = 10
+knn_classifier = KNeighborsClassifier(n_neighbors=k)
+knn_classifier.fit(X_train, y_train)
 
-We simply applied ```KNeighborsClassifier``` function, and printed the result using ```classification_report```:
-<img width="504" alt="截屏2024-03-14 17 39 16" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/5ba49df3-f499-47c9-af02-abac6b840a47">
+# Predict the labels for the test set
+y_true = y_test
+y_pred = knn_classifier.predict(X_test)
+```
 
 
 # Results : 
+
+### Model 3
+
+#### SVM
+
+#### Decision Tree Learning
+
+### Gradient boosted Tree
+
+After OverSamplying, then finally we found that the accuracy decreased:: <img width="439" alt="截屏2024-03-14 17 28 22" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/75220e47-7dab-40ce-9f42-89c85be67dbc">
+
+### KNN Model
+
+We printed the result using ```classification_report``` for our KNN model:
+<img width="504" alt="截屏2024-03-14 17 39 16" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/5ba49df3-f499-47c9-af02-abac6b840a47">
+
+
+
+
+
 
 # Discussion: 
 ### How we choose the model:
