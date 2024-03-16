@@ -58,10 +58,10 @@ df['sex'].replace('male', 1, inplace=True)
 ohe = OneHotEncoder()
 list1 = ['dzgroup', 'race', 'ca']
 for i in list1:
-    myohedzgroup = ohe.fit_transform(df[i].values.reshape(-1,1)).toarray()
-    myohedzgroup=pd.DataFrame(myohedzgroup, columns=ohe.categories_[0])
-    df=df.drop([i], axis=1)
-    df=pd.concat([df,myohedzgroup],axis=1)
+      myohedzgroup = ohe.fit_transform(df[i].values.reshape(-1,1)).toarray()
+      myohedzgroup=pd.DataFrame(myohedzgroup, columns=ohe.categories_[0])
+      df=df.drop([i], axis=1)
+      df=pd.concat([df,myohedzgroup],axis=1)
 
 df = df.dropna(axis = 0, how = 'any')
 df.drop(df.columns[32], axis=1)
