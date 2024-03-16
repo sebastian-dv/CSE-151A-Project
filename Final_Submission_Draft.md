@@ -149,8 +149,11 @@ In order to minimize the error, we set the same parameter as ```RandomizedSearch
 
   The accuracy increased again! It is worth trying different tuner methods! As the result shows, we decided to use the result from the ```GridSearchCV``` to do the ```classification report```: 
   <img width="434" alt="截屏2024-03-14 17 12 50" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/42b27107-5c23-4672-80ae-40052f7f2c76">
-  
+
   Although it turns out the accuracy is a little bit decreased due to some training issues that are out of our control, we think that is the best accuracy we can get so far.
+
+  We also printed the ranking of the importance of each feature: 
+<img width="717" alt="截屏2024-03-15 18 27 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/57e56250-556b-4db5-8a26-fa4443c9cc93">
 
 ### Gradient boosted Tree
 Gradient boosted Tree is the third method we chose.
@@ -213,7 +216,7 @@ After we got the result from the classification report of the SVM tuner and Over
 
   One of our members visited office hours and the Professor suggested we try XGboost. XGboost offers some very attractive features for us. It incorporates regularization, handles missing values, and is able to handle unbalanced datasets. On top of that, it is fast and achieves high accuracy. However, after training our Xgboost classifier, there was not a significant improvement over other models with its 0.57 testing accuracy. We tried random search and grid search to obtain the best parameters, but neither were that effective, improving the accuracy to 0.58.
 
-  In the meantime, we also tried Gradient Boosted Tree as an alternative to XGboost, but the results were not as good. We also displayed the ranking of importance of each feature, as shown below:
+  In the meantime, we also tried Gradient Boosted Tree as an alternative to XGboost, but the results were not as good. We also displayed the ranking of importance of each feature, results shown below:
   <img width="717" alt="截屏2024-03-15 18 27 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/2bc722a5-6367-4467-939a-36a2c2b67c9b">
 
   As the picture shows, surprisingly, the ```race``` is the most important feature to discuss about towards our target.
