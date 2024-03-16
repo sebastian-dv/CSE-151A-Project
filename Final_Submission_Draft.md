@@ -178,10 +178,57 @@ After data preprocessing:
   
   In conclusion, we thoroughly analyzed the description of each variable to understand their significance, carefully selecting features pertinent to our topic to ensure effective data preprocessing. We meticulously printed out the data frame containing the chosen features, meticulously verifying its shape to ascertain the number of observations accurately. We conducted a meticulous check for any empty values, such as null, within the data frame, ensuring data integrity before proceeding. Additionally, for each categorical attribute, we meticulously listed out all unique elements, ensuring comprehensive understanding and meticulous preprocessing of the data.
 
-After getting the result for model 1:
+### Model 1:
+  For our Model1, our goal is to build a baseline model that can help us understand the dataset better, and serve as comparison for our more complex future models. We decided to implement a logistic classifier for its ease of implementation and high interpretability. By default, logistic classifiers are designed for binary classification. However, using the parameter multi_class='multinomial', they are able to handle multi-class classification.
+
+  Our Model1 achieved 0.55 training accuracy and 0.54 testing accuracy, with the cross-validation score also being very similar to the training score. Based on these observations, we concluded that no overfitting occurred. 
+
+  Although the accuracy is not great, at this point, we were satisfied with Model 1 and its performance. We believed that the low accuracy was mainly due to the poor choice of model as a logistic classifier is a binary classification algorithm at the end of the day. With more advanced models and careful tuning, we should be able to level up that accuracy in the future.
+
+### Model2
+
+  For Model 2, we decided to go with something much more powerful, a Neural Network. 
+
+  We started out by building a base model that has 4 hidden layers and 1 output layer. From our experiences in HW2, we know that softmax for output activation and categorical cross entropy for loss are very solid choices in a multi-class setting. We then experimented with a couple of different activation functions and chose tanh which yielded relatively good performance. This base model only achieved 0.55 testing accuracy, which is definitely lower than we expected. We also saw signs of overfitting, since our training loss is much lower than our validation loss, leading us to believe that our real accuracy is likely to be even lower. 
+
+  To get a sense of how our model truly performs to unseen data, we utilize K-fold cross-validation. Our K-fold cross-validation score was indeed lower at 0.52 accuracy. 
+
+  In an attempt to improve the accuracy, we used hyperparameter tuning. Since we’re certain that softmax is the correct output activation function, we tuned the activation function for the rest of the layers, number of units, learning rate, and loss functions. At first, we attempted a large range of values on choosing the number of units in each layer, and the train/validation loss graph shows the result was extremely overfitting. We also increased the number of max trials to check if it could help the tuner explore more combinations, but we found out that such an attempt would increase the validation error as well. We proposed that lowering the number of units and layers might reduce the sign of overfitting, so we attempted multiple combinations to find a fitting graph. After tuning, the accuracy remained low at 0.52, with no overfitting this time according to our graph.
+
+  As HP tuning did not improve our accuracy, we resorted to another technique we learned in class, which is oversampling. The reason we chose this technique is because we have an extremely imbalanced dataset, our most populated target has 1725 entries while the least populated target has 98 entries. However, Oversampling actually decreased our accuracy, and our accuracy decreased to 0.38 after oversampling. We believe there are two main reasons why oversampling did not work. One is that our dataset is too imbalanced and the other is that we have a small dataset. Our model is overfitting after oversampling due to these reasons.
+
+  Model 2 overall was not ideal, we expected much more out of our Neural Network model. We suspect that advanced feature engineering may be needed and potentially changing the number of layers in our sequential model can also be helpful.
+
+### Model 3
+  We first tried the SVM model since the model is good for One-Hot encoding targets compared to the Naive Bayes model. Also, according to the resource: Kernel SVMs can effectively handle non-linear decision boundaries, making them useful for tasks where data is not linearly separable. [What are the advantages and disadvantages of using a kernel SVM algorithm? - Quora](https://www.quora.com/What-are-the-advantages-and-disadvantages-of-using-a-kernel-SVM-algorithm), So we decided to try the SVM first.
+After we got the result from the classification report of the SVM tuner and OverSampling, although the accuracy score is fair, we found that SVM is limited by choosing an appropriate kernel or manually transforming features to capture non-linear relationships effectively. So we think we may need to try other models to do the comparison. 
+
+  One of our members visited office hours and the Professor suggested we try XGboost. XGboost offers some very attractive features for us. It incorporates regularization, handles missing values, and is able to handle unbalanced datasets. On top of that, it is fast and achieves high accuracy. However, after training our Xgboost classifier, there was not a significant improvement over other models with its 0.57 testing accuracy. We tried random search and grid search to obtain the best parameters, but neither were that effective, improving the accuracy to 0.58.
+
+  In the meantime, we also tried Gradient Boosted Tree as an alternative to XGboost, but the results were not as good. 
+
+  At this point, we have tried essentially every model besides KNN that has been discussed in this class. We ended up trying KNN as well. Our KNN model only yielded 0.5 testing accuracy, quite a bit worse than XGboost.
 
 
 
 # Conclusion section: 
+  We believe there are several reasons why our models did not perform that well. 
+  
+1. imbalanced dataset. Some of our classes have significantly fewer instances than others. For example, Colon Cancer has 98 instances while ARF/MOSF w/Sepsis has 1725 instances. Classifier can be biased toward majority groups
+ 
+2. Insufficient data. After preprocessing and dropping null values. Our dataset only has 3840 entries, which is likely not enough for such a complex classification problem.
+
+3. Feature engineering. Our group put a lot of emphasis on model selection and model tuning, but our feature engineering was very limited, using only the LabelEncoder, OneHotEncoder, and Scalers.
+
+  However, this isn’t to say that our model didn’t improve throughout the project timeline. Although our first logistic classifier model also achieved 50% accuracy, it did so by ignoring some minority classes. In the classification report, we can see that the precision for Colon Cancer is 0. If we look at our final model, although the accuracy overall didn’t improve significantly, the accuracy is now evenly distributed between classes, there are no classes that are very inaccurate. We believe that is a major improvement. 
+
+If we started our project over, there are several things we wished we could have done:
+
+1. Instead of dropping any row that contains null value, maybe we should try to impute them to obtain more data for our model
+
+2. Allocate more time for feature engineering. Good features can significantly enhance a model's ability to capture patterns and relationships in the data.
+
+3. Play around with Neural Network’s number of layers. Although we spent a lot of time tuning Neural Network parameters, we might have benefited from experimenting with different numbers of hidden layers
+
 
 # Collaboration section: 
