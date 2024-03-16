@@ -261,6 +261,10 @@ KNN was our final version for the third model. We simply applied the ```KNeighbo
 # Results : 
 ### Data Exploration
 
+![Barchart](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/66afc575-09cd-4fc2-b152-805c58aabf06)
+
+![Screenshot 2024-03-15 at 8 42 12 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/5a15641a-fd11-4260-952f-42b6d960342b)
+
 ### Data Preposessing
 
 <img width="1316" alt="截屏2024-03-15 下午8 52 29" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/147887997/e07aa042-c77c-4764-a521-cf22d6c816cd">
@@ -348,12 +352,8 @@ After OverSamplying, then finally we found that the accuracy decreased:: <img wi
 Our objective was to find a populous dataset with multiple indicators of health as well as firm confirmations of the existence of diseases based on those indicators. Therefore, the SUPPORT2 dataset looked exactly like what we were searching for. It had all of the indicators, like ```’age’```, ```’sex’```, ```’race’```, ```’heart rate’```, ```’respiration rate’```, ```’temperature’```, and more that we could use for our targets during model construction and training. However, through further inspection at some of the classes, we found that some had missing values, with some columns having far more null values than complete values. 
 
 Similarly, through our EDA, we found that the number of target classes within ```‘dzgroup’``` were imbalanced. Some of the target diseases appeared much more than others, which we knew could lead to some issues in the future and as a result we might have to perform some oversampling in order to allow our models to better learn from our data.
-![Barchart](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/66afc575-09cd-4fc2-b152-805c58aabf06)
 
 Prior to preprocessing, we found the total number of NaN values present in our chosen features and plotted them in a bar plot. The ones with seemingly no NaN values had very few which is why the bar cannot be seen for those. We had to figure out how to deal with these NaN values and with so many, it was difficult to decide what exactly to do.
-
-![Screenshot 2024-03-15 at 8 42 12 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/5a15641a-fd11-4260-952f-42b6d960342b)
-
 
 
 ### Data Preprocessing
