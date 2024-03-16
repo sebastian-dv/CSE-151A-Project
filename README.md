@@ -81,11 +81,11 @@ df.drop(df.columns[32], axis=1)
   In our first model, we set ```'dzgroup'``` as our target and used the rest of the columns as our features. To ensure that our feature data was normalized, we implemented minmax normalization. We then split the data into training and testing sets, with a 70:30 ratio and a random state of 0. We built eight different logistic regression models for single-class regression to predict each target and reported the results using ```accuracy_score```, ```classification_report```, and ```confusion_matrix```. 
   ```
   for i in targets_ohe.columns:
-  X_train, X_test, y_train, y_test = train_test_split(features, targets_ohe[i], test_size=0.3, random_state=0)
-  logreg = LogisticRegression(max_iter = 1000, solver = 'liblinear')
-  logregmodel = logreg.fit(X_train, y_train)
-  yhat_train = logreg.predict(X_train)
-  yhat_test = logreg.predict(X_test)
+      X_train, X_test, y_train, y_test = train_test_split(features, targets_ohe[i], test_size=0.3, random_state=0)
+      logreg = LogisticRegression(max_iter = 1000, solver = 'liblinear')
+      logregmodel = logreg.fit(X_train, y_train)
+      yhat_train = logreg.predict(X_train)
+      yhat_test = logreg.predict(X_test)
 
   train_accuracy = accuracy_score(y_train, yhat_train)
   test_accuracy = accuracy_score(y_test, yhat_test)
