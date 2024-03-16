@@ -250,6 +250,9 @@ We also printed the ranking of the importance of each feature:
 Gradient Boosted Tree was the third method we chose.
 We manually tried one set of parameters for the model as ```n_estimators=100, learning_rate=0.1, max_depth=3, random_state=21```. After training the model,  we used ```classification_report``` to evaluate the model.
 
+<img width="822" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/a07ca15f-f09a-4bc1-a258-89ca5ad34b4f">
+
+
 ### KNN Model
 KNN was our final version for the third model. We simply applied the ```KNeighborsClassifier``` function, and below are the details about our parameters in the KNN model:
 
