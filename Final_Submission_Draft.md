@@ -377,6 +377,10 @@ Counts of each of our targets
 
 Plot of features (out of the ones we chose) which contained NaN values as well as how many
 
+![11111](https://github.com/sebastian-dv/CSE-151A-Project/assets/147887997/f776e7ce-7da9-4b16-be76-5e1c89e2a4fa)
+
+Heatmap of the entire dataset
+
 ### Data Preposessing
 
 <img width="1316" alt="截屏2024-03-15 下午8 52 29" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/147887997/e07aa042-c77c-4764-a521-cf22d6c816cd">
