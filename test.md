@@ -266,6 +266,9 @@ We simply applied ```KNeighborsClassifier``` function, and printed the result us
 
 ### Data Preposessing
 
+<img width="1316" alt="截屏2024-03-15 下午8 52 29" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/147887997/e07aa042-c77c-4764-a521-cf22d6c816cd">
+The final preposessed dataframe.
+
 ### First Model
 ![Screenshot 2024-03-10 at 7 16 17 PM](https://github.com/sebastian-dv/CSE-151A-Project/assets/23327980/90e3f1ea-bb2b-4f66-ad46-c7322d1a7d89)
 This is our plot for our multi-class regression model, comparing our training score vs our cross-validation score.
