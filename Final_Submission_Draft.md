@@ -27,8 +27,7 @@ The rest of the paper is organized as follows: the Method Section will present t
 # Methods: 
 #### Data Exploration:
 
-#### Data Preprocessing: 
-  For data exploration, we called the [pd.DataFrame()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=RA1zgeeIgR2p&line=3&uniqifier=1) function to display the variable name and descriptions, and we found that there are 47 variables in total, which is a large dataset.
+For data exploration, we called the [pd.DataFrame()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=RA1zgeeIgR2p&line=3&uniqifier=1) function to display the variable name and descriptions, and we found that there are 47 variables in total, which is a large dataset.
   Then we created a data frame using [read_csv](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=YC0o6IQ1i-ec&line=1&uniqifier=1), after transferring, we selected 21 columns, with 20 features: ```'age'```, ```'sex'```, ```'scoma'```, ```'race'```, ```'sps'```, ```'aps'```, ```'diabetes'```, ```'dementia'```, ```'ca'```, ```'meanbp'```, ```'wblc'```, ```'hrt'```, ```'resp'```, ```'temp'```, ```'pafi'```, ```'alb'```, ```'bili'```, ```'crea'```, ```'sod'```, ```'ph'```, and ```'dzgroup'``` as our target.
 
 ```
@@ -36,7 +35,13 @@ df = pd.read_csv('https://archive.ics.uci.edu/static/public/880/data.csv')
 df = df[['age','sex','death','dzgroup','scoma','race','sps','aps','diabetes','dementia','ca','meanbp','wblc','hrt','resp','temp','pafi','alb','bili','crea','sod','ph']]
 ```
   The next step we took was to check for null values in the dataset. We used the [df.isnull().sum()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=KtldNNfpP723&line=1&uniqifier=1) function to calculate the null values for each feature we selected.
-  The result of df.isnull().sum() showed that some features contained several null values, and so we decided to deal with this data by removing them.
+  
+#### Data Preprocessing: 
+  
+To deal with the NaN values we found in our dataset, we decided to drop them. We dropped them using 
+```
+df = df.dropna(axis = 0, how = 'any')
+```
 
   For the features containing value type string, we applied the [unique()](https://colab.research.google.com/github/sebastian-dv/CSE-151A-Project/blob/main/SUPPORT2_Notebook.ipynb#scrollTo=CpA9bV6xP9K9&line=1&uniqifier=1) function to make it easy to distinguish.
 
