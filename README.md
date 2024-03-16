@@ -270,8 +270,8 @@ for class_label, count in zip(unique_classes_resampled, class_counts_resampled):
     print(f"Frequency of Class {class_label}: {count} instances")
 ```
 
-#### Decision Tree Learning
-  Another model we tried for the third model was the ```Decision Tree Learning``` model.
+#### XGboost
+  Another model we tried for the third model was the ```XGboost``` model.
 
   The data preprocessing was the same as processing for SVM, where we applied encoding and ```StandardScaler``` to make our data clean, but this time we tried ```XgBoost``` model, setting the parameters as follows: 
 
