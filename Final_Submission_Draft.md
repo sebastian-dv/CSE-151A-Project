@@ -172,7 +172,15 @@ We simply applied ```KNeighborsClassifier``` function, and printed the result us
 
 # Discussion: 
 ### How we choose the model:
-After data preprocessing:
+
+### EDA
+
+
+### Data Preprocessing
+
+  For the preprocessing step, our goal was to properly partition the dataset into two groups: useful data and extraneous information. We decided to fixate on the following columns, finding that they were more relevant for our model and project goal: ```'age', 'sex', 'dzgroup', 'scoma', 'race', 'sps', 'aps', 'diabetes', 'dementia', 'ca', 'meanbp', 'wblc', 'hrt', 'resp', 'temp', 'pafi', 'alb', 'bili', 'crea', 'sod', and 'ph'```. We then tried to isolate the target values that we thought would be the best for results, and so we focused on the column ```‘dzgroup’```, since it contained important information like rate of colon cancer, coma, lung cancer, and more, all of which fell under the targets we were looking for. Finally, after securing our features and targets, we looked to make the entire dataset all readable data, so we dropped every row of data containing a null value to ensure the data was properly aligned and evenly spread across all features and targets. At the point of completing preprocessing, we were satisfied with the resulting dataset we got, as there were still plenty of entries to properly train each model. However, looking back now, maybe it would have been better to keep some of the null values, since it would have been better at training models even at the expense of exposing it to null values that could mess up the training.
+
+### After data preprocessing:
 
   We chose to use a ```multi-class logistic regression model``` to train and fit the model with the preprocessed data. We then used the results to test for overfitting vs underfitting, accuracy, and error for train vs test data. We are thinking of testing with a ```multi-class classification model``` and a ```Keras Sequential model``` next to look for better results. This is because we need models that are capable of outputting multiple different classes since our targets are multiple different diseases. These next two models should be more powerful and hopefully better at predicting our targets.
   
@@ -205,7 +213,11 @@ After we got the result from the classification report of the SVM tuner and Over
 
   One of our members visited office hours and the Professor suggested we try XGboost. XGboost offers some very attractive features for us. It incorporates regularization, handles missing values, and is able to handle unbalanced datasets. On top of that, it is fast and achieves high accuracy. However, after training our Xgboost classifier, there was not a significant improvement over other models with its 0.57 testing accuracy. We tried random search and grid search to obtain the best parameters, but neither were that effective, improving the accuracy to 0.58.
 
-  In the meantime, we also tried Gradient Boosted Tree as an alternative to XGboost, but the results were not as good. 
+  In the meantime, we also tried Gradient Boosted Tree as an alternative to XGboost, but the results were not as good. We also displayed the ranking of importance of each feature, as shown below:
+  <img width="717" alt="截屏2024-03-15 18 27 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/2bc722a5-6367-4467-939a-36a2c2b67c9b">
+
+  As the picture shows, surprisingly, the ```race``` is the most important feature to discuss about towards our target.
+
 
   At this point, we have tried essentially every model besides KNN that has been discussed in this class. We ended up trying KNN as well. Our KNN model only yielded 0.5 testing accuracy, quite a bit worse than XGboost.
 
