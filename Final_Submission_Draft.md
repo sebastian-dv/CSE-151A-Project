@@ -544,18 +544,26 @@ If we started our project over, there are several things we wished we could have
 # Collaboration section: 
 
 1. Name: Pranav Prabu
+
    Contribution: Abstract, Preprocessing, Model 1, Final Report
 2. Name: Sebastian Diaz
+
    Contribution: Abstract, Preprocessing, Model 1, Final Report
 3. Name: Jou-Chih Chang
+
    Contribution: Abstract, Model 2, Model 3, Final Report
 4. Name: Juan Yin
+
    Contribution: Abstract, Model 1, Model 3, Final Report
 5. Name: Irving Zhao
+
    Contribution: Abstract, Model 2, Model 3, Final Report
 6. Name: Xianzhe Guo
+
    Contribution: Abstract, Model 1, Model 2, Final Report
+
 7. Name: Tiankuo Li
+   
    Contribution: Abstract, Model 1, Model 3, Final Report
 
 # Colab Files of Our 3 Models
