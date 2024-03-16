@@ -91,6 +91,11 @@ yhat_test = logreg.predict(X_test)
 #### Neural Network
   We used a ```MinMaxScaler``` to apply minmax normalization to our feature data, and for the Keras Sequential Model, we split the data into training and testing sets with an 80:20 ratio, setting the random state to 0 using ```train_test_split```:
   whereas for the hyperparameter tuning model, we split the data into training and testing sets with an 85:15 ratio, setting the random state to 1, in order to train more data to fit our data.
+```
+# scaling data
+scaler = MinMaxScaler()
+X = pd.DataFrame(scaler.fit_transform(X), columns = X.columns)
+```
   
   We built the base model (Keras Sequential Model) to predict each target and report the result using ```classification_report```. 
   ```
