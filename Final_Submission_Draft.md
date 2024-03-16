@@ -139,12 +139,13 @@ We also used oversampling with ```SMOTE``` and ```RandomOverSampler```, but it a
 <img width="813" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/f5caa2be-7c8e-47cc-85da-e29970c8bad0">
 
 #### Decision Tree Learning
-  Another model we tried for the third model is ```Decision Tree Learning``` model.
+  Another model we tried for the third model was the ```Decision Tree Learning``` model.
 
-  The data preprocessing is the same, we applied encoding and StandardScaler to make our data clean, but this time we tried ```XgBoost``` model, we set our parameters as follows: 
-  <img width="830" alt="截屏2024-03-14 17 01 28" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/5621a169-42e4-4b7f-a4c4-9ac41731245d">
+  The data preprocessing was the same as processing for SVM, where we applied encoding and ```StandardScaler``` to make our data clean, but this time we tried ```XgBoost``` model, setting the parameters as follows: 
+<img width="815" alt="image" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/122483969/7332c03b-0863-433a-ac35-55cd5608e167">
 
-  It turns out a not-bad result, with 0.57-ish accuracy, and better than the tunered SVM model. And we decided to try different parameters as well to improve the accuracy by ```RandomizedSearchCV```. As the diagram shows below, we selected four parameters: ```'max_depth'```, ```'learning_rate'```, ```'n_estimators'```, and ```'subsample'```:
+
+We then decided to try different parameters as well to improve the accuracy by ```RandomizedSearchCV```. As the diagram shows below, we selected four parameters: ```'max_depth'```, ```'learning_rate'```, ```'n_estimators'```, and ```'subsample'```:
   <img width="398" alt="截屏2024-03-14 17 07 35" src="https://github.com/sebastian-dv/CSE-151A-Project/assets/79886525/4a03bae0-649e-4da1-9f6d-dead4ca3a3a3">
 
   After getting the best parameter, we rebuilt the model and finally got good accuracy which is 0.58, the result is displayed below:
